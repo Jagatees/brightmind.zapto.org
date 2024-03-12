@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-        <title>World of Pets</title>
+        <title>World of Tuition</title>
         
         <?php
             include "inc/head.inc.php";
