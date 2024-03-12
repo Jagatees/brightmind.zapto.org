@@ -31,7 +31,7 @@
                     </figure>
                         
                     <p>
-                        Poodles are a group of formal dog breeds, the Standard
+                        Poooooooooooooooooooooooodles are a group of formal dog breeds, the Standard
                         Poodle, Miniature Poodle and Toy Poodle...
                     </p>
                 </article>
