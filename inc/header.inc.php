@@ -1,4 +1,4 @@
 <header class="jumbotron text-center bg-dark text-white">
-    <h1 class="display-4 section-heading">Welcome to World of Pets!</h1>
-    <h2>Home of Singapore's Pet Lovers</h2>
+    <h1 class="display-4 section-heading">Bright Minds Academy</h1>
+    <h2>Singapore's Number 1 Fake Tuition Centre</h2>
 </header>
