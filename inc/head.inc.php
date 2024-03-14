@@ -6,10 +6,12 @@
     <!--Custom CSS-->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/carousel.css">
+    <link rel="stylesheet" href="test/index.css">
     <!-- Google Material Design -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!--External JS-->
     <script src="js/main.js" defer></script>
+    <script src="test/index.js"></script>
     <title>Bright Minds Academy</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
