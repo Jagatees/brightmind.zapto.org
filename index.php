@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- This is for the Nav bar to Wrap Around the Content of this Page -->
+<div id="main">
+
 <head>
     <title>Bright Minds Academy</title>
     <style>
@@ -123,10 +127,6 @@
 </head>
 <body>
     <?php
-        include "inc/nav.inc.php";
-    ?>
-
-    <?php
         include "inc/header.inc.php";
     ?>
         
@@ -180,5 +180,7 @@
     <?php
         include "inc/footer.inc.php";
     ?>
+</div>
+
 </body>
 </html>
