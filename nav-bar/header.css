@@ -1,0 +1,49 @@
+/* header.css */
+
+/* Styles for the header and title */
+header.jumbotron {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+  
+  /* Header title styles */
+  header .section-heading {
+    margin-right: 20px;
+    font-size: 2.5rem;
+  }
+  
+  /* If you have other elements in your header that you don't want to center, you can wrap your title in a div and center that specifically */
+  .header-title {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  /* Styles for horizontal top navigation */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Styles for navigation items within horizontal top navigation */
+  nav a {
+    padding: 0.5em 1em;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  /* Hover effect for top navigation links */
+  nav a:hover {
+    background-color: #555;
+  }
+  
+  /* Container styles for navigation items, if needed */
+  nav .nav-container {
+    display: flex;
+  }
+  

@@ -1,0 +1,50 @@
+/* sidebar.css */
+
+/* General styles for the side navigation */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+    z-index: 1;
+  }
+  
+  /* Styles for navigation links within the side navigation */
+  .sidenav a {
+    font-size: 25px;
+    text-decoration: none;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* Hover effect for navigation links */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Close button styles for side navigation */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* Main content area styles for when side navigation is toggled */
+  #main {
+    transition: margin-left .5s;
+  }
+  
+  /* Responsive styles for the side navigation */
+  @media screen and (max-height: 450px) {
+    .sidenav { padding-top: 15px; }
+    .sidenav a { font-size: 18px; }
+  }
+  
