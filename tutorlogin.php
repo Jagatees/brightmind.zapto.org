@@ -46,9 +46,9 @@
       background: #fbfbfb;
       border-radius: 8px;
       box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
-      height: 410px;
+      height: 390px;
       margin: 6rem auto 8.1rem auto;
-      width: 329px;
+      width: 351px;
     }
     #card-content {
       padding: 12px 44px;
@@ -102,8 +102,8 @@
     .underline-title {
       background: -webkit-linear-gradient(right, #a6d9f5, #56bdf5);
       height: 2px;
-      margin: -0.5rem auto 0 auto;
-      width: 89px;
+      margin: -0.3rem auto 0 auto;
+      width: 220px;
     }
     footer {
       border-top: 1px solid #000 !important;
@@ -120,7 +120,7 @@
       <div id="card">
         <div id="card-content">
           <div id="card-title">
-            <h2>LOGIN</h2>
+            <h2>TUTOR LOGIN</h2>
             <div class="underline-title"></div>
           </div>
           <form method="post" class="form" action="process_login.php">
@@ -136,7 +136,6 @@
             <div class="form-border"></div>
             
             <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
-            <p id="signup">New? Sign up <a href=register.php>here</a>!</p>
           </form>
         </div>
       </div>
