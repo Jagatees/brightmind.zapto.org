@@ -20,6 +20,6 @@
     width: 100%; /* This will make the image fit the width of the card */
 }
 
-.container {
+.card-container {
     padding: 2px 16px;
 }
