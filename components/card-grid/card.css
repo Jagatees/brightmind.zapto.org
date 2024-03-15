@@ -1,0 +1,25 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates three columns */
+    grid-gap: 20px; /* Adjusts the gap between the cards */
+    padding: 20px; /* Padding around the grid */
+}
+
+.card {
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card img {
+    width: 100%; /* This will make the image fit the width of the card */
+}
+
+.container {
+    padding: 2px 16px;
+}

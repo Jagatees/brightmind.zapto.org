@@ -18,41 +18,17 @@
 
         <main class="container">
 
-
-            <div class="row">
-                <div class="column">
-                    <div class="card">
-                        <h3>Card 1</h3>
-                        <p>Some text</p>
-                        <p>Some text</p>
+            <div class="grid-container">
+                <div class="card">
+                    <img src="img_avatar.png" alt="Avatar" style="width:100%">
+                    <div class="container">
+                        <h4><b>John Doe</b></h4>
+                        <p>Architect & Engineer</p>
                     </div>
                 </div>
-
-                <div class="column">
-                    <div class="card">
-                        <h3>Card 2</h3>
-                        <p>Some text</p>
-                        <p>Some text</p>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-                        <h3>Card 3</h3>
-                        <p>Some text</p>
-                        <p>Some text</p>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-                        <h3>Card 4</h3>
-                        <p>Some text</p>
-                        <p>Some text</p>
-                    </div>
-                </div>
+                <!-- Repeat the above div 8 more times to make a total of 9 cards -->
+                <!-- Make sure to change the contents or src of each card as needed -->
             </div>
-
 
 
         </main>

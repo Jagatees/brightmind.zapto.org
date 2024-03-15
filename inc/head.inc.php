@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/carousel.css">
 
-    <!-- Jagatees Nav Bar And Header -->
-    <link rel="stylesheet" href="nav-bar/header.css">
-    <link rel="stylesheet" href="nav-bar/sidebar.css">
+    <!-- Nav Bar & Header -->
+    <link rel="stylesheet" href="components/nav-bar/header.css">
+    <link rel="stylesheet" href="components/nav-bar/sidebar.css">
+
+    <link rel="stylesheet" href="components/card-grid/card.css">
+
 
     <!-- Google Material Design -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
