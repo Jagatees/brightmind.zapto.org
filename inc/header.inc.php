@@ -4,6 +4,6 @@
         include "components/nav-bar/index.html";
         ?>
     <div class="header-title">
-        <img src="images/testheader.png" alt="" height="100px" width="200px">
+        <img src="images/testheader.png" alt="" height="50px" width="100px">
     </div>
 </header>

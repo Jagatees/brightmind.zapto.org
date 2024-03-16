@@ -139,17 +139,24 @@
             margin-bottom: 50px;
         }
 
-        .map h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color:white;
-            text-align:center;
-        }
 
         .map
         {
             text-align:center;
+            position: relative;
+            padding-bottom: 56.25%; 
+            height: 0;
         }
+
+        .map iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        }
+        
+
 
         #testimonials
     {
@@ -319,7 +326,9 @@
 
     <section class="section-below-carousel bg-light py-5">
     <div class="container">
-        <h2 class="text-center">What do we provide?</h2>
+    <div class="testimonial-heading">
+            <h1> What do we provide?</h1>
+    </div>
         <div class="row justify-content-around">
             <div class="col-lg-4 col-md-6">
                 <div class="logo text-center">
@@ -344,10 +353,15 @@
     </section>
 
 
+    <div class="testimonial-heading">
+        <h1>Want to find us?</h1>
+    <p style="font-size:20px">Here is our address!</p>
+    </div>
     <section class="map">
-        <h2> Want to find us? </h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.665394053238!2d103.8462120742383!3d1.377438761488071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da16e96db0a1ab%3A0x3d0be54fbbd6e1cd!2sSingapore%20Institute%20of%20Technology%20(SIT%40NYP)!5e0!3m2!1sen!2ssg!4v1710602407815!5m2!1sen!2ssg" width="1200" height="900" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </section>
+    <div class="embed-responsive embed-responsive-4by3">
+        <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.665394053238!2d103.8462120742383!3d1.377438761488071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da16e96db0a1ab%3A0x3d0be54fbbd6e1cd!2sSingapore%20Institute%20of%20Technology%20(SIT%40NYP)!5e0!3m2!1sen!2ssg!4v1710602407815!5m2!1sen!2ssg"  style="border:0; width:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>
     
 
     <section id="testimonials">
