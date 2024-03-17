@@ -7,7 +7,7 @@
 <head>
     <title>Bright Minds Academy</title>
     <style>
-        *{margin: 0 ; padding: 0;}
+
         body {
         background: -webkit-linear-gradient(bottom, #87CEEB, #dbe9f4);
         background-repeat: no-repeat;
@@ -280,7 +280,44 @@
         transform: translateY(-10px);
         transition: all ease 0.3s;
     }
-    </style>
+
+    .subject-section {
+    padding: 50px 0;
+    }
+
+    .subject-box {
+        display: block;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 24px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .math {
+        background-color: #007bff; /* Blue color */
+    }
+
+    .science {
+        background-color: #28a745; /* Green color */
+    }
+
+    .english {
+        background-color: #17a2b8; /* Cyan color */
+    }
+
+    .mother-tongue {
+        background-color: #dc3545; /* Red color */
+    }
+
+    </style>    
+
     <?php
         include "inc/head.inc.php";
     ?>
@@ -303,7 +340,7 @@
     <div class="carousel-wrapper">
         <div class="carousel-slide">
         <div class="blur">
-        <img src="images/tutioncentre.jpeg" alt="" width="100%" height="100%"> 
+        <img src="images/tutioncentre.jpeg" alt="" > 
         <span class="blurry" style="background-image: url(images/tutioncentre.jpeg)"></span>
         <div class="over">
             <div class="flex">
@@ -316,10 +353,10 @@
         </div>
         </div>
         <div class="carousel-slide">
-            <img src="images/tutioncentre.jpeg" alt="logo" width="100%" height="100%"/>
+            <img src="images/tutioncentre.jpeg" alt="logo" />
         </div>
         <div class="carousel-slide">
-            <img src="images/BMALogo2.png" alt="logo" width="100%" height="100%"/>
+            <img src="images/BMALogo2.png" alt="logo" />
         </div>
         </div>
     </div>
@@ -345,17 +382,37 @@
             <div class="col-lg-4 col-md-6">
                 <div class="logo text-center">
                     <img src="images/A+.png" alt="icon3" height="100px" width="210px">
-                    <p>From data collected from all our past and current students, on average, <span style="color: orange;">80%</span> of our students score <span style="color: orange;">A+</span> for their <span style="color: orange;">O-levels</span> and <span style="color: orange;">PSLE</span>. 19% score a B and only 1% score less than that. We can guarantee our tuition centre provides some of the best results across Singapore!</p>
+                    <p>From data collected from all our past and current students, on average, <span style="color: orange;">80%</span> of our students score <span style="color: orange;">A+</span> for their <span style="color: orange;">PSLE</span>. 19% score a B and only 1% score less than that. We can guarantee our tuition centre provides some of the best results across Singapore!</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <div class="testimonial-heading">
+            <h1> What subjects do we teach?</h1>
+            <p style="font-size:20px">We provide tuition for all primary school subjects for from P1 to P6. Click a subject below to find a class session that best suits your child! </p>
+    </div>  
+    <section class="subject-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="math-page.html" class="subject-box math"> <img src="images/math.png" height="40px" width="60px"> Math</a>
+                </div><div class="col-md-6">
+                    <a href="science-page.html" class="subject-box science"> <img src="images/science.png" height="70px" width="70px"> Science</a>
+                </div>
+                <div class="col-md-6">
+                    <a href="english-page.html" class="subject-box english">  <img src="images/english.png" height="70px" width="70px"> English</a>
+                </div><div class="col-md-6">
+                    <a href="mother-tongue-page.html" class="subject-box mother-tongue">  <img src="images/MT.png" height="70px" width="70px">  Mother Tongue</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <div class="testimonial-heading">
         <h1>Want to find us?</h1>
-    <p style="font-size:20px">Here is our address!</p>
+        <p style="font-size:20px">Here is our address!</p>
     </div>
     <section class="map">
     <div class="embed-responsive embed-responsive-4by3">
