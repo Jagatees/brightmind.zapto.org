@@ -35,18 +35,11 @@
       font-family: "Raleway", sans-serif;
       font-size: 11pt;
     }
-    #forgot-pass {
-      color: #2dbd6e;
-      font-family: "Raleway", sans-serif;
-      font-size: 10pt;
-      margin-top: 3px;
-      text-align: right;
-    }
     #card {
       background: #fbfbfb;
       border-radius: 8px;
       box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
-      height: 650px;
+      height: 660px;
       margin: 6rem auto 8.1rem auto;
       width: 329px;
     }
