@@ -75,7 +75,11 @@ if (empty($_POST["pwd_confirm"])) {
 // Final output based on success
 if ($success) {
     saveMemberToDB($fname ,$lname, $email, $pwd, $role);
-    header('Location: index.php');
+    session_start();
+    $_SESSION['user_logged_in'] = true;
+    $_SESSION['fname'] = $fname;
+    $_SESSION['role'] = $role; 
+    header('Location: welcome.php');
     exit; //
 } else {
     echo "<div class='alert alert-danger' role='alert'>";

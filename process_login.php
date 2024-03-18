@@ -59,12 +59,14 @@ if ($success) {
 
 if ($success) {
     // Store user info in session variable
-    $_SESSION['user_name'] = $fname . ' ' . $lname;
-    header('Location: welcome.php'); // Redirect to welcome page
+    session_start();
+    $_SESSION['user_logged_in'] = true;
+    $_SESSION['fname'] = $fname;
+    $_SESSION['role'] = $role; 
+    header('Location: welcome.php'); 
     exit();
 } else {
     echo $errorMsg;
-    // Optionally redirect back to login page or display error
 }
 
 
