@@ -1,12 +1,13 @@
 <?php
 session_start(); // Start the session at the beginning of the file
 
-$fname = $email = $lname = $errorMsg = $pwd = "";
+$fname = $email = $lname = $errorMsg = $pwd = $role =  "";
 $success = true;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 
 // Function to sanitize input
 function sanitize_input($data) {
@@ -14,6 +15,22 @@ function sanitize_input($data) {
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
+}
+
+// Define an array of valid roles
+$validRoles = ['student', 'teacher', 'admin'];
+
+// Sanitize the input
+$role = sanitize_input($_POST["role"]);
+
+// Check if the role is valid
+if (empty($role)) {
+    $errorMsg .= "Role is required.<br>";
+    $success = false;
+} else if (!in_array($role, $validRoles)) {
+    // If the role is not in the array of valid roles
+    $errorMsg .= "Invalid role selected.<br>";
+    $success = false;
 }
 
 // Sanitize and validate the email
@@ -29,11 +46,11 @@ if (empty($_POST["email"])) {
 }
 
 // Sanitize and validate the password
-if (empty($_POST["pwd"])) {
+if (empty($_POST["password"])) {
     $errorMsg .= "Password is required.<br>";
     $success = false;
 } else {
-    $pwd = sanitize_input($_POST["pwd"]);
+    $pwd = sanitize_input($_POST["password"]);
 }
 
 if ($success) {
@@ -52,7 +69,15 @@ if ($success) {
 
 
 function authenticateUser() {
-    global $fname, $lname, $email, $pwd, $errorMsg, $success;
+    global $fname, $lname, $email, $pwd, $errorMsg, $success, $role;
+
+
+     // Check to Prevent Error
+     $allowedTypes = ['student', 'teacher', 'admin'];
+
+     if (!in_array($role, $allowedTypes)) {
+         die("Invalid type specified.");
+     }
 
     $config = parse_ini_file('/var/www/private/db-config.ini');
     if (!$config) {
@@ -73,8 +98,10 @@ function authenticateUser() {
         return;
     }
 
+    $tableName = "`tuition_centre`.`{$role}`";
+
     // Prepare and execute query to authenticate user
-    $stmt = $conn->prepare("SELECT fname, Iname, email, password FROM world_of_pets_members WHERE email = ?");
+    $stmt = $conn->prepare("SELECT fname, lname, email, password, role FROM $tableName WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();

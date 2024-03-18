@@ -74,14 +74,7 @@ if (empty($_POST["pwd_confirm"])) {
 
 // Final output based on success
 if ($success) {
-    // echo "<div class='alert alert-success'>";
-    // echo "<h4 class='alert-heading'>Your registration is successful!</h4>";
-    // echo "<p>Thank you for signing up, " . htmlspecialchars($lname) . ".</p>";
-    // echo "<hr>";
-    // echo "<a href='register.php' class='btn btn-primary'>Log in</a>";
-    // echo "</div>";
     saveMemberToDB($fname ,$lname, $email, $pwd, $role);
-    // Redirect to the homepage
     header('Location: index.php');
     exit; //
 } else {
