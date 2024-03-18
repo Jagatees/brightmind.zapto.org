@@ -12,6 +12,7 @@
         background: -webkit-linear-gradient(bottom, #87CEEB, #dbe9f4);
         background-repeat: no-repeat;
             }
+                
         .blur {
         overflow: hidden;
         position: relative;
@@ -58,7 +59,7 @@
         display: flex;
         font-size: 20px;
         height: 100%;
-        padding: 20px 120px;
+        padding: 20px 100px;
         position: absolute;
         top: 0;
         left: 0;
@@ -80,7 +81,7 @@
         }
         }
         .book-now-btn {
-        padding: 30px 60px;
+        padding: 20px 40px;
         background-color: #ff7f50; 
         color: #fff; 
         font-size: 24px;
@@ -316,8 +317,7 @@
         background-color: #dc3545; /* Red color */
     }
 
-    </style>    
-
+    </style>  
     <?php
         include "inc/head.inc.php";
     ?>
@@ -328,18 +328,7 @@
     ?>
         
     <main class="container">
-    <div class="carousel">
-    <input type="radio" id="carousel-css-slide-1" name="carousel-css" value="slide-1" checked/>
-    <input type="radio" id="carousel-css-slide-2" name="carousel-css" value="slide-2"/>
-    <input type="radio" id="carousel-css-slide-3" name="carousel-css" value="slide-3"/>
-    <!-- More Radio Buttons Here -->
-    <label for="carousel-css-slide-1" data-value="slide-1"></label>
-    <label for="carousel-css-slide-2" data-value="slide-2"></label>
-    <label for="carousel-css-slide-3" data-value="slide-3"></label>
-    <!-- More Lables Here -->
-    <div class="carousel-wrapper">
-        <div class="carousel-slide">
-        <div class="blur">
+    <div class="blur">
         <img src="images/tutioncentre.jpeg" alt="" > 
         <span class="blurry" style="background-image: url(images/tutioncentre.jpeg)"></span>
         <div class="over">
@@ -351,15 +340,7 @@
             </div>
         </div>
         </div>
-        </div>
-        <div class="carousel-slide">
-            <img src="images/tutioncentre.jpeg" alt="logo" />
-        </div>
-        <div class="carousel-slide">
-            <img src="images/BMALogo2.png" alt="logo" />
-        </div>
-        </div>
-    </div>
+
 
     <section class="section-below-carousel bg-light py-5">
     <div class="container">
