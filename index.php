@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+session_start();
+?>
+
 <!-- This is for the Nav bar to Wrap Around the Content of this Page -->
 <div id="main">
 

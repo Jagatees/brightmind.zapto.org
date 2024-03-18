@@ -37,10 +37,10 @@
         session_start();
         if (isset($_SESSION['user_name'])) {
             echo "<p>Hello, " . $_SESSION['user_name'] . "! Welcome to our website.</p>";
-            echo '<p><a href="index.php">Logout</a></p>';
+            echo '<p><a href="index.php">Go Back to Main Page</a></p>';
         } else {
             echo "<p>You are not logged in.</p>";
-            echo '<p><a href="login.php">Login</a></p>';
+            echo '<p><a href="index.php">Go Back to Main Page</a></p>';
         }
         ?>
     </div>

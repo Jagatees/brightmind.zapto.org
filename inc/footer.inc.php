@@ -95,6 +95,10 @@ ul{
 
 
 </style>
+<?php
+        include "components/top-button/top-button.html";
+        ?>
+        
 <footer class="footer">
   	 <div class="container">
   	 	<div class="row">

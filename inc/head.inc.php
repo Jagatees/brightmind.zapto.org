@@ -9,7 +9,6 @@
     <!-- Nav Bar & Header -->
     <link rel="stylesheet" href="components/nav-bar/header.css">
     <link rel="stylesheet" href="components/nav-bar/sidebar.css">
-
     <link rel="stylesheet" href="components/card-grid/card.css">
 
 
