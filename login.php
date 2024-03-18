@@ -122,6 +122,14 @@
             <input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" />
             
             <div class="form-border"></div>
+
+            <label for="role" style="padding-top:22px">&nbsp;Role</label>
+            <select id="role" class="form-content" name="role" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="student">student</option>
+              <option value="teacher">teacher</option>
+              <option value="admin">admin</option>
+            </select>
             
             <label for="user-password" style="padding-top:22px">&nbsp;Password</label>
             <input id="pwd" class="form-content" type="password" name="password" required />

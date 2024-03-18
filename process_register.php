@@ -1,10 +1,28 @@
 <?php
-$fname = $email = $lname = $errorMsg = $pwd = "";
+$fname = $email = $lname = $errorMsg = $pwd = $role = "";
 $success = true;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+
+// Define an array of valid roles
+$validRoles = ['student', 'teacher', 'admin'];
+
+// Sanitize the input
+$role = sanitize_input($_POST["role"]);
+
+// Check if the role is valid
+if (empty($role)) {
+    $errorMsg .= "Role is required.<br>";
+    $success = false;
+} else if (!in_array($role, $validRoles)) {
+    // If the role is not in the array of valid roles
+    $errorMsg .= "Invalid role selected.<br>";
+    $success = false;
+}
+
 
 // Sanitize and validate the email
 if (empty($_POST["email"])) {
@@ -34,19 +52,20 @@ if (empty($_POST["lname"])) {
     $lname = sanitize_input($_POST["lname"]);
 }
 
-// Sanitize and validate the password
-if (empty($_POST["pwd"])) {
-    $errorMsg .= "Password is required.<br>";
-    $success = false;
-} else {
-    $pwd = sanitize_input($_POST["pwd"]);
-}
+// Updated line to match the HTML form:
+    if (empty($_POST["password"])) {
+        $errorMsg .= "Password is required.<br>";
+        $success = false;
+    } else {
+        $pwd = sanitize_input($_POST["password"]);
+        // Your existing code for password confirmation and hashing follows here
+    }
 
 // Check if password confirmation matches
 if (empty($_POST["pwd_confirm"])) {
     $errorMsg .= "Confirm Password is required.<br>";
     $success = false;
-} else if ($_POST["pwd"] !== $_POST["pwd_confirm"]) {
+} else if ($_POST["password"] !== $_POST["pwd_confirm"]) {
     $errorMsg .= "Passwords do not match.<br>";
     $success = false;
 } else {
@@ -55,13 +74,16 @@ if (empty($_POST["pwd_confirm"])) {
 
 // Final output based on success
 if ($success) {
-    echo "<div class='alert alert-success'>";
-    echo "<h4 class='alert-heading'>Your registration is successful!</h4>";
-    echo "<p>Thank you for signing up, " . htmlspecialchars($lname) . ".</p>";
-    echo "<hr>";
-    echo "<a href='register.php' class='btn btn-primary'>Log in</a>";
-    echo "</div>";
-    saveMemberToDB($fname ,$lname, $email, $pwd);
+    // echo "<div class='alert alert-success'>";
+    // echo "<h4 class='alert-heading'>Your registration is successful!</h4>";
+    // echo "<p>Thank you for signing up, " . htmlspecialchars($lname) . ".</p>";
+    // echo "<hr>";
+    // echo "<a href='register.php' class='btn btn-primary'>Log in</a>";
+    // echo "</div>";
+    saveMemberToDB($fname ,$lname, $email, $pwd, $role);
+    // Redirect to the homepage
+    header('Location: index.php');
+    exit; //
 } else {
     echo "<div class='alert alert-danger' role='alert'>";
     echo "<h4 class='alert-heading'>Oops!</h4>";
@@ -92,8 +114,17 @@ function sanitize_input($data)
 /*
  * Helper function to write the member data to the database.
  */
-function saveMemberToDB($fname, $lname, $email, $pwd_hashed)
+function saveMemberToDB($fname, $lname, $email, $pwd_hashed, $role)
 {
+
+    // Check to Prevent Error
+    $allowedTypes = ['student', 'teacher', 'admin'];
+
+    if (!in_array($role, $allowedTypes)) {
+        die("Invalid type specified.");
+    }
+
+
     $config = parse_ini_file('/var/www/private/db-config.ini');
     if (!$config) {
         die("Failed to read database config file.");
@@ -111,13 +142,13 @@ function saveMemberToDB($fname, $lname, $email, $pwd_hashed)
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Prepare the SQL statement and check for errors
-    $stmt = $conn->prepare("INSERT INTO world_of_pets_members (fname, lname, email, password) VALUES (?, ?, ?, ?)");
+    $tableName = "`tuition_centre`.`{$role}`";
+    $stmt = $conn->prepare("INSERT INTO $tableName (fname, lname, email, password, role) VALUES (?, ?, ?, ?, ?)");
     if (!$stmt) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
     }
 
-    $stmt->bind_param("ssss", $fname, $lname, $email, $pwd_hashed);
+    $stmt->bind_param("sssss", $fname, $lname, $email, $pwd_hashed, $role);
     if (!$stmt->execute()) {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }

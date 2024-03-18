@@ -2,7 +2,6 @@
 <html lang="en">
 
 <div id="main">
-
     <head>
         <title>About Us</title>
 
@@ -22,7 +21,7 @@
             <div class="grid-container">
                 <?php foreach ($teachers as $teacher): ?>
                     <div class="card">
-                        <img src="img_avatar.png" alt="Avatar" style="width:100%">
+                        <img src="images/teacher/english.png" alt="Avatar" style="width:100%">
                         <div class="card-container">
                             <h4><b>
                                     <?php echo htmlspecialchars($teacher['name']); ?>
@@ -41,6 +40,8 @@
                 <?php endforeach; ?>
             </div>
         </main>
+
+        
         <?php
         include "inc/footer.inc.php";
         ?>
