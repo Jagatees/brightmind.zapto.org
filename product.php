@@ -18,7 +18,20 @@
 
         <main class="container">
 
-          
+            <div class="card">
+                <h2>Lesson one</h2>
+                <p>Math</p>
+                <button>Add to cart</button>
+            </div>
+
+
+            <div class="card">
+                <h2>Lesson Two</h2>
+                <p>English</p>
+                <button>Add to cart</button>
+            </div>
+
+
 
         </main>
         <?php
