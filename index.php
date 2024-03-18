@@ -340,7 +340,7 @@ session_start();
                 <img src="images/BMALogo2.png" alt="logo" width="auto" height="auto" style="padding-bottom: 50px;"/>
                 <h2>The Best For Your Child</h2>
                 <p> At Bright Minds Academy,  we believe that every student is capable of greatness, and we are here to guide them on their journey to success.</p>
-                <button class="book-now-btn">Book Now</button>
+                <button href="product.php" class="book-now-btn">Book Now</button>
             </div>
         </div>
         </div>
