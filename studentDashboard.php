@@ -12,14 +12,42 @@ endif;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bright Minds Academy - Tutor Dashboard</title>
-    <!-- Include Bootstrap CSS, existing stylesheets, and additional styles -->
     <?php include "inc/head.inc.php"; // This should include your styles and Bootstrap ?>
+    <!-- Include jQuery UI CSS -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <style>
-        #timeslotContainer {
-            display: none; /* Initially hide the timeslot container */
+        #timeslotContainer, #editProfileContainer, #calendarContainer {
+            display: none; /* Initially hide the containers */
             margin-top: 20px;
         }
+
+        /* Custom Calendar Styles */
+        .ui-datepicker {
+            width: 100%;
+            background: #0097a7;
+            border: 1px solid #555;
+            color: #fff;
+        }
+        .ui-datepicker-title {
+            margin: 10px 0;
+        }
+        .ui-state-default, .ui-widget-content .ui-state-default {
+            background: transparent;
+            color: #fff;
+        }
+        .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+            background: #005f6b;
+            color: #ffeb3b;
+        }
+        .ui-datepicker-header {
+            color: #fff;
+            background-color: #007c91;
+        }
+        .ui-datepicker-prev, .ui-datepicker-next {
+            cursor: pointer;
+        }
+        /* More custom styles can be added here as needed */
     </style>
 </head>
 <body>
@@ -38,13 +66,13 @@ endif;
                             </span>
                         </li>
                         <li class="nav-item">
-                            <!-- Modified the href to "#" and added an id -->
-                            <a class="nav-link" href="#" id="viewClassesLink"> 
+                            <a class="nav-link" href="#" id="viewClassesLink">
                                 View Classes
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="edit_profile.php">
+                            <!-- Link for editing profile -->
+                            <a class="nav-link" href="#" id="editProfileLink">
                                 Edit Profile
                             </a>
                         </li>
@@ -62,33 +90,79 @@ endif;
                 <div id="timeslotContainer" class="container">
                     <!-- Timeslots will be inserted here -->
                 </div>
+
+                <!-- Container for editing profile -->
+                <div id="editProfileContainer" class="container">
+                    <!-- Edit Profile form will be inserted here -->
+                </div>
+
+                <!-- Container for the calendar -->
+                <div id="calendarContainer" class="container">
+                    <!-- Calendar will be initialized here -->
+                </div>
             </main>
         </div>
     </div>
     
     <?php include "inc/footer.inc.php"; // Include footer components ?>
-    <!-- jQuery and Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
     $(document).ready(function(){
+
+        // Initialize the calendar
+        $("#calendarContainer").datepicker({
+            // Customizations specific to booked dates can be applied here
+            beforeShowDay: function(date) {
+                // Array of booked dates (could be dynamically generated)
+                var bookedDates = ["2024-03-23", "2024-03-24"];
+                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                if (bookedDates.indexOf(string) >= 0) {
+                    return [true, 'ui-state-highlight', 'Booked']; // Highlight booked dates
+                }
+                return [true, '', ''];
+            }
+        });
+
         $("#viewClassesLink").click(function(event){
             event.preventDefault(); // Prevents direct navigation to the link
-            
-            // HTML content for timeslots
-            var timeslotsHtml = `
-                <h4>Classes Booked</h4>
-                <p>Mr Prik: 23 March 2024 10:00 AM - 11:00 AM</p>
-                <p>Mr James: 24 March 2024 11:00 AM - 12:00 PM</p>
-                <!-- Add more timeslots as needed -->
+
+            // Show the calendar container instead of timeslot HTML
+            $("#calendarContainer").fadeIn();
+            $("#timeslotContainer").fadeOut();
+            $("#editProfileContainer").fadeOut();
+        });
+
+        $("#editProfileLink").click(function(event){
+            event.preventDefault(); // Prevents direct navigation
+            var editProfileHtml = `
+                <h4>Edit Profile</h4>
+                <form id="editProfileForm">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter name">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthday">Birthday:</label>
+                        <input type="date" class="form-control" id="birthday">
+                    </div>
+                    <div class="form-group">
+                        <label for="profilePicture">Profile Picture:</label>
+                        <input type="file" class="form-control-file" id="profilePicture">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             `;
-            
-            // Populate the timeslot container with timeslot HTML and show it
-            $("#timeslotContainer").html(timeslotsHtml).fadeIn();
+            // Populate the edit profile container and show it
+            $("#editProfileContainer").html(editProfileHtml).fadeIn();
+            // Hide the timeslot container to prevent overlapping containers
+            $("#timeslotContainer").fadeOut();
+            // Hide the timeslot container to prevent overlapping containers
+            $("#calendarContainer").fadeOut();
         });
     });
     </script>
-
 </body>
 </html>
