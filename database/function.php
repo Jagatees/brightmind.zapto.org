@@ -4,33 +4,6 @@
 include "database/connect.php";
 
 
-function insertIntoTable($name, $age, $bio, $subject, $price) {
-    $response = [
-        'success' => false,
-        'message' => ''
-    ];
-
-    $conn = getDbConnection();
-
-    $stmt = $conn->prepare("INSERT INTO `tuition_centre`.`user` 
-    (name, age, bio, subject, price) VALUES (?, ?, ?, ?, ?)");
-
-    $stmt->bind_param("sisss", $name, $age, $bio, $subject, $price); // 's' denotes a string, 'i' denotes an integer
-
-    if ($stmt->execute()) {
-        $response['success'] = true;
-        $response['message'] = 'Data inserted successfully.';
-    } else {
-        $response['message'] = 'Failed to insert data.';
-    }
-
-    $stmt->close();
-    $conn->close();
-
-    return $response;
-}
-
-
 function getTeachers() {
     $teachers = [];
 
@@ -60,6 +33,54 @@ function getTeachers() {
 
     return $teachers;
 }
+
+
+
+// INSERT either [student | teacher | admin] role into table (First Time)
+function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $price, $subject) {
+
+    $allowedTypes = ['student', 'teacher', 'admin'];
+
+    if (!in_array($role, $allowedTypes)) {
+        die("Invalid type specified.");
+    }
+
+    $config = parse_ini_file('/var/www/private/db-config.ini');
+    if (!$config) {
+        die("Failed to read database config file.");
+    }
+
+    $conn = new mysqli(
+        $config['servername'],
+        $config['username'],
+        $config['password'],
+        $config['dbname']
+    );
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $tableName = "`tuition_centre`.`user`";
+    $stmt = $conn->prepare("INSERT INTO $tableName (fname, lname, email, password, role, bio, age, price, subject) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    if (!$stmt) {
+        die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+    }
+
+    $age = (int)$age;
+    $price = (float)$price;
+
+    $stmt->bind_param("sssssssss", $fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $price, $subject);
+    if (!$stmt->execute()) {
+        die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
+
+
 
 
 
