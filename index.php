@@ -84,23 +84,26 @@ session_start();
             margin: 0;
         }
         }
-        .book-now-btn {
-        padding: 20px 40px;
-        background-color: #ff7f50; 
-        color: #fff; 
-        font-size: 24px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-        text-transform: uppercase; 
-        font-weight: bold; 
-        letter-spacing: 1px; 
-    }
+        a.book-now-btn {
+            display: inline-block;
+            padding: 20px 40px;
+            background-color: #ff7f50; 
+            color: #fff; 
+            font-size: 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            text-transform: uppercase; 
+            font-weight: bold; 
+            letter-spacing: 1px; 
+            text-decoration: none; /* Remove underline */
+        }
 
-        .book-now-btn:hover {
+        a.book-now-btn:hover {
             background-color: #ff6347; 
         }
+
 
             .section-below-carousel {
             background-color: #f8fcfc;
@@ -340,7 +343,7 @@ session_start();
                 <img src="images/BMALogo2.png" alt="logo" width="auto" height="auto" style="padding-bottom: 50px;"/>
                 <h2>The Best For Your Child</h2>
                 <p> At Bright Minds Academy,  we believe that every student is capable of greatness, and we are here to guide them on their journey to success.</p>
-                <button href="product.php" class="book-now-btn">Book Now</button>
+                <a href="lessons.php" class="book-now-btn">Book Now</a>
             </div>
         </div>
         </div>
