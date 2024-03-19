@@ -12,7 +12,7 @@ session_start();
     <title>Bright Minds Academy</title>
     <style>
         body {
-        background: -webkit-linear-gradient(bottom, #87CEEB, #dbe9f4);
+        background: -webkit-linear-gradient(bottom, #f1ce17, #f1ce17);
         background-repeat: no-repeat;
         }
                 
@@ -322,6 +322,26 @@ session_start();
     .mother-tongue {
         background-color: #dc3545; /* Red color */
     }
+
+    a.book-now-btn {
+    display: inline-block;
+    padding: 20px 40px;
+    background-color: #FFD814; /* Current button background color */
+    color: #000000; /* Text color */
+    font-size: 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none; /* Remove underline */
+}
+
+a.book-now-btn:hover {
+    background-color: #232F3E; /* Button background color on hover */
+}
 
     </style>  
     <?php

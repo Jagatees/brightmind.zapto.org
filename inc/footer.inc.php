@@ -41,7 +41,7 @@ ul{
   position: absolute;
   left:0;
   bottom: -10px;
-  background-color: #e91e63;
+  background-color: #FFD814;
   height: 2px;
   box-sizing: border-box;
   width: 100%;

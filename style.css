@@ -16,7 +16,7 @@ body, html {
     padding: 20px;
     color: white; 
     background: linear-gradient(direction, color-stop1, color-stop2,);
-    background: linear-gradient(to right, #ccecf7, #2F80ED);
+    background: linear-gradient(to right, #FFD814, #E3E6E6);
 }
 
 .enter-button {

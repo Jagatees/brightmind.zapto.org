@@ -21,29 +21,5 @@ header.jumbotron {
     flex-grow: 1;
     text-align: center;
   }
-  
-  /* Styles for horizontal top navigation */
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* Styles for navigation items within horizontal top navigation */
-  nav a {
-    padding: 0.5em 1em;
-    color: white;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-  
-  /* Hover effect for top navigation links */
-  nav a:hover {
-    background-color: #555;
-  }
-  
-  /* Container styles for navigation items, if needed */
-  nav .nav-container {
-    display: flex;
-  }
+
   

@@ -8,7 +8,6 @@
     include "database/function.php";
     $teachers = getTeachers();
     ?>
-    <!-- Include your main stylesheet here, if not already included -->
 </head>
 
 <body>

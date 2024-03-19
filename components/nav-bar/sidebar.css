@@ -1,24 +1,22 @@
 /* sidebar.css */
 
-/* General styles for the side navigation */
 .sidenav {
-    padding-top: 60px; /* Increase this value to add more space at the top */
+    padding-top: 60px; 
     height: 100%;
     width: 0;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #008DDA;
+    background-color: #FFD814;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
     z-index: 1;
   }
   
-  /* Styles for navigation links within the side navigation */
   .sidenav a {
     margin-bottom: 10px;
-    padding: 8px 32px; /* Top/Bottom, Left/Right */
+    padding: 8px 32px; 
     font-size: 25px;
     text-decoration: none;
     color: #000000;
@@ -26,12 +24,10 @@
     transition: 0.3s;
   }
   
-  /* Hover effect for navigation links */
   .sidenav a:hover {
-    color: #F7EEDD;
+    color: #232F3E;
   }
   
-  /* Close button styles for side navigation */
   .sidenav .closebtn {
     position: absolute;
     top: 0;
@@ -40,12 +36,10 @@
     margin-left: 50px;
   }
   
-  /* Main content area styles for when side navigation is toggled */
   #main {
     transition: margin-left .5s;
   }
   
-  /* Responsive styles for the side navigation */
   @media screen and (max-height: 450px) {
     .sidenav { padding-top: 15px; }
     .sidenav a { font-size: 18px; }
