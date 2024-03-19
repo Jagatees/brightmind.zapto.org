@@ -22,6 +22,8 @@ session_start();
     <a href="login.php">Login</a>
     <a href="register.php">Register</a>
   <?php endif; ?>
+
+  
 </div>
 
 <span style="font-size:30px;cursor:pointer" onclick="toggleNav()">&#9776;</span>
