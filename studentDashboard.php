@@ -103,7 +103,25 @@ endif;
             </main>
         </div>
     </div>
-    
+    <div class="modal fade" id="timeslotModal" tabindex="-1" role="dialog" aria-labelledby="timeslotModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="timeslotModalLabel">Booked Timeslots</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php include "inc/footer.inc.php"; // Include footer components ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -114,15 +132,28 @@ endif;
 
         // Initialize the calendar
         $("#calendarContainer").datepicker({
-            // Customizations specific to booked dates can be applied here
             beforeShowDay: function(date) {
-                // Array of booked dates (could be dynamically generated)
                 var bookedDates = ["2024-03-23", "2024-03-24"];
-                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                if (bookedDates.indexOf(string) >= 0) {
-                    return [true, 'ui-state-highlight', 'Booked']; // Highlight booked dates
+                var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                return [true, bookedDates.includes(dateString) ? 'ui-state-highlight' : '', ''];
+            },
+            onSelect: function(dateText) {
+                // Define the booked timeslots for each date
+                var bookedTimeslots = {
+                    "2024-03-23": ["10:00 AM - 11:00 AM", "1:00 PM - 2:00 PM"],
+                    "2024-03-24": ["11:00 AM - 12:00 PM"]
+                };
+                // Check if there are timeslots for the selected date
+                if (bookedTimeslots[dateText]) {
+                    // Create the HTML for the modal body
+                    var timeslotHtml = bookedTimeslots[dateText].map(function(timeslot) {
+                        return "<p>" + timeslot + "</p>";
+                    }).join('');
+                    // Set the modal content
+                    $('#timeslotModal .modal-body').html(timeslotHtml);
+                    // Show the modal
+                    $('#timeslotModal').modal('show');
                 }
-                return [true, '', ''];
             }
         });
 
