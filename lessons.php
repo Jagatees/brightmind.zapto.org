@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <title>Bright Minds Academy - Lessons</title>
-    <?php
-    include "components/nav-bar/nav.php";
-    include "inc/head.inc.php"; // Include head components
-    //include "../db.php"; // Include database connection
-    ?>
     <link rel="stylesheet" href="css/lessons.css">
+    <?php
+        include "inc/head.inc.php";
+    ?>
 </head>
 <body>
+<div id="main">
+        <?php include "inc/header.inc.php"; ?>
     <div class="container">
         <div class="row">
             <h4>Book Lessons</h4>
@@ -55,6 +55,7 @@
             </div>
         </div>        
     </div>
+</main>
     <br>
     <?php include "inc/footer.inc.php"; // Include footer components ?>
 
