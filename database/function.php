@@ -12,7 +12,7 @@ function insertIntoTable($name, $age, $bio, $subject, $price) {
 
     $conn = getDbConnection();
 
-    $stmt = $conn->prepare("INSERT INTO `tuition_centre`.`teacher` 
+    $stmt = $conn->prepare("INSERT INTO `tuition_centre`.`user` 
     (name, age, bio, subject, price) VALUES (?, ?, ?, ?, ?)");
 
     $stmt->bind_param("sisss", $name, $age, $bio, $subject, $price); // 's' denotes a string, 'i' denotes an integer
@@ -36,7 +36,7 @@ function getTeachers() {
 
     $conn = getDbConnection();
 
-    $sql = "SELECT name, age, bio, subject, price FROM `tuition_centre`.`teacher`";
+    $sql = "SELECT name, age, bio, subject, price FROM `tuition_centre`.`user`";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

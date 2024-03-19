@@ -139,7 +139,7 @@ function saveMemberToDB($fname, $lname, $email, $pwd_hashed, $role)
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $tableName = "`tuition_centre`.`{$role}`";
+    $tableName = "`tuition_centre`.`user`";
     $stmt = $conn->prepare("INSERT INTO $tableName (fname, lname, email, password, role) VALUES (?, ?, ?, ?, ?)");
     if (!$stmt) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);

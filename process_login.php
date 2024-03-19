@@ -100,7 +100,7 @@ function authenticateUser() {
         return;
     }
 
-    $tableName = "`tuition_centre`.`{$role}`";
+    $tableName = "`tuition_centre`.`user`";
 
     // Prepare and execute query to authenticate user
     $stmt = $conn->prepare("SELECT fname, lname, email, password, role FROM $tableName WHERE email = ?");
