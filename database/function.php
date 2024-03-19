@@ -37,7 +37,8 @@ function getTeachers() {
     $conn = getDbConnection();
 
     // Adjust the column names according to your table structure
-    $sql = "SELECT fname, lname, age, bio, subject FROM `tuition_centre`.`user`";
+    // Add a WHERE clause to filter users by role
+    $sql = "SELECT fname, lname, age, bio, subject FROM `tuition_centre`.`user` WHERE role = 'teacher'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -59,6 +60,7 @@ function getTeachers() {
 
     return $teachers;
 }
+
 
 
 ?>

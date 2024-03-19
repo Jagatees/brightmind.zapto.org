@@ -24,8 +24,6 @@
                     <option value="English">English</option>
                     <option value="Math">Math</option>
                     <option value="Mother-Tongue">Mother-Tongue</option>
-
-                    <!-- Add more options -->
                 </select>
             </div>
             <div class="grid-container">
