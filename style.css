@@ -2,10 +2,8 @@ body, html {
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-image: url('images/splashPage/whiteboard.jpg');
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+    overflow: hidden;
+    background: linear-gradient(direction, color-stop1, color-stop2);
 }
 
 .splash-container {
@@ -16,7 +14,9 @@ body, html {
     align-items: center;
     text-align: center;
     padding: 20px;
-    color: white; /* This makes text more readable on a dark background */
+    color: white; 
+    background: linear-gradient(direction, color-stop1, color-stop2,);
+    background: linear-gradient(to right, #ccecf7, #2F80ED);
 }
 
 .enter-button {
