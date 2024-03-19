@@ -8,7 +8,9 @@ header.jumbotron {
     justify-content: center;
     text-align: center;
     width: 100%;
+    background-color: #FCEB95;
   }
+  
   
   /* Header title styles */
   header .section-heading {

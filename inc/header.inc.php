@@ -1,4 +1,4 @@
-<header class="jumbotron bg-white text-dark custom-bg ">
+<header class="jumbotron text-dark custom-bg ">
 <?php
         include "components/nav-bar/nav.php";
         ?>
