@@ -34,7 +34,7 @@
                         <img src="images/teacher/english.png" alt="Avatar" style="width:100%">
                         <div class="card-container">
                             <h4><b>
-                                    <?php echo htmlspecialchars($teacher['name']); ?>
+                                    <?php echo htmlspecialchars($teacher['fname']); ?>
                                 </b></h4>
                             <p>Subject:
                                 <?php echo htmlspecialchars($teacher['subject']); ?>

@@ -36,12 +36,21 @@ function getTeachers() {
 
     $conn = getDbConnection();
 
-    $sql = "SELECT name, age, bio, subject, price FROM `tuition_centre`.`user`";
+    // Adjust the column names according to your table structure
+    $sql = "SELECT fname, lname, age, bio, subject FROM `tuition_centre`.`user`";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            $teachers[] = $row;
+            // Create an associative array that matches your expected structure
+            $teacher = [
+                'fname' => $row['fname'],
+                'lname' => $row['lname'],
+                'subject' => $row['subject'],
+                'age' => $row['age'],
+                'bio' => $row['bio']
+            ];
+            $teachers[] = $teacher;
         }
     } else {
         echo "0 results";
