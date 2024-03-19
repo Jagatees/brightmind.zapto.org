@@ -8,8 +8,6 @@
     ?>
 </head>
 <body>
-<div id="main">
-        <?php include "inc/header.inc.php"; ?>
     <div class="container">
         <div class="row">
             <h4>Book Lessons</h4>
@@ -55,10 +53,16 @@
             </div>
         </div>        
     </div>
-</main>
+    <?php if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] && $_SESSION['role'] == 'students'): ?>
+        <a href="#" class="btn btn-light">Book now</a>
+    <?php else: ?>
+    <?php endif; ?>
+    <div id="main">
+            <?php include "inc/header.inc.php"; ?>
+    </main>
     <br>
     <?php include "inc/footer.inc.php"; // Include footer components ?>
 
-    <script src="js/lesson.js"></script>
+    <script src="js/create_lesson.js"></script>
 </body>
 </html>
