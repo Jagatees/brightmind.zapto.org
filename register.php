@@ -46,7 +46,7 @@
         background: #fbfbfb;
         border-radius: 8px;
         box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
-        height: 660px;
+        height: 755px;
         margin: 6rem auto 8.1rem auto;
         width: 329px;
       }
@@ -154,13 +154,10 @@
 
             <div class="form-border"></div>
 
-
             <label for="role" style="padding-top:22px">&nbsp;Role</label>
             <select id="role" class="form-content" name="role" required>
               <option value="" disabled selected>Select your role</option>
               <option value="student">student</option>
-              <option value="teacher">teacher</option>
-              <option value="admin">admin</option>
             </select>
 
             <label for="user-password" style="padding-top:22px">&nbsp;Password</label>
