@@ -3,6 +3,15 @@
 
 <head>
     <title>About Us</title>
+    <style>
+        .card {  
+            transition: background-color 0.3s ease; 
+        }
+
+        .card:hover {
+            background-color: #FFFDF3; 
+        }
+    </style>
     <?php
     include "inc/head.inc.php";
     include "database/function.php";
@@ -13,7 +22,7 @@
 <body>
     <div id="main">
         <?php include "inc/header.inc.php"; ?>
-
+        
         <main class="container">
             <div class="filter-container">
                 <label for="subjectFilter">Filter by subject:</label>
