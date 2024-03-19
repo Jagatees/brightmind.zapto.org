@@ -158,6 +158,10 @@
             <select id="role" class="form-content" name="role" required>
               <option value="" disabled selected>Select your role</option>
               <option value="student">student</option>
+
+              <!-- Remove the Bottom two ones the other page are install -->
+              <option value="teacher">teacher</option>
+              <option value="admin">admin</option>
             </select>
 
             <label for="user-password" style="padding-top:22px">&nbsp;Password</label>
