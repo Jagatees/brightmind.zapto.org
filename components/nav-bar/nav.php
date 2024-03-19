@@ -3,7 +3,7 @@ session_start();
 ?>
 
 <div id="mySidenav" class="sidenav">
-<a href="index.php">Home</a>
+<a href="home.php">Home</a>
   <a href="ourTeacher.php">Our Teachers</a>
   <a href="lessons.php">Lessons</a>
 
