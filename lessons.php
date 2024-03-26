@@ -8,6 +8,8 @@
     ?>
 </head>
 <body>
+<?php include "inc/header.inc.php"; ?>
+<div id="main">
     <div class="container">
         <div class="row">
             <h4>Book Lessons</h4>
@@ -57,9 +59,8 @@
         <a href="#" class="btn btn-light">Book now</a>
     <?php else: ?>
     <?php endif; ?>
-    <div id="main">
-            <?php include "inc/header.inc.php"; ?>
-    </main>
+    
+</main>
     <br>
     <?php include "inc/footer.inc.php"; // Include footer components ?>
 
