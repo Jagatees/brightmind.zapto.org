@@ -21,15 +21,18 @@ $allLessonsJSON = json_encode($lessons); // Encode the lessons array as JSON
 
     <?php include "inc/header.inc.php"; ?>
     <div id="menu">
-        <button onclick="approveLesson()">Approve Lesson</button>
+        <button onclick="approveLesson()">Approve-Lesson</button>
+        <button onclick="editProfile()">Edit-Profile</button>
+
     </div>
     <div id="content">
-        <h1>Welcome Page</h1>
-        <p>Click the buttons on the left to view different content here.</p>
+       
     </div>
     </main>
     <?php include "inc/footer.inc.php"; ?>
     <script>
+
+        // Approve Lessons
         var allLessons = JSON.parse('<?php echo $allLessonsJSON; ?>');
 
         function approveLesson() {
@@ -42,11 +45,29 @@ $allLessonsJSON = json_encode($lessons); // Encode the lessons array as JSON
                 contentDiv.innerHTML += '<p><strong>Module:</strong> ' + lesson.module + '</p>';
                 contentDiv.innerHTML += '<p><strong>Level:</strong> ' + lesson.level + '</p>';
                 contentDiv.innerHTML += '<p><strong>approvel:</strong> ' + lesson.approvel + '</p>';
-                contentDiv.innerHTML +=  '<button>Approve</button>';
-                contentDiv.innerHTML +=  '<button>Do Not Approve</button>';
+                contentDiv.innerHTML +=  '<button onclick="updateApproval('+lesson.idlessons+', 1)">Approve</button>';
+                contentDiv.innerHTML +=  '<button onclick="updateApproval('+lesson.idlessons+', 0)">Do Not Approve</button>';
                 contentDiv.innerHTML += '<hr>'; 
             });
         }
+
+        function updateApproval(lessonId, approvalStatus) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'update_lesson_approval.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                    location.reload()
+                }
+            };
+            xhr.send('lessonId=' + lessonId + '&approvalStatus=' + approvalStatus);
+        }
+
+
+        // Edit Profile
+        
+
+       
     </script>
 </body>
 </html>

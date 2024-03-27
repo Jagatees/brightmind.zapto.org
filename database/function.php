@@ -112,6 +112,35 @@ function getlessons() {
 }
 
 
+function updateLessonApproval($lessonId, $approvalStatus) {
+    // Establish database connection
+    $conn = getDbConnection();
+
+    // Prepare the SQL statement to update the approvel column based on the lessonId
+    $sql = "UPDATE `tuition_centre`.`lessons` SET approvel = ? WHERE idlessons = ?";
+    
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+    }
+
+    // Bind parameters to the prepared statement
+    $stmt->bind_param("ii", $approvalStatus, $lessonId);
+
+    // Execute the statement and check for success/failure
+    if ($stmt->execute()) {
+        echo "Lesson approval status updated successfully.";
+    } else {
+        die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+    }
+
+    // Close the statement and the connection
+    $stmt->close();
+    $conn->close();
+}
+
+
 
 
 ?>
