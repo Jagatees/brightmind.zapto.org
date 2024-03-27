@@ -4,6 +4,35 @@
 include "database/connect.php";
 
 
+
+function getAllUsers() {
+    $users = []; 
+
+    $conn = getDbConnection();
+
+    $sql = "SELECT fname, lname, age, bio, subject FROM `tuition_centre`.`user`";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $user = [ 
+                'fname' => $row['fname'],
+                'lname' => $row['lname'],
+                'subject' => isset($row['subject']) ? $row['subject'] : '',
+                'age' => $row['age'],
+                'bio' => $row['bio']
+            ];
+            $users[] = $user;
+        }
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+
+    return $users;
+}
+
+
 function getTeachers() {
     $teachers = [];
 
@@ -135,6 +164,40 @@ function updateLessonApproval($lessonId, $approvalStatus) {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }
 
+    // Close the statement and the connection
+    $stmt->close();
+    $conn->close();
+}
+
+
+function deleteUserByDetails($fname, $lname, $subject) {
+    // Establish database connection
+    $conn = getDbConnection();
+    
+    // Prepare the SQL statement to delete a user where fname, lname, and subject match
+    $sql = "DELETE FROM `tuition_centre`.`user` WHERE fname = ? AND lname = ? AND subject = ?";
+    
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+    }
+    
+    // Bind parameters to the prepared statement
+    $stmt->bind_param("sss", $fname, $lname, $subject);
+    
+    // Execute the statement and check for success/failure
+    if ($stmt->execute()) {
+        // Check how many rows were affected
+        if ($stmt->affected_rows > 0) {
+            echo "User deleted successfully.";
+        } else {
+            echo "No user found with the specified details.";
+        }
+    } else {
+        die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+    }
+    
     // Close the statement and the connection
     $stmt->close();
     $conn->close();
