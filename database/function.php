@@ -10,7 +10,8 @@ function getAllUsers() {
 
     $conn = getDbConnection();
 
-    $sql = "SELECT fname, lname, age, bio, subject FROM `tuition_centre`.`user`";
+    // Modify the SQL to include a WHERE clause that filters by role
+    $sql = "SELECT fname, lname, age, bio, subject FROM `tuition_centre`.`user` WHERE role IN ('student', 'teacher')";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

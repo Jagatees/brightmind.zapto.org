@@ -93,17 +93,17 @@ $allUserJSON = json_encode($user);
         var alluser = JSON.parse('<?php echo $allUserJSON; ?>');
 
         function userall() {
-    var contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = '<h2>Delete User</h2>';
-    alluser.forEach(function(user) {
-        contentDiv.innerHTML += '<p><strong>fame:</strong> ' + user.fname + '</p>';
-        contentDiv.innerHTML += '<p><strong>lname:</strong> ' + user.lname + '</p>';
-        contentDiv.innerHTML += '<p><strong>subject:</strong> ' + user.subject + '</p>';
-        // Update this line to correctly call deleteUser with the user's details
-        contentDiv.innerHTML += '<button onclick="deleteUser(\'' + user.fname.replace(/'/g, "\\'") + '\',\'' + user.lname.replace(/'/g, "\\'") + '\',\'' + user.subject.replace(/'/g, "\\'") + '\')">Delete</button>';
-        contentDiv.innerHTML += '<hr>'; 
-    });
-}
+            var contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = '<h2>Delete User</h2>';
+            alluser.forEach(function(user) {
+                contentDiv.innerHTML += '<p><strong>fame:</strong> ' + user.fname + '</p>';
+                contentDiv.innerHTML += '<p><strong>lname:</strong> ' + user.lname + '</p>';
+                contentDiv.innerHTML += '<p><strong>subject:</strong> ' + user.subject + '</p>';
+                // Update this line to correctly call deleteUser with the user's details
+                contentDiv.innerHTML += '<button onclick="deleteUser(\'' + user.fname.replace(/'/g, "\\'") + '\',\'' + user.lname.replace(/'/g, "\\'") + '\',\'' + user.subject.replace(/'/g, "\\'") + '\')">Delete</button>';
+                contentDiv.innerHTML += '<hr>'; 
+            });
+        }
 
         function deleteUser(fname, lname, subject) {
             if (!confirm('Are you sure you want to delete this user?')) {
