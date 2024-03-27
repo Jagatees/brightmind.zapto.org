@@ -25,9 +25,9 @@ $allUserJSON = json_encode($user);
 
     <?php include "inc/header.inc.php"; ?>
     <div id="menu">
-        <button onclick="approveLesson()">Approve-Lesson</button>
-        <button onclick="createTeacherAccount()">Create-Teacher-Account</button>
-        <button onclick="userall()">User-Account</button>
+        <button onclick="approveLesson()">Approve-Lesson-LEFT-UI</button>
+        <button onclick="createTeacherAccount()">Create-Teacher-Account-WIP</button>
+        <button onclick="userall()">Delete-User-LEFT-UI</button>
     </div>
     <div id="content">
        
@@ -86,8 +86,35 @@ $allUserJSON = json_encode($user);
             contentDiv.innerHTML += '<label for="pwd_confirm" style="padding-top:22px">&nbsp;Confirm Password:</label>';
             contentDiv.innerHTML += '<input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password"><br>';
             contentDiv.innerHTML += '<div class="form-border"></div>';
-            contentDiv.innerHTML += '<button onclick="saveProfileChanges()">Save Changes</button>';
+            contentDiv.innerHTML += '<button onclick="createAccount()">Save Changes</button>';
         }
+
+
+        function createAccount() {
+            var fname = document.getElementById('fname').value;
+            var lname = document.getElementById('lname').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('pwd').value;
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'adminDashboard-createAccount.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    alert(this.responseText); 
+                }
+            };
+            xhr.send('fname=' + encodeURIComponent(fname) + '&lname=' + encodeURIComponent(lname) + '&email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password));
+        }
+
+
+
+
+
+
+
+
+
 
         // Display user & then delete
         var alluser = JSON.parse('<?php echo $allUserJSON; ?>');
