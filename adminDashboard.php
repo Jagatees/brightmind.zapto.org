@@ -17,6 +17,8 @@ $allLessonsJSON = json_encode($lessons); // Encode the lessons array as JSON
     <?php include "inc/head.inc.php"; ?>
 </head>
 <body>
+<div id="main">
+
     <?php include "inc/header.inc.php"; ?>
     <div id="menu">
         <button onclick="approveLesson()">Approve Lesson</button>
@@ -25,6 +27,7 @@ $allLessonsJSON = json_encode($lessons); // Encode the lessons array as JSON
         <h1>Welcome Page</h1>
         <p>Click the buttons on the left to view different content here.</p>
     </div>
+    </main>
     <?php include "inc/footer.inc.php"; ?>
     <script>
         var allLessons = JSON.parse('<?php echo $allLessonsJSON; ?>');
@@ -39,6 +42,8 @@ $allLessonsJSON = json_encode($lessons); // Encode the lessons array as JSON
                 contentDiv.innerHTML += '<p><strong>Module:</strong> ' + lesson.module + '</p>';
                 contentDiv.innerHTML += '<p><strong>Level:</strong> ' + lesson.level + '</p>';
                 contentDiv.innerHTML += '<p><strong>approvel:</strong> ' + lesson.approvel + '</p>';
+                contentDiv.innerHTML +=  '<button>Approve</button>';
+                contentDiv.innerHTML +=  '<button>Do Not Approve</button>';
                 contentDiv.innerHTML += '<hr>'; 
             });
         }
