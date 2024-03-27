@@ -35,8 +35,6 @@ function getTeachers() {
 }
 
 
-
-// INSERT either [student | teacher | admin] role into table (First Time)
 function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $price, $subject) {
 
     $allowedTypes = ['student', 'teacher', 'admin'];
@@ -80,6 +78,38 @@ function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $pri
 }
 
 
+
+function getlessons() {
+    $teachers = [];
+
+    $conn = getDbConnection();
+
+    // Adjust the column names according to your table structure
+    // Add a WHERE clause to filter users by role
+    $sql = "SELECT idlessons, idteacher, time_slot, module, level, approvel FROM `tuition_centre`.`lessons`";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            // Create an associative array that matches your expected structure
+            $teacher = [
+                'idlessons' => $row['idlessons'],
+                'idteacher' => $row['idteacher'],
+                'time_slot' => $row['time_slot'],
+                'module' => $row['module'],
+                'level' => $row['level'],
+                'approvel' => $row['approvel']
+
+            ];
+            $teachers[] = $teacher;
+        }
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+
+    return $teachers;
+}
 
 
 
