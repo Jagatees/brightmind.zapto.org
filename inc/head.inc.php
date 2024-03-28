@@ -18,7 +18,7 @@
     
     <!-- External JS -->
     <script src="js/main.js" defer></script>
-    <script src="nav-bar/index.js"></script>
+    <script src="components/nav-bar/index.js"></script>
 
     <title>Bright Minds Academy</title>
     <meta charset="UTF-8">
