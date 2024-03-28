@@ -110,44 +110,43 @@ function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $pri
 
 
 function getlessons() {
-    $teachers = [];
+    $lessons = []; 
 
     $conn = getDbConnection();
 
-    // Adjust the column names according to your table structure
-    // Add a WHERE clause to filter users by role
-    $sql = "SELECT idlessons, idteacher, time_slot, module, level, approvel FROM `tuition_centre`.`lessons`";
+    $sql = "SELECT lesson_id, uuid, time_slot, module, level, approvel, teacher_name FROM `tuition_centre`.`lessons`";
+
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             // Create an associative array that matches your expected structure
-            $teacher = [
-                'idlessons' => $row['idlessons'],
-                'idteacher' => $row['idteacher'],
+            $lesson = [
+                'lesson_id' => $row['lesson_id'],
+                'uuid' => $row['uuid'],
                 'time_slot' => $row['time_slot'],
                 'module' => $row['module'],
                 'level' => $row['level'],
-                'approvel' => $row['approvel']
-
+                'approvel' => $row['approvel'],
+                'teacher_name' => $row['teacher_name']
             ];
-            $teachers[] = $teacher;
+            $lessons[] = $lesson;
         }
     } else {
         echo "0 results";
     }
     $conn->close();
 
-    return $teachers;
+    return $lessons;
 }
 
 
-function updateLessonApproval($lessonId, $approvalStatus) {
+function updateLessonApproval($lesson_id, $approvalStatus) {
     // Establish database connection
     $conn = getDbConnection();
 
-    // Prepare the SQL statement to update the approvel column based on the lessonId
-    $sql = "UPDATE `tuition_centre`.`lessons` SET approvel = ? WHERE idlessons = ?";
+    // Prepare the SQL statement to update the approval column based on the uuid
+    $sql = "UPDATE `tuition_centre`.`lessons` SET approvel = ? WHERE lesson_id = ?";
     
     // Prepare the statement
     $stmt = $conn->prepare($sql);
@@ -156,7 +155,8 @@ function updateLessonApproval($lessonId, $approvalStatus) {
     }
 
     // Bind parameters to the prepared statement
-    $stmt->bind_param("ii", $approvalStatus, $lessonId);
+    // Assuming approvalStatus is an integer and uuid is a string
+    $stmt->bind_param("ii", $approvalStatus, $lesson_id);
 
     // Execute the statement and check for success/failure
     if ($stmt->execute()) {
@@ -169,6 +169,7 @@ function updateLessonApproval($lessonId, $approvalStatus) {
     $stmt->close();
     $conn->close();
 }
+
 
 
 function deleteUserByDetails($fname, $lname, $subject) {
@@ -244,6 +245,36 @@ function updateUserNames($newFname, $newLname) {
         $_SESSION['lname'] = $newLname;
     }
 }
+
+function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId) {
+    // Establish database connection
+    $conn = getDbConnection();
+    
+    // Prepare the SQL statement to insert a lesson
+    $sql = "INSERT INTO `tuition_centre`.`lessons` (uuid, time_slot, module, level, approvel, teacher_name) 
+    VALUES (?, ?, ?, ?, ?, ?)";
+    
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+    }
+    
+    // Bind parameters to the prepared statement
+    $stmt->bind_param("ssssis", $uuid, $timeSlot, $module, $level, $approvel, $teacherId);
+    
+    // Execute the statement and check for success/failure
+    if ($stmt->execute()) {
+        echo "Lesson inserted successfully.";
+    } else {
+        die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+    }
+    
+    // Close the statement and the connection
+    $stmt->close();
+    $conn->close();
+}
+
 
 
 

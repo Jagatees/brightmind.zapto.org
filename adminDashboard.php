@@ -6,11 +6,12 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true)
 }
 
 include "database/function.php";
+
 $lessons = getlessons();
-$allLessonsJSON = json_encode($lessons);
+$allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
 $user = getAllUsers();
-$allUserJSON = json_encode($user);
+$allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 ?>
 
 <!DOCTYPE html>
@@ -65,8 +66,7 @@ $allUserJSON = json_encode($user);
 
             <!-- Main content -->
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-                <div id="content"> <!-- This is where your dynamic content will be loaded -->
-                    <!-- This container will initially be empty and will be filled with content by your JavaScript functions -->
+                <div id="content"> 
                 </div>
                 <div id="approveLessonContainer" class="lesson-container">
                     <div id="lessonCardsContainer" class ="lesson-container"></div> 
@@ -76,37 +76,57 @@ $allUserJSON = json_encode($user);
                 
                 </div>
                 <div id="deleteContainer" class="container user-container">
-                    <!-- Delete user will be initialized here -->
                 </div>
             </main>
         </div>
     </div>
     <?php include "inc/footer.inc.php"; ?>
     <script>
-        // Approve Lessons
-        var allLessons = JSON.parse('<?php echo $allLessonsJSON; ?>');
+        // Ensure the PHP-generated JSON strings are not empty
+        var allLessonsJSON = '<?php echo $allLessonsJSON; ?>';
+        var allUserJSON = '<?php echo $allUserJSON; ?>';
+        
+        if (allLessonsJSON) {
+            var allLessons = JSON.parse(allLessonsJSON);
+        } else {
+            console.error('allLessonsJSON is empty or invalid');
+        }
+
+        if (allUserJSON) {
+            var alluser = JSON.parse(allUserJSON);
+        } else {
+            console.error('allUserJSON is empty or invalid');
+        }
 
         function approveLesson() {
-            document.getElementById('content').style.display = 'none'; // Hide the generic content container
-            document.getElementById('createTeacherContainer').style.display = 'none'; // Hide create teacher form
-            document.getElementById('deleteContainer').style.display = 'none'; // Hide delete user form
+            // Hide various containers
+            document.getElementById('content').style.display = 'none';
+            document.getElementById('createTeacherContainer').style.display = 'none';
+            document.getElementById('deleteContainer').style.display = 'none';
+
+            // Clear and display the lesson cards container
             var lessonCardsContainer = document.getElementById('lessonCardsContainer');
-            lessonCardsContainer.innerHTML = '';    
             var approveLessonContainer = document.getElementById('approveLessonContainer');
-            approveLessonContainer.style.display = 'block'; // Show the approve lesson container
 
-
-        
+            // Loop through all lessons to create approval cards
             allLessons.forEach(function(lesson) {
+                // Check for undefined values and print to console if found
+                Object.entries(lesson).forEach(([key, value]) => {
+                    if (value === undefined) {
+                        console.log('Undefined found for key:', key);
+                    }
+                });
+
             var cardHtml = '<div class="lesson-card">';
-            cardHtml += '<p><strong>ID:</strong> ' + lesson.idlessons + '</p>';
-            cardHtml += '<p><strong>Teacher ID:</strong> ' + lesson.idteacher + '</p>';
-            cardHtml += '<p><strong>Time Slot:</strong> ' + lesson.time_slot + '</p>';
-            cardHtml += '<p><strong>Module:</strong> ' + lesson.module + '</p>';
-            cardHtml += '<p><strong>Level:</strong> ' + lesson.level + '</p>';
-            cardHtml += '<p><strong>Approve:</strong> ' + lesson.approvel + '</p>';
-            cardHtml += '<button class="approve" onclick="updateApproval('+lesson.idlessons+', 1)">Approve</button>';
-            cardHtml += '<button class="deny" onclick="updateApproval('+lesson.idlessons+', 0)">Do Not Approve</button>';
+            cardHtml += '<p><strong>ID:</strong> ' + (lesson.lesson_id ) + '</p>';
+            cardHtml += '<p><strong>Teacher ID:</strong> ' + (lesson.uuid ) + '</p>';
+            cardHtml += '<p><strong>Teacher Name:</strong> ' + (lesson.teacher_name ) + '</p>';
+            cardHtml += '<p><strong>Time Slot:</strong> ' + (lesson.time_slot ) + '</p>';
+            cardHtml += '<p><strong>Module:</strong> ' + (lesson.module ) + '</p>';
+            cardHtml += '<p><strong>Level:</strong> ' + (lesson.level) + '</p>';
+            cardHtml += '<p><strong>Approval:</strong> ' + (lesson.approvel) + '</p>';
+            cardHtml += '<button class="approve" onclick="updateApproval(' + (lesson.lesson_id) + ', 1)">Approve</button>';
+            cardHtml += '<button class="deny" onclick="updateApproval(' + (lesson.lesson_id) + ', 0)">Do Not Approve</button>';
             cardHtml += '</div>';
 
             lessonCardsContainer.innerHTML += cardHtml;
@@ -114,7 +134,9 @@ $allUserJSON = json_encode($user);
     }
 
 
-        function updateApproval(lessonId, approvalStatus) {
+
+
+        function updateApproval(lesson_id, approvalStatus) {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'adminDashboard-ApproveLesson.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -123,7 +145,7 @@ $allUserJSON = json_encode($user);
                     location.reload()
                 }
             };
-            xhr.send('lessonId=' + lessonId + '&approvalStatus=' + approvalStatus);
+            xhr.send('lesson_id=' + lesson_id + '&approvalStatus=' + approvalStatus);
         }
 
 
