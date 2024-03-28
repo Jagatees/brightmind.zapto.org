@@ -1,5 +1,5 @@
 <?php
-$fname = $email = $lname = $errorMsg = $pwd = $role = "";
+$fname = $email = $lname = $errorMsg = $pwd = $role = $uuid = "";
 $success = true;
 
 ini_set('display_errors', 1);
@@ -72,14 +72,22 @@ if (empty($_POST["pwd_confirm"])) {
     $pwd = password_hash($pwd, PASSWORD_DEFAULT);
 }
 
+
+// Check if uuid is set
+if (isset($_POST['uuid'])) {
+    $uuid = $_POST['uuid'];
+    // Do something with $uuid, like passing it to another function or saving it to a database
+}
+
 // Final output based on success
 if ($success) {
-    saveMemberToDB($fname ,$lname, $email, $pwd, $role);
+    saveMemberToDB($fname ,$lname, $email, $pwd, $role, $uuid);
     session_start();
     $_SESSION['user_logged_in'] = true;
     $_SESSION['fname'] = $fname;
     $_SESSION['lname'] = $lname;
-    $_SESSION['role'] = $role; 
+    $_SESSION['role'] = $role;
+    $_SESSION['uuid'] = $uuid; 
     header('Location: welcome.php');
     exit; //
 } else {
@@ -112,7 +120,7 @@ function sanitize_input($data)
 /*
  * Helper function to write the member data to the database.
  */
-function saveMemberToDB($fname, $lname, $email, $pwd_hashed, $role)
+function saveMemberToDB($fname, $lname, $email, $pwd_hashed, $role, $uuid)
 {
 
     // Check to Prevent Error
@@ -141,12 +149,12 @@ function saveMemberToDB($fname, $lname, $email, $pwd_hashed, $role)
     }
 
     $tableName = "`tuition_centre`.`user`";
-    $stmt = $conn->prepare("INSERT INTO $tableName (fname, lname, email, password, role) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO $tableName (fname, lname, email, password, role, uuid) VALUES (?, ?, ?, ?, ?, ?)");
     if (!$stmt) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
     }
 
-    $stmt->bind_param("sssss", $fname, $lname, $email, $pwd_hashed, $role);
+    $stmt->bind_param("ssssss", $fname, $lname, $email, $pwd_hashed, $role, $uuid);
     if (!$stmt->execute()) {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }

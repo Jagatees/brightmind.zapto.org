@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!--External JS-->
     <script src="js/main.js" defer></script>
-    <script src="nav-bar/index.js"></script>
+    <script src="components/nav-bar/index.js"></script>
     <title>Bright Minds Academy</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

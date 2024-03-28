@@ -1,7 +1,7 @@
 <?php
 session_start(); // Start the session at the beginning of the file
 
-$fname = $email = $lname = $errorMsg = $pwd = $role =  "";
+$fname = $email = $lname = $errorMsg = $pwd = $role  =  "";
 $success = true;
 
 ini_set('display_errors', 1);
@@ -58,12 +58,12 @@ if ($success) {
 }
 
 if ($success) {
-    // Store user info in session variable
     session_start();
     $_SESSION['user_logged_in'] = true;
     $_SESSION['fname'] = $fname;
     $_SESSION['lname'] = $lname;
-    $_SESSION['role'] = $role; 
+    $_SESSION['role'] = $role;
+    $_SESSION['uuid'] = $uuid; 
     header('Location: welcome.php'); 
     exit();
 } else {
@@ -72,7 +72,7 @@ if ($success) {
 
 
 function authenticateUser() {
-    global $fname, $lname, $email, $pwd, $errorMsg, $success, $role;
+    global $fname, $lname, $email, $pwd, $errorMsg, $success, $role, $uuid;
 
 
      // Check to Prevent Error
@@ -104,7 +104,7 @@ function authenticateUser() {
     $tableName = "`tuition_centre`.`user`";
 
     // Prepare and execute query to authenticate user
-    $stmt = $conn->prepare("SELECT fname, lname, email, password, role FROM $tableName WHERE email = ?");
+    $stmt = $conn->prepare("SELECT fname, lname, email, password, role, uuid FROM $tableName WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -114,10 +114,11 @@ function authenticateUser() {
         $fname = $row["fname"];
         $lname = $row["lname"];
         $pwd_hashed = $row["password"];
+        $uuid = $row["uuid"];
+
         if ($pwd_hashed !== null && $pwd !== null && password_verify($pwd, $pwd_hashed)) {
-            // Password verified, authentication successful
-            // You may want to store additional user information in session variables here
             $_SESSION['user_name'] = $fname . ' ' . $lname;
+            $_SESSION['uuid'] = $uuid;
         } else {
             // Password doesn't match
             $errorMsg = "Email found but password doesn't match.";
