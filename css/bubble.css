@@ -1,0 +1,46 @@
+.lesson-card {
+  background: #eaeb9e;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  margin: 10px;
+  padding: 20px;
+  display: inline-block; /* or flex if you want to use flexbox */
+  width: calc(50% - 20px); /* Adjust width for side by side display, considering margin */
+}
+
+.approve, .deny {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
+.approve {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.deny {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+/* Add media query for responsive layout if needed */
+@media (max-width: 768px) {
+  .lesson-card {
+      width: calc(100% - 20px);
+  }
+}
+
+.lesson-header {
+  position: relative; /* This makes it a positioning context for absolutely positioned children */
+  padding-top: 20px; /* Gives some space at the top */
+}
+
+.lessons-title {
+  position: absolute; /* Absolute position for the title */
+  top: 0; /* Align to the top of the nearest positioned ancestor */
+  left: 0; /* Align to the right of the nearest positioned ancestor */
+}

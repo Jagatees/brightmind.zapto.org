@@ -11,23 +11,83 @@ $allLessonsJSON = json_encode($lessons);
 
 $user = getAllUsers();
 $allUserJSON = json_encode($user);
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bright Minds Academy</title>
-    <?php include "inc/head.inc.php"; ?>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright Minds Academy - Tutor Dashboard</title>
+    <?php include "inc/head.inc.php"; // This should include your styles and Bootstrap ?>
+    <!-- Include jQuery UI CSS -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="css/bubble.css" rel="stylesheet">
+
+    
+    <!-- Custom styles for this template -->
 </head>
 <body>
 <div id="main">
 
     <?php include "inc/header.inc.php"; ?>
     <div id="menu">
-        <button onclick="approveLesson()">Approve-Lesson-LEFT-UI</button>
-        <button onclick="createTeacherAccount()">Create-Teacher-Account-WIP</button>
-        <button onclick="userall()">Delete-User-LEFT-UI</button>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <span class="nav-link active">
+                                <img src="student.jpg" class="rounded-circle" width="50" height="50">
+                                <span class="ml-2">Javier</span>
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="approveLesson()">
+                                Approve Lessons
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <!-- Link for editing profile -->
+                            <a class="nav-link" href="#" onclick="createTeacherAccount()">
+                                Create Teacher Account
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            
+                            <a class="nav-link" href="#" onclick="userall()">
+                                Delete User
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php">
+                                Log Out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- Main content -->
+            <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4 d-flex justify-content-center align-items-center">
+            <div class="row justify-content-center">
+            <div class="col-12 col-md-8">
+            <div id="approveLessonContainer" class="container lesson-container">
+                <div id="approveLessonContainer" class="container">
+                    <!-- Approve Lesson will be inserted here -->
+                </div>
+
+                <!-- Container for editing profile -->
+                <div id="createTeacherContainer" class="container">
+                    <!-- Create Teacher form will be inserted here -->
+                </div>
+
+                <!-- Container for the calendar -->
+                <div id="deleteContainer" class="container">
+                    <!-- Delete user will be initialized here -->
+                </div>
+            </main>
     </div>
     <div id="content">
        
@@ -40,20 +100,26 @@ $allUserJSON = json_encode($user);
         var allLessons = JSON.parse('<?php echo $allLessonsJSON; ?>');
 
         function approveLesson() {
-            var contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = '<h2>Lessons</h2>';
-            allLessons.forEach(function(lesson) {
-                contentDiv.innerHTML += '<p><strong>ID:</strong> ' + lesson.idlessons + '</p>';
-                contentDiv.innerHTML += '<p><strong>Teacher ID:</strong> ' + lesson.idteacher + '</p>';
-                contentDiv.innerHTML += '<p><strong>Time Slot:</strong> ' + lesson.time_slot + '</p>';
-                contentDiv.innerHTML += '<p><strong>Module:</strong> ' + lesson.module + '</p>';
-                contentDiv.innerHTML += '<p><strong>Level:</strong> ' + lesson.level + '</p>';
-                contentDiv.innerHTML += '<p><strong>approvel:</strong> ' + lesson.approvel + '</p>';
-                contentDiv.innerHTML +=  '<button onclick="updateApproval('+lesson.idlessons+', 1)">Approve</button>';
-                contentDiv.innerHTML +=  '<button onclick="updateApproval('+lesson.idlessons+', 0)">Do Not Approve</button>';
-                contentDiv.innerHTML += '<hr>'; 
-            });
-        }
+        var contentDiv = document.getElementById('content');
+        contentDiv.innerHTML = '<h2>Lessons</h2><div class="lessons-container">';
+    
+        allLessons.forEach(function(lesson) {
+        var cardHtml = '<div class="lesson-card">';
+        cardHtml += '<p><strong>ID:</strong> ' + lesson.idlessons + '</p>';
+        cardHtml += '<p><strong>Teacher ID:</strong> ' + lesson.idteacher + '</p>';
+        cardHtml += '<p><strong>Time Slot:</strong> ' + lesson.time_slot + '</p>';
+        cardHtml += '<p><strong>Module:</strong> ' + lesson.module + '</p>';
+        cardHtml += '<p><strong>Level:</strong> ' + lesson.level + '</p>';
+        cardHtml += '<p><strong>Approve:</strong> ' + lesson.approvel + '</p>';
+        cardHtml += '<button class="approve" onclick="updateApproval('+lesson.idlessons+', 1)">Approve</button>';
+        cardHtml += '<button class="deny" onclick="updateApproval('+lesson.idlessons+', 0)">Do Not Approve</button>';
+        cardHtml += '</div>';
+        contentDiv.innerHTML += cardHtml;
+    });
+    
+    contentDiv.innerHTML += '</div>';
+}
+
 
         function updateApproval(lessonId, approvalStatus) {
             var xhr = new XMLHttpRequest();
