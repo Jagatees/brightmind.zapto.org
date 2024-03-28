@@ -23,15 +23,10 @@ $allUserJSON = json_encode($user);
     <!-- Include jQuery UI CSS -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="css/bubble.css" rel="stylesheet">
-
-    
-    <!-- Custom styles for this template -->
 </head>
 <body>
 <div id="main">
-
     <?php include "inc/header.inc.php"; ?>
-    <div id="menu">
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
@@ -45,19 +40,17 @@ $allUserJSON = json_encode($user);
                             </span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="approveLesson()">
+                            <a class="nav-link" href="#" onclick=" event.preventDefault(); approveLesson()">
                                 Approve Lessons
                             </a>
                         </li>
                         <li class="nav-item">
-                            <!-- Link for editing profile -->
-                            <a class="nav-link" href="#" onclick="createTeacherAccount()">
+                            <a class="nav-link" href="#" onclick=" event.preventDefault(); createTeacherAccount()">
                                 Create Teacher Account
                             </a>
                         </li>
                         <li class="nav-item">
-                            
-                            <a class="nav-link" href="#" onclick="userall()">
+                            <a class="nav-link" href="#" onclick="event.preventDefault(); userall()">
                                 Delete User
                             </a>
                         </li>
@@ -69,39 +62,42 @@ $allUserJSON = json_encode($user);
                     </ul>
                 </div>
             </nav>
+
             <!-- Main content -->
-            <div class="col-md-9 ml-sm-auto col-lg-10 px-md-4 d-flex justify-content-center align-items-center">
-            <div class="row justify-content-center">
-            <div class="col-12 col-md-8">
-            <div id="approveLessonContainer" class="container lesson-container">
-                <div id="approveLessonContainer" class="container">
-                    <!-- Approve Lesson will be inserted here -->
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div id="content"> <!-- This is where your dynamic content will be loaded -->
+                    <!-- This container will initially be empty and will be filled with content by your JavaScript functions -->
+                </div>
+                <div id="approveLessonContainer" class="lesson-container">
+                    <h2>Lessons</h2>
+                    <div id="lessonCardsContainer" class ="lesson-container"></div> 
                 </div>
 
-                <!-- Container for editing profile -->
                 <div id="createTeacherContainer" class="container">
                     <!-- Create Teacher form will be inserted here -->
                 </div>
 
-                <!-- Container for the calendar -->
                 <div id="deleteContainer" class="container">
                     <!-- Delete user will be initialized here -->
                 </div>
             </main>
+        </div>
     </div>
-    <div id="content">
-       
-    </div>
-    </main>
     <?php include "inc/footer.inc.php"; ?>
     <script>
-
         // Approve Lessons
         var allLessons = JSON.parse('<?php echo $allLessonsJSON; ?>');
 
         function approveLesson() {
-        var contentDiv = document.getElementById('content');
-        contentDiv.innerHTML = '<h2>Lessons</h2><div class="lessons-container">';
+        document.getElementById('content').style.display = 'none'; // Hide the generic content container
+        document.getElementById('createTeacherContainer').style.display = 'none'; // Hide create teacher form
+        document.getElementById('deleteContainer').style.display = 'none'; // Hide delete user form
+        var lessonCardsContainer = document.getElementById('lessonCardsContainer');
+        lessonCardsContainer.innerHTML = '';    
+        var approveLessonContainer = document.getElementById('approveLessonContainer');
+        approveLessonContainer.style.display = 'block'; // Show the approve lesson container
+
+
     
         allLessons.forEach(function(lesson) {
         var cardHtml = '<div class="lesson-card">';
@@ -114,10 +110,9 @@ $allUserJSON = json_encode($user);
         cardHtml += '<button class="approve" onclick="updateApproval('+lesson.idlessons+', 1)">Approve</button>';
         cardHtml += '<button class="deny" onclick="updateApproval('+lesson.idlessons+', 0)">Do Not Approve</button>';
         cardHtml += '</div>';
-        contentDiv.innerHTML += cardHtml;
+
+        lessonCardsContainer.innerHTML += cardHtml;
     });
-    
-    contentDiv.innerHTML += '</div>';
 }
 
 
@@ -136,8 +131,13 @@ $allUserJSON = json_encode($user);
 
         // Create Teacher Account
         function createTeacherAccount() {
+            document.getElementById('approveLessonContainer').style.display = 'none'; // Hide approve lessons
+            document.getElementById('deleteContainer').style.display = 'none'; // Hide delete user form
+
             var contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = '<h2>Edit Profile</h2>';
+            contentDiv.style.display = 'block'; // Show the content container for create teacher account
+            var contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = '<h2>Create Teacher Account</h2>';
             contentDiv.innerHTML += '<label for="fname" style="padding-top:13px">&nbsp;First Name:</label>';
             contentDiv.innerHTML += '<input maxlength="45" class="form-content" type="text" id="fname" name="fname" placeholder="Enter first name"><br>';
             contentDiv.innerHTML += '<div class="form-border"></div>';
@@ -172,21 +172,15 @@ $allUserJSON = json_encode($user);
             };
             xhr.send('fname=' + encodeURIComponent(fname) + '&lname=' + encodeURIComponent(lname) + '&email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password));
         }
-
-
-
-
-
-
-
-
-
-
         // Display user & then delete
         var alluser = JSON.parse('<?php echo $allUserJSON; ?>');
 
         function userall() {
+            document.getElementById('approveLessonContainer').style.display = 'none'; // Hide approve lessons
+            document.getElementById('createTeacherContainer').style.display = 'none'; // Hide create teacher form
+
             var contentDiv = document.getElementById('content');
+            contentDiv.style.display = 'block'; // Show the content container for delete user
             contentDiv.innerHTML = '<h2>Delete User</h2>';
             alluser.forEach(function(user) {
                 contentDiv.innerHTML += '<p><strong>fame:</strong> ' + user.fname + '</p>';

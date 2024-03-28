@@ -1,11 +1,22 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* This will align items to the start of the container */
+}
+
+.row {
+  margin: 0;
+  padding: 0;
+}
+
 .lesson-card {
+  flex: 1 1 calc(50% - 40px); /* Allow cards to grow and shrink but not exceed half the container's width */
+  max-width: calc(50% - 40px); /* Max width so two cards fit side by side */
   background: #eaeb9e;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  margin: 10px;
   padding: 20px;
-  display: inline-block; /* or flex if you want to use flexbox */
-  width: calc(50% - 20px); /* Adjust width for side by side display, considering margin */
+  box-sizing: border-box; /* Include padding in width calculations */
 }
 
 .approve, .deny {
@@ -27,16 +38,15 @@
   color: white;
 }
 
-/* Add media query for responsive layout if needed */
 @media (max-width: 768px) {
   .lesson-card {
-      width: calc(100% - 20px);
+    flex-basis: calc(100% - 40px); /* On small screens, take full width minus padding */
+    max-width: calc(100% - 40px); /* Adjust maximum width for small screens */
   }
 }
 
 .lesson-header {
-  position: relative; /* This makes it a positioning context for absolutely positioned children */
-  padding-top: 20px; /* Gives some space at the top */
+  width: 100%; /* Ensure the header takes the full width */
 }
 
 .lessons-title {
@@ -44,3 +54,20 @@
   top: 0; /* Align to the top of the nearest positioned ancestor */
   left: 0; /* Align to the right of the nearest positioned ancestor */
 }
+.lesson-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Align to the start of the main content */
+  gap: 20px; /* Space between cards */
+  align-items: flex-start; /* Align items to the top */
+  width: 100%; /* Take up 100% of the main container */
+  max-width: calc(100% - 40px); /* Max width accounting for padding */
+}
+main {
+  flex-direction: column; /* Stack sidebar and content vertically on smaller screens */
+}
+
+.lesson-container {
+  justify-content: center; /* Center cards within the lesson-container on smaller screens */
+}
+
