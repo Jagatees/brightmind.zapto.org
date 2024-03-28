@@ -181,12 +181,19 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
         }
 
 
+        function generateUUID() {
+          return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+              var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+              return v.toString(16);
+          });
+      }
 
         function createAccount() {
             var fname = document.getElementById('fname').value;
             var lname = document.getElementById('lname').value;
             var email = document.getElementById('email').value;
             var password = document.getElementById('pwd').value;
+            var uuid = generateUUID();
             
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'adminDashboard-createAccount.php', true);
@@ -197,9 +204,10 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
                 }
             };
             xhr.send('fname=' + encodeURIComponent(fname) 
-            + '&lname=' + encodeURIComponent(lname) + '&email=' 
-            + encodeURIComponent(email) 
-            + '&password=' + encodeURIComponent(password));
+            + '&lname=' + encodeURIComponent(lname) 
+            + '&email=' + encodeURIComponent(email) 
+            + '&password=' + encodeURIComponent(password)
+            + '&uuid=' + encodeURIComponent(uuid));
         }
         
         // Display user & then delete

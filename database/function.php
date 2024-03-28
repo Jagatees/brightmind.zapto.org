@@ -65,7 +65,7 @@ function getTeachers() {
 }
 
 
-function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $price, $subject) {
+function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $price, $subject, $uuid) {
 
     $allowedTypes = ['student', 'teacher', 'admin'];
 
@@ -90,7 +90,7 @@ function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $pri
     }
 
     $tableName = "`tuition_centre`.`user`";
-    $stmt = $conn->prepare("INSERT INTO $tableName (fname, lname, email, password, role, bio, age, price, subject) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO $tableName (fname, lname, email, password, role, bio, age, price, subject, uuid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     if (!$stmt) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
     }
@@ -98,7 +98,7 @@ function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $pri
     $age = (int)$age;
     $price = (float)$price;
 
-    $stmt->bind_param("sssssssss", $fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $price, $subject);
+    $stmt->bind_param("ssssssssss", $fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $price, $subject, $uuid);
     if (!$stmt->execute()) {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }
