@@ -73,11 +73,10 @@ $allUserJSON = json_encode($user);
                     <div id="lessonCardsContainer" class ="lesson-container"></div> 
                 </div>
 
-                <div id="createTeacherContainer" class="container">
-                    <!-- Create Teacher form will be inserted here -->
+                <div id="createTeacherContainer" class="container create-teacher-form">
+                
                 </div>
-
-                <div id="deleteContainer" class="container">
+                <div id="deleteContainer" class="container user-container">
                     <!-- Delete user will be initialized here -->
                 </div>
             </main>
@@ -131,29 +130,34 @@ $allUserJSON = json_encode($user);
 
         // Create Teacher Account
         function createTeacherAccount() {
-            document.getElementById('approveLessonContainer').style.display = 'none'; // Hide approve lessons
-            document.getElementById('deleteContainer').style.display = 'none'; // Hide delete user form
+            document.getElementById('approveLessonContainer').style.display = 'none';
+            document.getElementById('deleteContainer').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
 
             var contentDiv = document.getElementById('content');
-            contentDiv.style.display = 'block'; // Show the content container for create teacher account
-            var contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = '<h2>Create Teacher Account</h2>';
-            contentDiv.innerHTML += '<label for="fname" style="padding-top:13px">&nbsp;First Name:</label>';
-            contentDiv.innerHTML += '<input maxlength="45" class="form-content" type="text" id="fname" name="fname" placeholder="Enter first name"><br>';
-            contentDiv.innerHTML += '<div class="form-border"></div>';
-            contentDiv.innerHTML += '<label for="lname" style="padding-top:22px">&nbsp;Last Name:</label>';
-            contentDiv.innerHTML += '<input required maxlength="45" class="form-content" type="text" id="lname" name="lname" placeholder="Enter last name"><br>';
-            contentDiv.innerHTML += '<div class="form-border"></div>';
-            contentDiv.innerHTML += '<label for="email" style="padding-top:22px">&nbsp;Email:</label>';
-            contentDiv.innerHTML += '<input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" placeholder="Enter email"><br>';
-            contentDiv.innerHTML += '<label for="password" style="padding-top:22px">&nbsp;Password:</label>';
-            contentDiv.innerHTML += '<input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter password"><br>';
-            contentDiv.innerHTML += '<div class="form-border"></div>';
-            contentDiv.innerHTML += '<label for="pwd_confirm" style="padding-top:22px">&nbsp;Confirm Password:</label>';
-            contentDiv.innerHTML += '<input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password"><br>';
-            contentDiv.innerHTML += '<div class="form-border"></div>';
-            contentDiv.innerHTML += '<button onclick="createAccount()">Save Changes</button>';
+            contentDiv.innerHTML = ''; // Clear the content container
+            
+            // Create the card container
+            var cardDiv = document.createElement('div');
+            cardDiv.className = 'create-teacher-form';
+
+            cardDiv.innerHTML += '<h2>Create Teacher Account</h2>';
+            cardDiv.innerHTML += '<label for="fname">First Name:</label>';
+            cardDiv.innerHTML += '<input maxlength="45" class="form-content" type="text" id="fname" name="fname" placeholder="Enter first name"><br>';
+            cardDiv.innerHTML += '<label for="lname">Last Name:</label>';
+            cardDiv.innerHTML += '<input required maxlength="45" class="form-content" type="text" id="lname" name="lname" placeholder="Enter last name"><br>';
+            cardDiv.innerHTML += '<label for="email">Email:</label>';
+            cardDiv.innerHTML += '<input id="email" class="form-content" type="email" name="email" required maxlength="45" placeholder="Enter email"><br>';
+            cardDiv.innerHTML += '<label for="password">Password:</label>';
+            cardDiv.innerHTML += '<input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter password"><br>';
+            cardDiv.innerHTML += '<label for="pwd_confirm">Confirm Password:</label>';
+            cardDiv.innerHTML += '<input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password"><br>';
+            cardDiv.innerHTML += '<button onclick="createAccount()">Save Changes</button>';
+
+            // Append the card to the contentDiv
+            contentDiv.appendChild(cardDiv);
         }
+
 
 
         function createAccount() {
@@ -176,21 +180,39 @@ $allUserJSON = json_encode($user);
         var alluser = JSON.parse('<?php echo $allUserJSON; ?>');
 
         function userall() {
-            document.getElementById('approveLessonContainer').style.display = 'none'; // Hide approve lessons
-            document.getElementById('createTeacherContainer').style.display = 'none'; // Hide create teacher form
+    // Hide other containers
+    document.getElementById('approveLessonContainer').style.display = 'none';
+    document.getElementById('createTeacherContainer').style.display = 'none';
+    document.getElementById('content').style.display = 'none';
 
-            var contentDiv = document.getElementById('content');
-            contentDiv.style.display = 'block'; // Show the content container for delete user
-            contentDiv.innerHTML = '<h2>Delete User</h2>';
-            alluser.forEach(function(user) {
-                contentDiv.innerHTML += '<p><strong>fame:</strong> ' + user.fname + '</p>';
-                contentDiv.innerHTML += '<p><strong>lname:</strong> ' + user.lname + '</p>';
-                contentDiv.innerHTML += '<p><strong>subject:</strong> ' + user.subject + '</p>';
-                // Update this line to correctly call deleteUser with the user's details
-                contentDiv.innerHTML += '<button onclick="deleteUser(\'' + user.fname.replace(/'/g, "\\'") + '\',\'' + user.lname.replace(/'/g, "\\'") + '\',\'' + user.subject.replace(/'/g, "\\'") + '\')">Delete</button>';
-                contentDiv.innerHTML += '<hr>'; 
-            });
-        }
+    // Now show the deleteContainer and insert user cards
+    var deleteContainer = document.getElementById('deleteContainer');
+    deleteContainer.style.display = 'block'; // Show the delete user container
+    deleteContainer.innerHTML = '<h2>Delete User</h2><div class="user-container">'; // Use user-container for flex styling
+
+    // Create a container for user cards if it doesn't exist
+    var userCardsContainer = deleteContainer.querySelector('.user-container');
+    if (!userCardsContainer) {
+        userCardsContainer = document.createElement('div');
+        userCardsContainer.className = 'user-container';
+        deleteContainer.appendChild(userCardsContainer);
+    }    
+    userCardsContainer.innerHTML = ''; // Clear existing cards
+
+    alluser.forEach(function(user) {
+        var userCard = document.createElement('div');
+        userCard.className = 'user-card';
+        userCard.innerHTML = '<p><strong>First Name:</strong> ' + user.fname + '</p>';
+        userCard.innerHTML += '<p><strong>Last Name:</strong> ' + user.lname + '</p>';
+        userCard.innerHTML += '<p><strong>Subject:</strong> ' + user.subject + '</p>';
+        userCard.innerHTML += '<button onclick="deleteUser(\'' + user.fname.replace(/'/g, "\\'") + '\',\'' + user.lname.replace(/'/g, "\\'") + '\',\'' + user.subject.replace(/'/g, "\\'") + '\')">Delete</button>';
+        userCard.innerHTML += '<hr>';
+        
+        userCardsContainer.appendChild(userCard); // Append new cards
+    });
+    deleteContainer.appendChild(userCardsContainer);
+}
+
 
         function deleteUser(fname, lname, subject) {
             if (!confirm('Are you sure you want to delete this user?')) {
