@@ -205,6 +205,46 @@ function deleteUserByDetails($fname, $lname, $subject) {
 }
 
 
+function updateUserNames($newFname, $newLname) {
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    $currentFname = isset($_SESSION['fname']) ? $_SESSION['fname'] : '';
+    $currentLname = isset($_SESSION['lname']) ? $_SESSION['lname'] : '';
+
+    $conn = getDbConnection();
+
+    $sql = "UPDATE `tuition_centre`.`user` SET fname = ?, lname = ? WHERE fname = ? AND lname = ?";
+    
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+    }
+
+    $stmt->bind_param("ssss", $newFname, $newLname, $currentFname, $currentLname);
+
+    $success = false;
+    if ($stmt->execute()) {
+        if ($stmt->affected_rows > 0) {
+            echo "User name updated successfully.";
+            $success = true;
+        } else {
+            echo "No user found with the specified details or no change was made.";
+        }
+    } else {
+        die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+    }
+
+    $stmt->close();
+    $conn->close();
+
+    if ($success) {
+        $_SESSION['fname'] = $newFname;
+        $_SESSION['lname'] = $newLname;
+    }
+}
+
 
 
 ?>

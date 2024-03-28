@@ -62,6 +62,7 @@ if ($success) {
     session_start();
     $_SESSION['user_logged_in'] = true;
     $_SESSION['fname'] = $fname;
+    $_SESSION['lname'] = $lname;
     $_SESSION['role'] = $role; 
     header('Location: welcome.php'); 
     exit();

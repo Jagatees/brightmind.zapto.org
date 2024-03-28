@@ -9,10 +9,11 @@ session_start();
 
   <?php if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in']): ?>
     <span>UserName, <?php echo htmlspecialchars($_SESSION['fname']); ?></span>
+    <span>UserName, <?php echo htmlspecialchars($_SESSION['lname']); ?></span>
     <span>Role, <?php echo htmlspecialchars($_SESSION['role']); ?></span>
     <a href="adminDashboard.php">Admin-Dashboard</a>
     <a href="studentDashboard.php">Student-Dashboard</a>
-    <a href="tutorDashboard.php">Teachers-Dashboard</a>
+    <a href="teacherDashboard.php">Teachers-Dashboard</a>
     <a href="logout.php">Logout</a>
   <?php else: ?>
     <a href="login.php">Login</a>

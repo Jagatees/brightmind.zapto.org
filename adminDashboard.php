@@ -18,7 +18,7 @@ $allUserJSON = json_encode($user);
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bright Minds Academy - Tutor Dashboard</title>
+    <title>Bright Minds Academy - Admin Dashboard</title>
     <?php include "inc/head.inc.php"; // This should include your styles and Bootstrap ?>
     <!-- Include jQuery UI CSS -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -87,31 +87,31 @@ $allUserJSON = json_encode($user);
         var allLessons = JSON.parse('<?php echo $allLessonsJSON; ?>');
 
         function approveLesson() {
-        document.getElementById('content').style.display = 'none'; // Hide the generic content container
-        document.getElementById('createTeacherContainer').style.display = 'none'; // Hide create teacher form
-        document.getElementById('deleteContainer').style.display = 'none'; // Hide delete user form
-        var lessonCardsContainer = document.getElementById('lessonCardsContainer');
-        lessonCardsContainer.innerHTML = '';    
-        var approveLessonContainer = document.getElementById('approveLessonContainer');
-        approveLessonContainer.style.display = 'block'; // Show the approve lesson container
+            document.getElementById('content').style.display = 'none'; // Hide the generic content container
+            document.getElementById('createTeacherContainer').style.display = 'none'; // Hide create teacher form
+            document.getElementById('deleteContainer').style.display = 'none'; // Hide delete user form
+            var lessonCardsContainer = document.getElementById('lessonCardsContainer');
+            lessonCardsContainer.innerHTML = '';    
+            var approveLessonContainer = document.getElementById('approveLessonContainer');
+            approveLessonContainer.style.display = 'block'; // Show the approve lesson container
 
 
-    
-        allLessons.forEach(function(lesson) {
-        var cardHtml = '<div class="lesson-card">';
-        cardHtml += '<p><strong>ID:</strong> ' + lesson.idlessons + '</p>';
-        cardHtml += '<p><strong>Teacher ID:</strong> ' + lesson.idteacher + '</p>';
-        cardHtml += '<p><strong>Time Slot:</strong> ' + lesson.time_slot + '</p>';
-        cardHtml += '<p><strong>Module:</strong> ' + lesson.module + '</p>';
-        cardHtml += '<p><strong>Level:</strong> ' + lesson.level + '</p>';
-        cardHtml += '<p><strong>Approve:</strong> ' + lesson.approvel + '</p>';
-        cardHtml += '<button class="approve" onclick="updateApproval('+lesson.idlessons+', 1)">Approve</button>';
-        cardHtml += '<button class="deny" onclick="updateApproval('+lesson.idlessons+', 0)">Do Not Approve</button>';
-        cardHtml += '</div>';
+        
+            allLessons.forEach(function(lesson) {
+            var cardHtml = '<div class="lesson-card">';
+            cardHtml += '<p><strong>ID:</strong> ' + lesson.idlessons + '</p>';
+            cardHtml += '<p><strong>Teacher ID:</strong> ' + lesson.idteacher + '</p>';
+            cardHtml += '<p><strong>Time Slot:</strong> ' + lesson.time_slot + '</p>';
+            cardHtml += '<p><strong>Module:</strong> ' + lesson.module + '</p>';
+            cardHtml += '<p><strong>Level:</strong> ' + lesson.level + '</p>';
+            cardHtml += '<p><strong>Approve:</strong> ' + lesson.approvel + '</p>';
+            cardHtml += '<button class="approve" onclick="updateApproval('+lesson.idlessons+', 1)">Approve</button>';
+            cardHtml += '<button class="deny" onclick="updateApproval('+lesson.idlessons+', 0)">Do Not Approve</button>';
+            cardHtml += '</div>';
 
-        lessonCardsContainer.innerHTML += cardHtml;
-    });
-}
+            lessonCardsContainer.innerHTML += cardHtml;
+        });
+    }
 
 
         function updateApproval(lessonId, approvalStatus) {
@@ -174,44 +174,48 @@ $allUserJSON = json_encode($user);
                     alert(this.responseText); 
                 }
             };
-            xhr.send('fname=' + encodeURIComponent(fname) + '&lname=' + encodeURIComponent(lname) + '&email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password));
+            xhr.send('fname=' + encodeURIComponent(fname) 
+            + '&lname=' + encodeURIComponent(lname) + '&email=' 
+            + encodeURIComponent(email) 
+            + '&password=' + encodeURIComponent(password));
         }
+        
         // Display user & then delete
         var alluser = JSON.parse('<?php echo $allUserJSON; ?>');
 
         function userall() {
-    // Hide other containers
-    document.getElementById('approveLessonContainer').style.display = 'none';
-    document.getElementById('createTeacherContainer').style.display = 'none';
-    document.getElementById('content').style.display = 'none';
+            // Hide other containers
+            document.getElementById('approveLessonContainer').style.display = 'none';
+            document.getElementById('createTeacherContainer').style.display = 'none';
+            document.getElementById('content').style.display = 'none';
 
-    // Now show the deleteContainer and insert user cards
-    var deleteContainer = document.getElementById('deleteContainer');
-    deleteContainer.style.display = 'block'; // Show the delete user container
-    deleteContainer.innerHTML = '<h2>Delete User</h2><div class="user-container">'; // Use user-container for flex styling
+            // Now show the deleteContainer and insert user cards
+            var deleteContainer = document.getElementById('deleteContainer');
+            deleteContainer.style.display = 'block'; // Show the delete user container
+            deleteContainer.innerHTML = '<h2>Delete User</h2><div class="user-container">'; // Use user-container for flex styling
 
-    // Create a container for user cards if it doesn't exist
-    var userCardsContainer = deleteContainer.querySelector('.user-container');
-    if (!userCardsContainer) {
-        userCardsContainer = document.createElement('div');
-        userCardsContainer.className = 'user-container';
-        deleteContainer.appendChild(userCardsContainer);
-    }    
-    userCardsContainer.innerHTML = ''; // Clear existing cards
+            // Create a container for user cards if it doesn't exist
+            var userCardsContainer = deleteContainer.querySelector('.user-container');
+            if (!userCardsContainer) {
+                userCardsContainer = document.createElement('div');
+                userCardsContainer.className = 'user-container';
+                deleteContainer.appendChild(userCardsContainer);
+            }    
+            userCardsContainer.innerHTML = ''; // Clear existing cards
 
-    alluser.forEach(function(user) {
-        var userCard = document.createElement('div');
-        userCard.className = 'user-card';
-        userCard.innerHTML = '<p><strong>First Name:</strong> ' + user.fname + '</p>';
-        userCard.innerHTML += '<p><strong>Last Name:</strong> ' + user.lname + '</p>';
-        userCard.innerHTML += '<p><strong>Subject:</strong> ' + user.subject + '</p>';
-        userCard.innerHTML += '<button onclick="deleteUser(\'' + user.fname.replace(/'/g, "\\'") + '\',\'' + user.lname.replace(/'/g, "\\'") + '\',\'' + user.subject.replace(/'/g, "\\'") + '\')">Delete</button>';
-        userCard.innerHTML += '<hr>';
-        
-        userCardsContainer.appendChild(userCard); // Append new cards
-    });
-    deleteContainer.appendChild(userCardsContainer);
-}
+            alluser.forEach(function(user) {
+                var userCard = document.createElement('div');
+                userCard.className = 'user-card';
+                userCard.innerHTML = '<p><strong>First Name:</strong> ' + user.fname + '</p>';
+                userCard.innerHTML += '<p><strong>Last Name:</strong> ' + user.lname + '</p>';
+                userCard.innerHTML += '<p><strong>Subject:</strong> ' + user.subject + '</p>';
+                userCard.innerHTML += '<button onclick="deleteUser(\'' + user.fname.replace(/'/g, "\\'") + '\',\'' + user.lname.replace(/'/g, "\\'") + '\',\'' + user.subject.replace(/'/g, "\\'") + '\')">Delete</button>';
+                userCard.innerHTML += '<hr>';
+                
+                userCardsContainer.appendChild(userCard); // Append new cards
+            });
+            deleteContainer.appendChild(userCardsContainer);
+        }
 
 
         function deleteUser(fname, lname, subject) {
