@@ -69,11 +69,10 @@ $allUserJSON = json_encode($user);
                     <!-- This container will initially be empty and will be filled with content by your JavaScript functions -->
                 </div>
                 <div id="approveLessonContainer" class="lesson-container">
-                    <h2>Lessons</h2>
                     <div id="lessonCardsContainer" class ="lesson-container"></div> 
                 </div>
 
-                <div id="createTeacherContainer" class="container create-teacher-form">
+                <div id="createTeacherContainer" class="container">
                 
                 </div>
                 <div id="deleteContainer" class="container user-container">
@@ -130,32 +129,33 @@ $allUserJSON = json_encode($user);
 
         // Create Teacher Account
         function createTeacherAccount() {
+            document.getElementById('content').style.display = 'block';
             document.getElementById('approveLessonContainer').style.display = 'none';
             document.getElementById('deleteContainer').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
 
             var contentDiv = document.getElementById('content');
             contentDiv.innerHTML = ''; // Clear the content container
             
             // Create the card container
-            var cardDiv = document.createElement('div');
-            cardDiv.className = 'create-teacher-form';
+            var createTeacherDiv = document.createElement('div');
+            createTeacherDiv.className = 'create-teacher-form';
 
-            cardDiv.innerHTML += '<h2>Create Teacher Account</h2>';
-            cardDiv.innerHTML += '<label for="fname">First Name:</label>';
-            cardDiv.innerHTML += '<input maxlength="45" class="form-content" type="text" id="fname" name="fname" placeholder="Enter first name"><br>';
-            cardDiv.innerHTML += '<label for="lname">Last Name:</label>';
-            cardDiv.innerHTML += '<input required maxlength="45" class="form-content" type="text" id="lname" name="lname" placeholder="Enter last name"><br>';
-            cardDiv.innerHTML += '<label for="email">Email:</label>';
-            cardDiv.innerHTML += '<input id="email" class="form-content" type="email" name="email" required maxlength="45" placeholder="Enter email"><br>';
-            cardDiv.innerHTML += '<label for="password">Password:</label>';
-            cardDiv.innerHTML += '<input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter password"><br>';
-            cardDiv.innerHTML += '<label for="pwd_confirm">Confirm Password:</label>';
-            cardDiv.innerHTML += '<input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password"><br>';
-            cardDiv.innerHTML += '<button onclick="createAccount()">Save Changes</button>';
+            createTeacherDiv.innerHTML += '<h2>Create Teacher Account</h2>';
+            createTeacherDiv.innerHTML += '<label for="fname">First Name:</label>';
+            createTeacherDiv.innerHTML += '<input maxlength="45" class="form-content" type="text" id="fname" name="fname" placeholder="Enter first name"><br>';
+            createTeacherDiv.innerHTML += '<label for="lname">Last Name:</label>';
+            createTeacherDiv.innerHTML += '<input required maxlength="45" class="form-content" type="text" id="lname" name="lname" placeholder="Enter last name"><br>';
+            createTeacherDiv.innerHTML += '<label for="email">Email:</label>';
+            createTeacherDiv.innerHTML += '<input id="email" class="form-content" type="email" name="email" required maxlength="45" placeholder="Enter email"><br>';
+            createTeacherDiv.innerHTML += '<label for="password">Password:</label>';
+            createTeacherDiv.innerHTML += '<input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter password"><br>';
+            createTeacherDiv.innerHTML += '<label for="pwd_confirm">Confirm Password:</label>';
+            createTeacherDiv.innerHTML += '<input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password"><br>';
+            createTeacherDiv.innerHTML += '<button onclick="createAccount()">Save Changes</button>';
 
             // Append the card to the contentDiv
-            contentDiv.appendChild(cardDiv);
+            contentDiv.innerHTML = '';
+            contentDiv.appendChild(createTeacherDiv);
         }
 
 
