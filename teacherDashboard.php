@@ -24,7 +24,7 @@ if(isset($_SESSION['uuid'])) {
     <title>Bright Minds Academy - Teacher Dashboard</title>
     <?php include "inc/head.inc.php"; // This should include your styles and Bootstrap ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="css/bubble.css" rel="stylesheet">
+    <link href="css/teacherDashboards.css" rel="stylesheet">
     <style>
         /* Add your CSS styles here */
         .readonly {
@@ -63,7 +63,7 @@ if(isset($_SESSION['uuid'])) {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" onclick=" event.preventDefault(); CheckLessonApprovel()">
-                                Check-Lesson-Approvel
+                                Check-Lesson-Approval
                             </a>
                         </li>
                         <li class="nav-item">
@@ -79,14 +79,14 @@ if(isset($_SESSION['uuid'])) {
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div id="content">
                 </div>
-                <div id="approveLessonContainer" class="lesson-container">
-                    <div id="lessonCardsContainer" class ="lesson-container"></div> 
+                <div id="editProfileContainer" class="container">
+                    
                 </div>
 
-                <div id="createTeacherContainer" class="container">
-                
+                <div id="createLessonContainer" class="container">
+
                 </div>
-                <div id="deleteContainer" class="container user-container">
+                <div id="checkLessonContainer" class="container checklesson-container">
                 </div>
             </main>
         </div>
@@ -109,13 +109,13 @@ if(isset($_SESSION['uuid'])) {
             
             // Hide various containers
             document.getElementById('content').style.display = 'none';
-            document.getElementById('createTeacherContainer').style.display = 'none';
-            document.getElementById('deleteContainer').style.display = 'none';
+            document.getElementById('createLessonContainer').style.display = 'none';
+            document.getElementById('editProfileContainer').style.display = 'none';
 
             // Clear and display the lesson cards container
-            var lessonCardsContainer = document.getElementById('lessonCardsContainer');
-            var approveLessonContainer = document.getElementById('approveLessonContainer');
-
+            var checkLessonContainer = document.getElementById('checkLessonContainer');
+            checkLessonContainer.style.display = 'block'; // Ensure container is visible
+            checkLessonContainer.innerHTML = ''; // Clear previous content
             // Loop through all lessons to create approval cards
             allLessons.forEach(function(lesson) {
                 // Check for undefined values and print to console if found
@@ -125,7 +125,7 @@ if(isset($_SESSION['uuid'])) {
                     }
                 });
 
-                var cardHtml = '<div class="lesson-card">';
+                var cardHtml = '<div class= "checklesson-card">';
                 cardHtml += '<p><strong>ID:</strong> ' + (lesson.lesson_id ) + '</p>';
                 cardHtml += '<p><strong>Teacher ID:</strong> ' + (lesson.uuid ) + '</p>';
                 cardHtml += '<p><strong>Teacher Name:</strong> ' + (lesson.teacher_name ) + '</p>';
@@ -135,14 +135,19 @@ if(isset($_SESSION['uuid'])) {
                 cardHtml += '<p><strong>Approval:</strong> ' + (lesson.approvel) + '</p>';
                 cardHtml += '</div>';
 
-                lessonCardsContainer.innerHTML += cardHtml;
+                checkLessonContainer.innerHTML += cardHtml;
             });
         }
 
         // EDIT PROFILE : START
         function editProfile() {
-            var contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = `
+            var contentDiv = document.getElementById('editProfileContainer');
+            contentDiv.innerHTML = ''; // Clear previous content
+            contentDiv.style.display = 'block'; // Make sure to display the container
+            document.getElementById('createLessonContainer').style.display = 'none';
+            document.getElementById('checkLessonContainer').style.display = 'none';
+            var formHtml = `
+            <div class= "edit-prof-form">
                 <h2>Edit Profile</h2>
                 <form id="editProfileForm">
                     <div class="form-group">
@@ -155,7 +160,9 @@ if(isset($_SESSION['uuid'])) {
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="updateProfile()">Update Profile</button>
                 </form>
+            </div>
             `;
+            contentDiv.innerHTML = formHtml;
         }
 
 
@@ -180,9 +187,15 @@ if(isset($_SESSION['uuid'])) {
 
         // SUBMITLESSONS : START
         function CreateLessons() {
-            var contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = `
-                <h2>Edit Profile</h2>
+            var contentDiv = document.getElementById('createLessonContainer');
+            contentDiv.innerHTML = ''; // Clear previous content
+            contentDiv.style.display = 'block'; // Make sure to display the container
+            // Hide other sections
+            document.getElementById('editProfileContainer').style.display = 'none';
+            document.getElementById('checkLessonContainer').style.display = 'none';
+            var formHtml = `
+            <div class= "create-lesson-form">
+                <h2>Create Lessons</h2>
                 <form id="editProfileForm">
                     <div class="form-group">
                         <label for="fname">Teacher-Name</label>
@@ -218,7 +231,9 @@ if(isset($_SESSION['uuid'])) {
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="createLesson()">Submit Lessons</button>
                 </form>
+            </div>
             `;
+            contentDiv.innerHTML = formHtml;
         }
 
         function createLesson() {
