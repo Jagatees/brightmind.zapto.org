@@ -111,6 +111,9 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
             // Clear and display the lesson cards container
             var lessonCardsContainer = document.getElementById('lessonCardsContainer');
             var approveLessonContainer = document.getElementById('approveLessonContainer');
+            approveLessonContainer.style.display = 'block'; // Make sure this is visible
+            lessonCardsContainer.innerHTML = ''; // Clear previous cards
+
 
             // Loop through all lessons to create approval cards
             allLessons.forEach(function(lesson) {
