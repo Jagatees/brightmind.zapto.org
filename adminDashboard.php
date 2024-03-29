@@ -176,7 +176,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
             createTeacherDiv.innerHTML += '<label for="lname">Last Name:</label>';
             createTeacherDiv.innerHTML += '<input required maxlength="45" class="form-content" type="text" id="lname" name="lname" placeholder="Enter last name"><br>';
             createTeacherDiv.innerHTML += '<label for="email">Email:</label>';
-            createTeacherDiv.innerHTML += '<input id="email" class="form-content" type="email" name="email" required maxlength="45" placeholder="Enter email"><br>';
+            createTeacherDiv.innerHTML += '<input id="email" class="form-content" type="email" name="email" required maxlength="45" placeholder="Enter email" oninput="validateEmailInput(this)"><br>';
             createTeacherDiv.innerHTML += '<label for="password">Password:</label>';
             createTeacherDiv.innerHTML += '<input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter password"><br>';
             createTeacherDiv.innerHTML += '<label for="pwd_confirm">Confirm Password:</label>';
@@ -201,13 +201,40 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
             createTeacherDiv.innerHTML += '<input type="radio" id="motherTongue" name="subject" value="MotherTongue">';
             createTeacherDiv.innerHTML += '<label for="motherTongue">Mother Tongue</label><br>';
             
-            createTeacherDiv.innerHTML += '<button onclick="createAccount()">Save Changes</button>';
+            createTeacherDiv.innerHTML += '<button onclick="createAccount()">Create</button>';
 
             // Append the card to the contentDiv
             contentDiv.innerHTML = '';
             contentDiv.appendChild(createTeacherDiv);
         }
 
+        function validateEmailInput(inputElement) {
+            var popup = document.getElementById('emailPopup');
+            if (!inputElement.value.includes('@')) {
+                // If there's no popup, create it
+                if (!popup) {
+                    popup = document.createElement('div');
+                    popup.id = 'emailPopup';
+                    popup.style.position = 'absolute';
+                    popup.style.left = inputElement.offsetLeft + 'px'; // Align left edge with the input
+                    popup.style.top = inputElement.offsetTop + inputElement.offsetHeight + 'px'; // Position below the input
+                    popup.style.backgroundColor = 'grey';
+                    popup.style.border = '1px solid black';
+                    popup.style.padding = '5px';
+                    popup.style.marginTop = '5px'; // Add a little space between the input and popup
+                    popup.style.fontSize = '12px'; // Smaller font size for the popup
+                    popup.style.zIndex = '10'; // Ensure the popup is above other elements
+                    popup.textContent = "@ is required in the email field.";
+                    document.body.appendChild(popup); // Append to the body to avoid positioning issues
+                }
+                popup.style.display = 'block';
+            } else {
+                // If the email contains '@', hide the popup
+                if (popup) {
+                    popup.style.display = 'none';
+                }
+            }
+        }
 
 
 

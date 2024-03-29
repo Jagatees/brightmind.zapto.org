@@ -22,3 +22,13 @@ if (isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) &
     echo "Error: Missing user details.";
 }
 ?>
+<script>
+function validateForm() {
+    var email = document.getElementById('email').value; // Make sure your email input has an id of 'email'
+    if (!email.includes('@')) {
+        alert("@ is required in the email field.");
+        return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+}
+</script>
