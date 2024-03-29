@@ -48,6 +48,7 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
                 <div class="card" style="width: 18rem;">
                     <div class="card-header">Subject :${lesson.module}</div>
                     <div class="card-body">
+                        <p class="card-text">Lesson ID: ${lesson.lesson_id}</p>
                         <p class="card-text">Tutor Name: ${lesson.teacher_name}</p>
                         <a href="#" class="btn btn-light">${lesson.time_slot}</a>
                         <br><br>
