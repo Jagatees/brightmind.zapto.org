@@ -14,6 +14,7 @@ endif;
     <?php include "inc/head.inc.php"; // This should include your styles and Bootstrap ?>
     <!-- Include jQuery UI CSS -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="css/studentDashboards.css" rel="stylesheet">
     <style>
         #timeslotContainer, #editProfileContainer, #calendarContainer {
             display: none; /* Initially hide the containers */
@@ -23,27 +24,45 @@ endif;
         /* Custom Calendar Styles */
         .ui-datepicker {
             width: 100%;
-            background: #0097a7;
+            background: #eaeb9e; /* Changed to yellow background */
             border: 1px solid #555;
-            color: #fff;
+            color: #333; /* Changed to a darker text color for readability */
         }
+
         .ui-datepicker-title {
             margin: 10px 0;
+            color: #333; /* Ensure the title is readable on a light background */
         }
+
         .ui-state-default, .ui-widget-content .ui-state-default {
             background: transparent;
-            color: #fff;
+            color: #333; /* Changed to a darker text color for readability */
         }
+
         .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-            background: #005f6b;
-            color: #ffeb3b;
+            background: #ffc107; /* Changed to a highlighted yellow for selection */
+            color: #212121; /* Changed to a darker text color for readability */
         }
+
         .ui-datepicker-header {
-            color: #fff;
-            background-color: #007c91;
+            color: #212121; /* Changed to a darker text color for readability */
+            background-color: #fdd835; /* Changed to a darker yellow */
         }
+
         .ui-datepicker-prev, .ui-datepicker-next {
             cursor: pointer;
+            color: #212121; /* Changed to a darker text color for readability */
+        }
+
+        /* If you have hover styles, you might want to update those as well */
+        .ui-state-default:hover, .ui-widget-content .ui-state-default:hover {
+            background: #ffee58; /* Lighter yellow for hover */
+        }
+
+        /* Current day or selected day styling */
+        .ui-datepicker-today .ui-state-default {
+            background: #fbc02d; /* A different shade of yellow for the current day */
+            color: #212121; /* Changed to a darker text color for readability */
         }
         /* More custom styles can be added here as needed */
     </style>
@@ -167,6 +186,7 @@ endif;
         $("#editProfileLink").click(function(event){
             event.preventDefault(); // Prevents direct navigation
             var editProfileHtml = `
+            <div class ="edit-prof-form"
                 <h4>Edit Profile</h4>
                 <form id="editProfileForm">
                     <div class="form-group">
@@ -179,6 +199,7 @@ endif;
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+            </div>
             `;
             // Populate the edit profile container and show it
             $("#editProfileContainer").html(editProfileHtml).fadeIn();
