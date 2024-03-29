@@ -117,36 +117,37 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
                     }
                 });
 
-            var cardHtml = '<div class="lesson-card">';
-            cardHtml += '<p><strong>ID:</strong> ' + (lesson.lesson_id ) + '</p>';
-            cardHtml += '<p><strong>Teacher ID:</strong> ' + (lesson.uuid ) + '</p>';
-            cardHtml += '<p><strong>Teacher Name:</strong> ' + (lesson.teacher_name ) + '</p>';
-            cardHtml += '<p><strong>Time Slot:</strong> ' + (lesson.time_slot ) + '</p>';
-            cardHtml += '<p><strong>Module:</strong> ' + (lesson.module ) + '</p>';
-            cardHtml += '<p><strong>Level:</strong> ' + (lesson.level) + '</p>';
-            cardHtml += '<p><strong>Approval:</strong> ' + (lesson.approvel) + '</p>';
-            cardHtml += '<button class="approve" onclick="updateApproval(' + (lesson.lesson_id) + ', 1)">Approve</button>';
-            cardHtml += '<button class="deny" onclick="updateApproval(' + (lesson.lesson_id) + ', 0)">Do Not Approve</button>';
-            cardHtml += '</div>';
+                var cardHtml = '<div class="lesson-card">';
+                cardHtml += '<p><strong>ID:</strong> ' + (lesson.lesson_id ) + '</p>';
+                cardHtml += '<p><strong>Teacher ID:</strong> ' + (lesson.uuid ) + '</p>';
+                cardHtml += '<p><strong>Teacher Name:</strong> ' + (lesson.teacher_name ) + '</p>';
+                cardHtml += '<p><strong>Time Slot:</strong> ' + (lesson.time_slot ) + '</p>';
+                cardHtml += '<p><strong>Module:</strong> ' + (lesson.module ) + '</p>';
+                cardHtml += '<p><strong>Level:</strong> ' + (lesson.level) + '</p>';
+                cardHtml += '<p><strong>Approval:</strong> ' + (lesson.approvel) + '</p>';
+                cardHtml += '<button class="approve" onclick="updateApproval(\'' + lesson.uuid + '\', 1)">Approve</button>';
+                cardHtml += '<button class="deny" onclick="updateApproval(\'' + lesson.uuid + '\', 0)">Do Not Approve</button>';
+                cardHtml += '</div>';
 
-            lessonCardsContainer.innerHTML += cardHtml;
-        });
-    }
-
-
+                lessonCardsContainer.innerHTML += cardHtml;
+            });
+        }
 
 
-        function updateApproval(lesson_id, approvalStatus) {
+
+
+        function updateApproval(uuid, approvalStatus) {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'adminDashboard-ApproveLesson.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                    location.reload()
+                    location.reload();
                 }
             };
-            xhr.send('lesson_id=' + lesson_id + '&approvalStatus=' + approvalStatus);
+            xhr.send('uuid=' + encodeURIComponent(uuid) + '&approvalStatus=' + approvalStatus);
         }
+
 
 
         // Create Teacher Account

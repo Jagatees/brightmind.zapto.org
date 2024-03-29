@@ -2,13 +2,15 @@
 session_start();
 include "database/function.php";
 
-if (isset($_POST['lesson_id']) && isset($_POST['approvalStatus'])) {
-    $lesson_id = $_POST['lesson_id'];
+if (isset($_POST['uuid']) && isset($_POST['approvalStatus'])) {
+    $uuid = $_POST['uuid'];
     $approvalStatus = $_POST['approvalStatus'];
 
-    updateLessonApproval($lesson_id, $approvalStatus);
+    // Call the function to update the lesson approval status with the uuid
+    updateLessonApproval($uuid, $approvalStatus);
     echo "Lesson approval status updated successfully.";
 } else {
-    echo "Error: lessonId or approvalStatus is not set.";
+    echo "Error: uuid or approvalStatus is not set.";
 }
+
 ?>

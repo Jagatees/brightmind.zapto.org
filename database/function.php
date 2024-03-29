@@ -141,12 +141,12 @@ function getlessons() {
 }
 
 
-function updateLessonApproval($lesson_id, $approvalStatus) {
+function updateLessonApproval($uuid, $approvalStatus) {
     // Establish database connection
     $conn = getDbConnection();
 
-    // Prepare the SQL statement to update the approval column based on the uuid
-    $sql = "UPDATE `tuition_centre`.`lessons` SET approvel = ? WHERE lesson_id = ?";
+    // Prepare the SQL statement to update the approval column based on uuid
+    $sql = "UPDATE `tuition_centre`.`lessons` SET approvel = ? WHERE uuid = ?";
     
     // Prepare the statement
     $stmt = $conn->prepare($sql);
@@ -156,11 +156,11 @@ function updateLessonApproval($lesson_id, $approvalStatus) {
 
     // Bind parameters to the prepared statement
     // Assuming approvalStatus is an integer and uuid is a string
-    $stmt->bind_param("ii", $approvalStatus, $lesson_id);
+    $stmt->bind_param("is", $approvalStatus, $uuid);
 
     // Execute the statement and check for success/failure
     if ($stmt->execute()) {
-        echo "Lesson approval status updated successfully.";
+        echo "Lesson approval status updated successfully for UUID: " . htmlspecialchars($uuid) . ".";
     } else {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }
@@ -169,6 +169,7 @@ function updateLessonApproval($lesson_id, $approvalStatus) {
     $stmt->close();
     $conn->close();
 }
+
 
 
 
