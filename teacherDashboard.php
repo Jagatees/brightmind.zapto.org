@@ -49,7 +49,7 @@ include "database/function.php";
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick=" event.preventDefault(); test()">
+                            <a class="nav-link" href="#" onclick=" event.preventDefault(); SubmitLessons()">
                                 Teacher Lessons
                             </a>
                         </li>
@@ -83,6 +83,7 @@ include "database/function.php";
         var userFirstName = <?php echo isset($_SESSION['fname']) ? json_encode($_SESSION['fname']) : json_encode(""); ?>;
         var userLastName = <?php echo isset($_SESSION['lname']) ? json_encode($_SESSION['lname']) : json_encode(""); ?>;
 
+        // EDIT PROFILE : START
         function editProfile() {
             var contentDiv = document.getElementById('content');
             contentDiv.innerHTML = `
@@ -118,9 +119,11 @@ include "database/function.php";
             xhr.send('fname=' + encodeURIComponent(fname) + '&lname=' + encodeURIComponent(lname));
         }
 
+        // EDIT PROFILE : END
 
-        
-        function test() {
+
+        // SUBMITLESSONS : START
+        function SubmitLessons() {
             var contentDiv = document.getElementById('content');
             contentDiv.innerHTML = `
                 <h2>Edit Profile</h2>
@@ -188,7 +191,7 @@ include "database/function.php";
                 + '&approvel=0'
                 + '&uuid=' + encodeURIComponent(uuid));
         }
-
+        // SUBMITLESSONS : END
 
             
 

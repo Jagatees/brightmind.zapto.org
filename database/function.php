@@ -3,6 +3,8 @@
 
 include "database/connect.php";
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 
 function getAllUsers() {
@@ -39,8 +41,6 @@ function getTeachers() {
 
     $conn = getDbConnection();
 
-    // Adjust the column names according to your table structure
-    // Add a WHERE clause to filter users by role
     $sql = "SELECT fname, lname, age, bio, subject FROM `tuition_centre`.`user` WHERE role = 'teacher'";
     $result = $conn->query($sql);
 
