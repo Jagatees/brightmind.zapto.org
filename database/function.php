@@ -141,6 +141,39 @@ function getlessons() {
     return $lessons;
 }
 
+function getlessonsUUID($uuid) {
+    $lessons = []; 
+
+    $conn = getDbConnection();
+
+    // Prepare SQL statement with a WHERE clause to filter lessons by UUID
+    $sql = "SELECT lesson_id, uuid, time_slot, module, level, approvel, teacher_name FROM `tuition_centre`.`lessons` WHERE uuid = '$uuid'";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            // Create an associative array that matches your expected structure
+            $lesson = [
+                'lesson_id' => $row['lesson_id'],
+                'uuid' => $row['uuid'],
+                'time_slot' => $row['time_slot'],
+                'module' => $row['module'],
+                'level' => $row['level'],
+                'approvel' => $row['approvel'],
+                'teacher_name' => $row['teacher_name']
+            ];
+            $lessons[] = $lesson;
+        }
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+
+    return $lessons;
+}
+
+
 
 function updateLessonApproval($uuid, $approvalStatus) {
     // Establish database connection

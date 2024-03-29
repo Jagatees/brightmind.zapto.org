@@ -6,6 +6,14 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true)
 }
 
 include "database/function.php";
+
+if(isset($_SESSION['uuid'])) {
+    $uuid = $_SESSION['uuid'];
+    $lessons = getlessonsUUID($uuid); 
+    $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+} else {
+    echo "UUID not found in session.";
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,18 +57,13 @@ include "database/function.php";
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick=" event.preventDefault(); SubmitLessons()">
-                                Teacher Lessons
+                            <a class="nav-link" href="#" onclick=" event.preventDefault(); CreateLessons()">
+                                Create-Lesson
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" onclick=" event.preventDefault(); SubmitLessons()">
-                                Approved Lessons
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick=" event.preventDefault(); SubmitLessons()">
-                                Pending Lessons
+                            <a class="nav-link" href="#" onclick=" event.preventDefault(); CheckLessonApprovel()">
+                                Check-Lesson-Approvel
                             </a>
                         </li>
                         <li class="nav-item">
@@ -92,6 +95,49 @@ include "database/function.php";
     <script>
         var userFirstName = <?php echo isset($_SESSION['fname']) ? json_encode($_SESSION['fname']) : json_encode(""); ?>;
         var userLastName = <?php echo isset($_SESSION['lname']) ? json_encode($_SESSION['lname']) : json_encode(""); ?>;
+
+        var allLessonsJSON = '<?php echo $allLessonsJSON; ?>';
+        var allLessons = allLessonsJSON ? JSON.parse(allLessonsJSON) : [];
+
+        if (allLessonsJSON) {
+            var allLessons = JSON.parse(allLessonsJSON);
+        } else {
+            console.error('allLessonsJSON is empty or invalid');
+        }
+
+        function CheckLessonApprovel() {
+            
+            // Hide various containers
+            document.getElementById('content').style.display = 'none';
+            document.getElementById('createTeacherContainer').style.display = 'none';
+            document.getElementById('deleteContainer').style.display = 'none';
+
+            // Clear and display the lesson cards container
+            var lessonCardsContainer = document.getElementById('lessonCardsContainer');
+            var approveLessonContainer = document.getElementById('approveLessonContainer');
+
+            // Loop through all lessons to create approval cards
+            allLessons.forEach(function(lesson) {
+                // Check for undefined values and print to console if found
+                Object.entries(lesson).forEach(([key, value]) => {
+                    if (value === undefined) {
+                        console.log('Undefined found for key:', key);
+                    }
+                });
+
+                var cardHtml = '<div class="lesson-card">';
+                cardHtml += '<p><strong>ID:</strong> ' + (lesson.lesson_id ) + '</p>';
+                cardHtml += '<p><strong>Teacher ID:</strong> ' + (lesson.uuid ) + '</p>';
+                cardHtml += '<p><strong>Teacher Name:</strong> ' + (lesson.teacher_name ) + '</p>';
+                cardHtml += '<p><strong>Time Slot:</strong> ' + (lesson.time_slot ) + '</p>';
+                cardHtml += '<p><strong>Module:</strong> ' + (lesson.module ) + '</p>';
+                cardHtml += '<p><strong>Level:</strong> ' + (lesson.level) + '</p>';
+                cardHtml += '<p><strong>Approval:</strong> ' + (lesson.approvel) + '</p>';
+                cardHtml += '</div>';
+
+                lessonCardsContainer.innerHTML += cardHtml;
+            });
+        }
 
         // EDIT PROFILE : START
         function editProfile() {
@@ -133,7 +179,7 @@ include "database/function.php";
 
 
         // SUBMITLESSONS : START
-        function SubmitLessons() {
+        function CreateLessons() {
             var contentDiv = document.getElementById('content');
             contentDiv.innerHTML = `
                 <h2>Edit Profile</h2>
@@ -205,7 +251,10 @@ include "database/function.php";
         }
         // SUBMITLESSONS : END
 
-            
+        // ApproveLesson : START
+
+        
+        // ApproveLesson : END
 
 
 
