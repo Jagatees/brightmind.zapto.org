@@ -9,6 +9,10 @@ header.jumbotron {
     text-align: center;
     width: 100%;
     background-color: #FCEB95;
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0; /* Set the top edge of the sticky header to the top of the viewport */
+    z-index: 1000; /* Ensure the header stays above other content when scrolling */
   }
   
   
@@ -23,5 +27,7 @@ header.jumbotron {
     flex-grow: 1;
     text-align: center;
   }
+
+
 
   
