@@ -8,14 +8,12 @@ endif;
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bright Minds Academy - Tutor Dashboard</title>
     <?php include "inc/head.inc.php"; // This should include your styles and Bootstrap ?>
     <!-- Include jQuery UI CSS -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
     <style>
         #timeslotContainer, #editProfileContainer, #calendarContainer {
             display: none; /* Initially hide the containers */
@@ -172,16 +170,12 @@ endif;
                 <h4>Edit Profile</h4>
                 <form id="editProfileForm">
                     <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter name">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
                     </div>
                     <div class="form-group">
-                        <label for="birthday">Birthday:</label>
-                        <input type="date" class="form-control" id="birthday">
-                    </div>
-                    <div class="form-group">
-                        <label for="profilePicture">Profile Picture:</label>
-                        <input type="file" class="form-control-file" id="profilePicture">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
