@@ -31,7 +31,7 @@
                     <option value="Science">Science</option>
                     <option value="English">English</option>
                     <option value="Math">Math</option>
-                    <option value="Mother-Tongue">Mother-Tongue</option>
+                    <option value="MotherTongue">MotherTongue</option>
                 </select>
             </div>
             <div class="grid-container">

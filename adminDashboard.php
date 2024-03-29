@@ -42,7 +42,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" onclick=" event.preventDefault(); approveLesson()">
-                                Approve Lessons
+                                Approve Teacher Lessons
                             </a>
                         </li>
                         <li class="nav-item">
@@ -52,7 +52,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" onclick="event.preventDefault(); userall()">
-                                Delete User
+                                Delete Teacher Account
                             </a>
                         </li>
                         <li class="nav-item">
@@ -85,6 +85,9 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
         // Ensure the PHP-generated JSON strings are not empty
         var allLessonsJSON = '<?php echo $allLessonsJSON; ?>';
         var allUserJSON = '<?php echo $allUserJSON; ?>';
+
+        var allLessons = allLessonsJSON ? JSON.parse(allLessonsJSON) : [];
+        var allUser = allUserJSON ? JSON.parse(allUserJSON) : [];
         
         if (allLessonsJSON) {
             var allLessons = JSON.parse(allLessonsJSON);
@@ -99,6 +102,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
         }
 
         function approveLesson() {
+            
             // Hide various containers
             document.getElementById('content').style.display = 'none';
             document.getElementById('createTeacherContainer').style.display = 'none';
@@ -174,12 +178,34 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
             createTeacherDiv.innerHTML += '<input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter password"><br>';
             createTeacherDiv.innerHTML += '<label for="pwd_confirm">Confirm Password:</label>';
             createTeacherDiv.innerHTML += '<input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password"><br>';
+            
+            // Add input fields for bio, age, and price
+            createTeacherDiv.innerHTML += '<label for="bio">Bio:</label>';
+            createTeacherDiv.innerHTML += '<textarea id="bio" class="form-content" name="bio" placeholder="Enter bio"></textarea><br>';
+            createTeacherDiv.innerHTML += '<label for="age">Age:</label>';
+            createTeacherDiv.innerHTML += '<input type="number" id="age" name="age" class="form-content" placeholder="Enter age"><br>';
+            createTeacherDiv.innerHTML += '<label for="price">Price:</label>';
+            createTeacherDiv.innerHTML += '<input type="number" id="price" name="price" class="form-content" placeholder="Enter price"><br>';
+
+            // Add radio buttons for subjects
+            createTeacherDiv.innerHTML += '<label for="subjects">Subjects:</label><br>';
+            createTeacherDiv.innerHTML += '<input type="radio" id="math" name="subject" value="Math">';
+            createTeacherDiv.innerHTML += '<label for="math">Math</label><br>';
+            createTeacherDiv.innerHTML += '<input type="radio" id="english" name="subject" value="English">';
+            createTeacherDiv.innerHTML += '<label for="english">English</label><br>';
+            createTeacherDiv.innerHTML += '<input type="radio" id="science" name="subject" value="Science">';
+            createTeacherDiv.innerHTML += '<label for="science">Science</label><br>';
+            createTeacherDiv.innerHTML += '<input type="radio" id="motherTongue" name="subject" value="MotherTongue">';
+            createTeacherDiv.innerHTML += '<label for="motherTongue">Mother Tongue</label><br>';
+            
             createTeacherDiv.innerHTML += '<button onclick="createAccount()">Save Changes</button>';
 
             // Append the card to the contentDiv
             contentDiv.innerHTML = '';
             contentDiv.appendChild(createTeacherDiv);
         }
+
+
 
 
         function generateUUID() {
@@ -189,27 +215,40 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
           });
       }
 
-        function createAccount() {
+      function createAccount() {
             var fname = document.getElementById('fname').value;
             var lname = document.getElementById('lname').value;
             var email = document.getElementById('email').value;
             var password = document.getElementById('pwd').value;
             var uuid = generateUUID();
-            
+
+            // Get the chosen subject
+            var selectedSubject = document.querySelector('input[name="subject"]:checked').value;
+
+            // Get values of bio, age, and price
+            var bio = document.getElementById('bio').value;
+            var age = document.getElementById('age').value;
+            var price = document.getElementById('price').value;
+
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'adminDashboard-createAccount.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function() {
                 if (this.status == 200) {
-                    alert(this.responseText); 
+                    alert(this.responseText);
                 }
             };
-            xhr.send('fname=' + encodeURIComponent(fname) 
-            + '&lname=' + encodeURIComponent(lname) 
-            + '&email=' + encodeURIComponent(email) 
-            + '&password=' + encodeURIComponent(password)
-            + '&uuid=' + encodeURIComponent(uuid));
+            xhr.send('fname=' + encodeURIComponent(fname) +
+                '&lname=' + encodeURIComponent(lname) +
+                '&email=' + encodeURIComponent(email) +
+                '&password=' + encodeURIComponent(password) +
+                '&uuid=' + encodeURIComponent(uuid) +
+                '&subject=' + encodeURIComponent(selectedSubject) + // Include the selected subject
+                '&bio=' + encodeURIComponent(bio) + // Include the bio
+                '&age=' + encodeURIComponent(age) + // Include the age
+                '&price=' + encodeURIComponent(price)); // Include the price
         }
+
         
         // Display user & then delete
         var alluser = JSON.parse('<?php echo $allUserJSON; ?>');

@@ -54,6 +54,16 @@ include "database/function.php";
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="#" onclick=" event.preventDefault(); SubmitLessons()">
+                                Approved Lessons
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick=" event.preventDefault(); SubmitLessons()">
+                                Pending Lessons
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="logout.php">
                                 Log Out
                             </a>
@@ -138,6 +148,8 @@ include "database/function.php";
                             <option value="Math">Math</option>
                             <option value="English">English</option>
                             <option value="Science">Science</option>
+                            <option value="MotherTongue">MotherTongue</option>
+
                         </select>
                     </div>
                     <div class="form-group">
