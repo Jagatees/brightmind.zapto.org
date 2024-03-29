@@ -98,7 +98,8 @@ function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $pri
     $age = (int)$age;
     $price = (float)$price;
 
-    $stmt->bind_param("ssssssssss", $fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $price, $subject, $uuid);
+    $stmt->bind_param("ssssssssss", $fname, $lname, $email, $pwd_hashed, $role, 
+    $bio, $age, $price, $subject, $uuid);
     if (!$stmt->execute()) {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }

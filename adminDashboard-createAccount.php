@@ -10,7 +10,9 @@ if (isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) &
     $password = $_POST['password'];
     $uuid = $_POST['uuid'];
 
-    insertRole($fname, $lname, $email, $password, "teacher", 'bio', 0, 0, 'subject', $uuid);
+    $pwd = password_hash($password, PASSWORD_DEFAULT);
+
+    insertRole($fname, $lname, $email, $pwd, "teacher", 'bio', 0, 0, 'subject', $uuid);
 } else {
     echo "Error: Missing user details.";
 }
