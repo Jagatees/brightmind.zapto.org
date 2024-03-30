@@ -168,8 +168,9 @@ if(isset($_SESSION['uuid'])) {
             </main>
         </div>
     </div>
-    <script src="js/create_lessons.js"></script>
+    <script src="js/add_lesson.js"></script>
     <?php include "inc/footer.inc.php"; ?>
+</div>
 
     <script>
         var userFirstName = <?php echo isset($_SESSION['fname']) ? json_encode($_SESSION['fname']) : json_encode(""); ?>;

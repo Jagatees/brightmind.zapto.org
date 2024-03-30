@@ -287,7 +287,7 @@ function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId, 
     
     // Prepare the SQL statement to insert a lesson
     $sql = "INSERT INTO `tuition_centre`.`lessons` (uuid, time_slot, module, level, approvel, teacher_name, date) 
-    VALUES (?, ?, ?, ?, ?, ?)";
+    VALUES (?, ?, ?, ?, ?, ?, ?)";
     
     // Prepare the statement
     $stmt = $conn->prepare($sql);
