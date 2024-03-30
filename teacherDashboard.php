@@ -92,6 +92,7 @@ if(isset($_SESSION['uuid'])) {
         </div>
     </div>
     <?php include "inc/footer.inc.php"; ?>
+</div>
     <script>
         var userFirstName = <?php echo isset($_SESSION['fname']) ? json_encode($_SESSION['fname']) : json_encode(""); ?>;
         var userLastName = <?php echo isset($_SESSION['lname']) ? json_encode($_SESSION['lname']) : json_encode(""); ?>;

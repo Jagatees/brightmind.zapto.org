@@ -1,8 +1,9 @@
 <?php
 session_start();
-if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])):
+if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
     header('Location: login.php');
-endif;
+    exit;
+}
 ?>  
 
 <!DOCTYPE html>
@@ -68,8 +69,8 @@ endif;
     </style>
 </head>
 <body>
+<div id="main">
     <?php include "inc/header.inc.php"; // Include the header ?>
-
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
@@ -120,6 +121,7 @@ endif;
             </main>
         </div>
     </div>
+    <?php include "inc/footer.inc.php"; // Include footer components ?>
     <div class="modal fade" id="timeslotModal" tabindex="-1" role="dialog" aria-labelledby="timeslotModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -138,8 +140,7 @@ endif;
             </div>
         </div>
     </div>
-
-    <?php include "inc/footer.inc.php"; // Include footer components ?>
+</div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
