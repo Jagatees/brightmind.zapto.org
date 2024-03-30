@@ -1,12 +1,8 @@
-<div id="main">
-
 <head>
   <!--Bootstrap CSS-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <!--Bootstrap JS-->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <!--Custom CSS-->
-    <link rel="stylesheet" href="css/carousel.css">
 
     <!-- Nav Bar & Header -->
     <link rel="stylesheet" href="components/nav-bar/header.css">
@@ -23,6 +19,9 @@
     <title>Bright Minds Academy</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     a {
       text-decoration: none;
@@ -108,39 +107,41 @@
 </head>
 
 <body>
-  <?php include "inc/header.inc.php"; ?>
-    <main>
-      <div id="card">
-        <div id="card-content">
-          <div id="card-title">
-            <h2>LOGIN</h2>
-            <div class="underline-title"></div>
+  <div id="main">
+    <?php include "inc/header.inc.php"; ?>
+      <main>
+        <div id="card">
+          <div id="card-content">
+            <div id="card-title">
+              <h2>LOGIN</h2>
+              <div class="underline-title"></div>
+            </div>
+            <form method="post" class="form" action="process_login.php">
+
+              <label for="user-email" style="padding-top:13px">&nbsp;Email</label>
+              <input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" />
+              
+              <div class="form-border"></div>
+
+              <label for="role" style="padding-top:22px">&nbsp;Role</label>
+              <select id="role" class="form-content" name="role" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="student">student</option>
+                <option value="teacher">teacher</option>
+                <option value="admin">admin</option>
+              </select>
+              
+              <label for="user-password" style="padding-top:22px">&nbsp;Password</label>
+              <input id="pwd" class="form-content" type="password" name="password" required />
+              
+              <div class="form-border"></div>
+              
+              <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
+              <p id="signup">New? Sign up <a href=register.php>here</a>!</p>
+            </form>
           </div>
-          <form method="post" class="form" action="process_login.php">
-
-            <label for="user-email" style="padding-top:13px">&nbsp;Email</label>
-            <input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" />
-            
-            <div class="form-border"></div>
-
-            <label for="role" style="padding-top:22px">&nbsp;Role</label>
-            <select id="role" class="form-content" name="role" required>
-              <option value="" disabled selected>Select your role</option>
-              <option value="student">student</option>
-              <option value="teacher">teacher</option>
-              <option value="admin">admin</option>
-            </select>
-            
-            <label for="user-password" style="padding-top:22px">&nbsp;Password</label>
-            <input id="pwd" class="form-content" type="password" name="password" required />
-            
-            <div class="form-border"></div>
-            
-            <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
-            <p id="signup">New? Sign up <a href=register.php>here</a>!</p>
-          </form>
         </div>
-      </div>
-    </main>
-    <?php include "inc/footer.inc.php"; ?>
+      </main>
+      <?php include "inc/footer.inc.php"; ?>
+  </div>
 </body>

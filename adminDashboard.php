@@ -81,6 +81,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
         </div>
     </div>
     <?php include "inc/footer.inc.php"; ?>
+</div>
     <script>
         // Ensure the PHP-generated JSON strings are not empty
         var allLessonsJSON = '<?php echo $allLessonsJSON; ?>';

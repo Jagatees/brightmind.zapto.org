@@ -19,6 +19,7 @@ body{
 }
 ul{
   list-style: none;
+  padding-left: 0;
 }
 .footer{
   background-color: #24262b;
@@ -105,8 +106,8 @@ ul{
   	 		<div class="footer-col">
   	 			<h4>Bright Minds Academy</h4>
   	 			<ul>
-  	 				<li><a href="#">about us</a></li>
-  	 				<li><a href="#">our services</a></li>
+  	 				<li><a href="home.php#">about us</a></li>
+  	 				<li><a href="home.php#services">our services</a></li>
   	 				<li><a href="#">privacy policy</a></li>
   	 			</ul>
   	 		</div>
@@ -132,7 +133,7 @@ ul{
   	 				<a href="#"><i class="fab fa-facebook-f"></i></a>
   	 				<a href="#"><i class="fab fa-twitter"></i></a>
   	 				<a href="#"><i class="fab fa-instagram"></i></a>
-  	 				<a href="#"><i class="fab fa-linkedin-in"></i></a>
+  	 				<a href="https://sg.linkedin.com/in/tscottjones" target="_blank" class="fab fa-linkedin-in" style="text-decoration: none;"></i></a>
   	 			</div>
   	 		</div>
   	 	</div>
