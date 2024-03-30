@@ -174,7 +174,7 @@ session_start();
     .testimonial-heading
     {
         letter-spacing: 1px;
-        margin: 30px 0px;
+        margin-top: 30px;
         padding: 10px 20px;
         display:flex;
         flex-direction:column;
@@ -419,7 +419,7 @@ a.book-now-btn:hover {
                 <p style="font-size:20px">Here is our address!</p>
             </div>
 
-            <section class="map">
+            <section class="map" style="margin-bottom:30px;">
                 <div class="embed-responsive embed-responsive-4by3">
                     <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.665394053238!2d103.8462120742383!3d1.377438761488071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da16e96db0a1ab%3A0x3d0be54fbbd6e1cd!2sSingapore%20Institute%20of%20Technology%20(SIT%40NYP)!5e0!3m2!1sen!2ssg!4v1710602407815!5m2!1sen!2ssg"  style="border:0; width:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
