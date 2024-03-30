@@ -281,12 +281,12 @@ function updateUserNames($newFname, $newLname) {
     }
 }
 
-function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId) {
+function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date) {
     // Establish database connection
     $conn = getDbConnection();
     
     // Prepare the SQL statement to insert a lesson
-    $sql = "INSERT INTO `tuition_centre`.`lessons` (uuid, time_slot, module, level, approvel, teacher_name) 
+    $sql = "INSERT INTO `tuition_centre`.`lessons` (uuid, time_slot, module, level, approvel, teacher_name, date) 
     VALUES (?, ?, ?, ?, ?, ?)";
     
     // Prepare the statement
@@ -296,11 +296,11 @@ function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId) 
     }
     
     // Bind parameters to the prepared statement
-    $stmt->bind_param("ssssis", $uuid, $timeSlot, $module, $level, $approvel, $teacherId);
-    
+    $stmt->bind_param("ssssiss", $uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date);
     // Execute the statement and check for success/failure
     if ($stmt->execute()) {
         echo "Lesson inserted successfully.";
+
     } else {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }
