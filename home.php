@@ -5,8 +5,6 @@
 session_start();
 ?>
 
-<div id="main">
-
 <head>
     <title>Bright Minds Academy</title>
     <style>
@@ -367,7 +365,7 @@ a.book-now-btn:hover {
         </div>
 
 
-    <section class="section-below-carousel bg-light py-5">
+    <section class="section-below-carousel bg-light py-5" id="services">
     <div class="container">
     <div class="testimonial-heading">
             <h1> What do we provide?</h1>

@@ -11,6 +11,17 @@
         .card:hover {
             background-color: #FFFDF3; 
         }
+        h1 {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+        h4 {
+            padding-top: 10px;
+        }
+        .filter-container {
+            margin-left: 20px;
+        }
     </style>
     <?php
     include "inc/head.inc.php";
@@ -24,6 +35,7 @@
         <?php include "inc/header.inc.php"; ?>
         
         <main class="container">
+            <h1>Our Teachers</h1>
             <div class="filter-container">
                 <label for="subjectFilter">Filter by subject:</label>
                 <select id="subjectFilter" onchange="filterCards()">
@@ -37,8 +49,8 @@
             <div class="grid-container">
                 <?php foreach ($teachers as $teacher) : ?>
                     <div class="card" data-subject="<?php echo htmlspecialchars($teacher['subject']); ?>">
-                        <img src="images/teacher/english.png" alt="Avatar" style="width:100%">
-                        <div class="card-container">
+                        <div class="card-container" style="padding: 0px">
+                            <img src="images/teacher/english.png" alt="Avatar" style="width:100%">
                             <h4><b>
                                     <?php echo htmlspecialchars($teacher['fname']); ?>
                                 </b></h4>
