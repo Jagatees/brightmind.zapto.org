@@ -1,6 +1,6 @@
 <header class="jumbotron text-dark custom-bg ">
 <?php include "components/nav-bar/nav.php"; ?>
-    <div class="header-title">
-        <img src="images/testheader.png" alt="" height="50px" width="100px">
+    <div class="header-title" style="padding-top:10px; padding-bottom:10px; padding-right:25px;">
+        <img src="images/BMALogo2.png" alt="" height="80px" width="262px">
     </div>
 </header>

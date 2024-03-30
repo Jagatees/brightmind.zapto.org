@@ -7,7 +7,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #ffec8e;
+    background-color: #374785;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
@@ -19,13 +19,13 @@
     padding: 8px 32px; 
     font-size: 25px;
     text-decoration: none;
-    color: #000000;
+    color: #FFFFFF;
     display: block;
     transition: 0.3s;
   }
   
   .sidenav a:hover {
-    color: #232F3E;
+    color: #a8d0e6;
   }
   
   .sidenav .closebtn {
