@@ -88,7 +88,7 @@ if(isset($_SESSION['uuid'])) {
                         <div class="row">
                             <h4>Create Lessons</h4>
                             <br><br>
-                            <form id="editProfileForm">
+                            <form id="createLessonForm">
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-2 col-form-label">Teacher name</label>
                                     <div class="col-sm-10">
@@ -333,34 +333,27 @@ if(isset($_SESSION['uuid'])) {
             var date = document.getElementById('date').value;
             var all_time_slot = document.getElementById('timeSlot').value;
 
-            const time_slot_array = all_time_slot.split("|");
-
             // Get UUID from the session
             var uuid = "<?php echo isset($_SESSION['uuid']) ? $_SESSION['uuid'] : ''; ?>";
             
-            for (let i = 0; i < time_slot_array.length; i++) {
-                if (time_slot_array[i] !== '')
-                {
-                    // Make an AJAX request to submit the lesson data
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'teacherDashboard-createLesson.php', true);
-                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    // xhr.onload = function() {
-                    //     if (this.status == 200) {
-                    //         alert(this.responseText); // Display response from the server
-                    //     }
-                    // };
-                    // Encode and send the data to the server, including approvel and UUID
-                    xhr.send('fname=' + encodeURIComponent(fname) 
-                    + '&subject=' + encodeURIComponent(subject) 
-                    + '&level=' + encodeURIComponent(level) 
-                    + '&timeSlot=' + encodeURIComponent(time_slot_array[i])
-                    + '&approvel=0'
-                    + '&uuid=' + encodeURIComponent(uuid)
-                    + '&date=' + encodeURIComponent(date));
-                    console.log(date);
+            // Make an AJAX request to submit the lesson data
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'teacherDashboard-createLesson.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    alert(this.responseText); // Display response from the server
                 }
-            }
+            };
+            // Encode and send the data to the server, including approvel and UUID
+            xhr.send('fname=' + encodeURIComponent(fname) 
+            + '&subject=' + encodeURIComponent(subject) 
+            + '&level=' + encodeURIComponent(level) 
+            + '&timeSlot=' + encodeURIComponent(all_time_slot)
+            + '&approvel=0'
+            + '&uuid=' + encodeURIComponent(uuid)
+            + '&date=' + encodeURIComponent(date));
+            console.log(date);
 
         }
         // SUBMITLESSONS : END

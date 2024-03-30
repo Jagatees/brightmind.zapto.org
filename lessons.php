@@ -20,12 +20,20 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
 </head>
 <body>
     <?php include "inc/header.inc.php"; ?>
+    <br>
+    <br>
     <div id="main">
         <div class="container">
             <div class="row">
                 <h4>Book Lessons</h4>
                 <br><br>
-                <div id="lessonCardsContainer" class="row"></div>
+                <form method="POST" action="payment.php">
+                    <div id="lessonCardsContainer" class="row">
+                    </div>
+                    <input type="text" id="selected_time_slot" name="selected_time_slot" value="" hidden>
+                    <input type="text" id="lessonID" name="lessonID" value="" hidden>
+                    <button type="submit" class="btn btn-primary" style="float:right;">Book Lesson</button>
+                </form>
             </div>
         </div>        
     </div>
@@ -41,25 +49,49 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
         var lessonCardsContainer = document.getElementById('lessonCardsContainer');
 
         lessonsData.forEach(function(lesson) {
-            var cardDiv = document.createElement('div');
-            cardDiv.classList.add('col-sm-4');
+            if (lesson.approvel == '1')
+            {
+                var cardDiv = document.createElement('div');
+                cardDiv.classList.add('col-sm-4');
 
-            var cardHTML = `
-                <div class="card" style="width: 18rem;">
-                    <div class="card-header">Subject :${lesson.module}</div>
-                    <div class="card-body">
-                        <p class="card-text">Lesson ID: ${lesson.lesson_id}</p>
-                        <p class="card-text">Tutor Name: ${lesson.teacher_name}</p>
-                        <a href="#" class="btn btn-light">${lesson.time_slot}</a>
-                        <br><br>
-                        <!-- You can add additional buttons or content here if needed -->
+                var cardHTML = `
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header">Subject :${lesson.module}</div>
+                        <div class="card-body">
+                            <p class="card-text">Lesson ID: ${lesson.lesson_id}</p>
+                            <p class="card-text">Tutor Name: ${lesson.teacher_name}</p>
+                            <p class="card-text">Date: ${lesson.date}</p>
+                            `;
+                
+                const time_slot_array = lesson.time_slot.split("|");
+                
+                for (let i = 0; i < time_slot_array.length; i ++)
+                {
+                    cardHTML += `
+                    <button type="button" onclick="selectTimeSlot(this, ${lesson.lesson_id})" class="btn btn-light">${time_slot_array[i]}</button>`;
+                }
+                cardHTML += `
+                            <br><br>
+                            <!-- You can add additional buttons or content here if needed -->
+                        </div>
                     </div>
-                </div>
-            `;
-
+                `;
+            }
+            
             cardDiv.innerHTML = cardHTML;
             lessonCardsContainer.appendChild(cardDiv);
         });
+
+        function selectTimeSlot(element, lessonID, uuid){
+            const btnList = document.querySelectorAll('.btn-light');
+            btnList.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            element.classList.add('active');
+            document.getElementById('lessonID').value = lessonID;
+            document.getElementById('selected_time_slot').value = element.innerHTML;
+        }
     </script>
 </body>
 </html>

@@ -115,7 +115,7 @@ function getlessons() {
 
     $conn = getDbConnection();
 
-    $sql = "SELECT lesson_id, uuid, time_slot, module, level, approvel, teacher_name FROM `tuition_centre`.`lessons`";
+    $sql = "SELECT lesson_id, uuid, time_slot, module, level, approvel, teacher_name, date FROM `tuition_centre`.`lessons`";
 
     $result = $conn->query($sql);
 
@@ -129,7 +129,8 @@ function getlessons() {
                 'module' => $row['module'],
                 'level' => $row['level'],
                 'approvel' => $row['approvel'],
-                'teacher_name' => $row['teacher_name']
+                'teacher_name' => $row['teacher_name'],
+                'date' => $row['date']
             ];
             $lessons[] = $lesson;
         }
@@ -173,6 +174,34 @@ function getlessonsUUID($uuid) {
     return $lessons;
 }
 
+function getlessonsByID($lessonID) {
+    $lessonDetails = []; 
+
+    $conn = getDbConnection();
+
+    // Prepare SQL statement with a WHERE clause to filter lessons by UUID
+    $sql = "SELECT module, level, teacher_name, date FROM `tuition_centre`.`lessons` WHERE lesson_id = '$lessonID'";
+
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            // Create an associative array that matches your expected structure
+            $lesson = [
+                'lesson_id' => $row['lesson_id'],
+                'module' => $row['module'],
+                'level' => $row['level'],
+                'teacher_name' => $row['teacher_name']
+            ];
+            $lessonDetails[] = $lesson;
+        }
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+
+    return $lessons;
+}
 
 
 function updateLessonApproval($uuid, $approvalStatus) {

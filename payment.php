@@ -12,7 +12,37 @@
 </head>
 <body>
     <?php include "inc/header.inc.php"; // Include the header ?>
-    <div id="paypal-button-container"></div> <!-- PayPal button will be rendered here -->
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Lesson ID</th>
+                        <td><?php echo $_POST['lessonID'] ?></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="col">Subject</th>
+                        <td><?php echo  $_POST['module'] ?></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <td><?php echo  $_POST['date'] ?></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Time</th>
+                        <td><?php echo $_POST['selected_time_slot'] ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+        <div class="row">
+            <div id="paypal-button-container"></div> <!-- PayPal button will be rendered here -->
+        </div>
+    </div>
     <?php include "inc/footer.inc.php"; // Include footer components ?>
 
 </body>
