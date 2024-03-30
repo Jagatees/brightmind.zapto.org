@@ -3,7 +3,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <!--Bootstrap JS-->
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-  
+
 
   <!-- Nav Bar & Header -->
   <link rel="stylesheet" href="components/nav-bar/header.css">
@@ -123,81 +123,81 @@
   </style>
 </head>
 
-<div id="main">
-
-  <body>
+<body>
+  <div id="main">
     <?php include "inc/header.inc.php"; ?>
-    <div id="card">
-      <div id="card-content">
-        <div id="card-title">
-          <h2>SIGNUP</h2>
-          <div class="underline-title"></div>
+    <main>
+      <div id="card">
+        <div id="card-content">
+          <div id="card-title">
+            <h2>SIGNUP</h2>
+            <div class="underline-title"></div>
+          </div>
+          <form method="post" class="form" action="process_register.php">
+            <label for="fname" style="padding-top:13px">&nbsp;First Name</label>
+            <input maxlength="45" class="form-content" type="text" id="fname" name="fname" placeholder="Enter first name">
+
+            <div class="form-border"></div>
+            <label for="lname" style="padding-top:22px">&nbsp;Last Name:</label>
+            <input required maxlength="45" class="form-content" type="text" id="lname" name="lname" placeholder="Enter last name">
+
+            <div class="form-border"></div>
+
+            <label for="user-email" style="padding-top:22px">&nbsp;Email</label>
+            <input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" placeholder="Enter email" />
+
+            <div class="form-border"></div>
+
+            <label for="role" style="padding-top:22px">&nbsp;Role</label>
+            <select id="role" class="form-content" name="role" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="student">student</option>
+
+              <!-- Remove the Bottom two ones the other page are install -->
+              <option value="teacher">teacher</option>
+              <option value="admin">admin</option>
+            </select>
+
+            <label for="user-password" style="padding-top:22px">&nbsp;Password</label>
+            <input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter password" />
+
+            <div class="form-border"></div>
+
+            <label for="pwd_confirm" style="padding-top:22px">&nbsp;Confirm Password:</label>
+            <input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password">
+
+            <input type="text" id="uuid" name="uuid" value="">
+
+
+            <div class="form-border"></div>
+
+            <input id="submit-btn" type="submit" name="submit" value="SIGNUP" />
+            <p id="signup">Already have an account? Log in <a href=login.php>here</a>!</p>
+          </form>
         </div>
-        <form method="post" class="form" action="process_register.php">
-          <label for="fname" style="padding-top:13px">&nbsp;First Name</label>
-          <input maxlength="45" class="form-content" type="text" id="fname" name="fname" placeholder="Enter first name">
-
-          <div class="form-border"></div>
-          <label for="lname" style="padding-top:22px">&nbsp;Last Name:</label>
-          <input required maxlength="45" class="form-content" type="text" id="lname" name="lname" placeholder="Enter last name">
-
-          <div class="form-border"></div>
-
-          <label for="user-email" style="padding-top:22px">&nbsp;Email</label>
-          <input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" placeholder="Enter email" />
-
-          <div class="form-border"></div>
-
-          <label for="role" style="padding-top:22px">&nbsp;Role</label>
-          <select id="role" class="form-content" name="role" required>
-            <option value="" disabled selected>Select your role</option>
-            <option value="student">student</option>
-
-            <!-- Remove the Bottom two ones the other page are install -->
-            <option value="teacher">teacher</option>
-            <option value="admin">admin</option>
-          </select>
-
-          <label for="user-password" style="padding-top:22px">&nbsp;Password</label>
-          <input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter password" />
-
-          <div class="form-border"></div>
-
-          <label for="pwd_confirm" style="padding-top:22px">&nbsp;Confirm Password:</label>
-          <input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password">
-
-          <input type="text" id="uuid" name="uuid" value="">
-
-
-          <div class="form-border"></div>
-
-          <input id="submit-btn" type="submit" name="submit" value="SIGNUP" />
-          <p id="signup">Already have an account? Log in <a href=login.php>here</a>!</p>
-        </form>
       </div>
-    </div>
     </main>
-    <script>
-      function generateUUID() {
-          return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-              var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-              return v.toString(16);
-          });
-      }
-
-            // Function to set UUID as value for the input field
-      function setUUID() {
-          var uuidInput = document.getElementById("uuid");
-          if (uuidInput) {
-              uuidInput.value = generateUUID();
-          }
-      }
-
-      // Call setUUID function when the page loads
-      window.onload = setUUID;
-
-    </script>
-
-
     <?php include "inc/footer.inc.php"; ?>
-  </body>
+  </div>
+
+  <script>
+    function generateUUID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
+    // Function to set UUID as value for the input field
+    function setUUID() {
+        var uuidInput = document.getElementById("uuid");
+        if (uuidInput) {
+            uuidInput.value = generateUUID();
+        }
+    }
+
+    // Call setUUID function when the page loads
+    window.onload = setUUID;
+
+  </script>
+</body>

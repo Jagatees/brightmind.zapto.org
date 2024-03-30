@@ -109,39 +109,39 @@
 <body>
   <div id="main">
     <?php include "inc/header.inc.php"; ?>
-      <main>
-        <div id="card">
-          <div id="card-content">
-            <div id="card-title">
-              <h2>LOGIN</h2>
-              <div class="underline-title"></div>
-            </div>
-            <form method="post" class="form" action="process_login.php">
-
-              <label for="user-email" style="padding-top:13px">&nbsp;Email</label>
-              <input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" />
-              
-              <div class="form-border"></div>
-
-              <label for="role" style="padding-top:22px">&nbsp;Role</label>
-              <select id="role" class="form-content" name="role" required>
-                <option value="" disabled selected>Select your role</option>
-                <option value="student">student</option>
-                <option value="teacher">teacher</option>
-                <option value="admin">admin</option>
-              </select>
-              
-              <label for="user-password" style="padding-top:22px">&nbsp;Password</label>
-              <input id="pwd" class="form-content" type="password" name="password" required />
-              
-              <div class="form-border"></div>
-              
-              <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
-              <p id="signup">New? Sign up <a href=register.php>here</a>!</p>
-            </form>
+    <main>
+      <div id="card">
+        <div id="card-content">
+          <div id="card-title">
+            <h2>LOGIN</h2>
+            <div class="underline-title"></div>
           </div>
+          <form method="post" class="form" action="process_login.php">
+
+            <label for="user-email" style="padding-top:13px">&nbsp;Email</label>
+            <input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" />
+              
+            <div class="form-border"></div>
+
+            <label for="role" style="padding-top:22px">&nbsp;Role</label>
+            <select id="role" class="form-content" name="role" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="student">student</option>
+              <option value="teacher">teacher</option>
+              <option value="admin">admin</option>
+            </select>
+              
+            <label for="user-password" style="padding-top:22px">&nbsp;Password</label>
+            <input id="pwd" class="form-content" type="password" name="password" required />
+              
+            <div class="form-border"></div>
+              
+            <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
+            <p id="signup">New? Sign up <a href=register.php>here</a>!</p>
+          </form>
         </div>
-      </main>
-      <?php include "inc/footer.inc.php"; ?>
+      </div>
+    </main>
+    <?php include "inc/footer.inc.php"; ?>
   </div>
 </body>

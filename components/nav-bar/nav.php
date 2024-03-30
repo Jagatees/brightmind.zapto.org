@@ -27,4 +27,4 @@ if (session_status() == PHP_SESSION_NONE) {
     <?php endif; ?>
 </div>
 
-<span style="font-size:30px;cursor:pointer" onclick="toggleNav()">&#9776;</span>
+<span style="font-size:30px;cursor:pointer;padding-left:5px;color:#ffffff" onclick="toggleNav()">&#9776;</span>

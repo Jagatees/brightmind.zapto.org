@@ -8,7 +8,7 @@ header.jumbotron {
     justify-content: center;
     text-align: center;
     width: 100%;
-    background-color: #FCEB95;
+    background-color: #24305e;
     position: -webkit-sticky; /* For Safari */
     position: sticky;
     top: 0; /* Set the top edge of the sticky header to the top of the viewport */
