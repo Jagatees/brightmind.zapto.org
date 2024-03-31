@@ -130,10 +130,10 @@ ul{
   	 		<div class="footer-col">
   	 			<h4>follow us</h4>
   	 			<div class="social-links">
-  	 				<a href="https://www.twitch.tv/xpluse3k_sg" target="_blank" class="fab fa-twitch" style="text-decoration: none;"></a>
-  	 				<a href="https://www.twitter.com/Xpluse3K" target="_blank" class="fab fa-twitter" style="text-decoration: none;"></a>
-  	 				<a href="https://www.youtube.com/channel/UCLjpzzVoHxEvHOsKsfjg1dQ" target="_blank" class="fab fa-youtube" style="text-decoration: none;"></a>
-  	 				<a href="https://sg.linkedin.com/in/tscottjones" target="_blank" class="fab fa-linkedin-in" style="text-decoration: none;"></a>
+  	 				<a href="#" target="_blank" class="fab fa-twitch" style="text-decoration: none;"></a>
+  	 				<a href="#" target="_blank" class="fab fa-twitter" style="text-decoration: none;"></a>
+  	 				<a href="#" target="_blank" class="fab fa-youtube" style="text-decoration: none;"></a>
+  	 				<a href="#" target="_blank" class="fab fa-linkedin-in" style="text-decoration: none;"></a>
   	 			</div>
   	 		</div>
   	 	</div>
