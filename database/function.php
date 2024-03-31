@@ -115,7 +115,7 @@ function getlessons() {
 
     $conn = getDbConnection();
 
-    $sql = "SELECT lesson_id, uuid, time_slot, module, level, approvel, teacher_name, date FROM `tuition_centre`.`lessons`";
+    $sql = "SELECT lesson_id, uuid, time_slot, module, level, approvel, teacher_name, date, price FROM `tuition_centre`.`lessons`";
 
     $result = $conn->query($sql);
 
@@ -130,7 +130,8 @@ function getlessons() {
                 'level' => $row['level'],
                 'approvel' => $row['approvel'],
                 'teacher_name' => $row['teacher_name'],
-                'date' => $row['date']
+                'date' => $row['date'],
+                'price' => $row['price']
             ];
             $lessons[] = $lesson;
         }
@@ -180,7 +181,7 @@ function getlessonsByID($lessonID) {
     $conn = getDbConnection();
 
     // Prepare SQL statement with a WHERE clause to filter lessons by UUID
-    $sql = "SELECT module, level, teacher_name, date FROM `tuition_centre`.`lessons` WHERE lesson_id = '$lessonID'";
+    $sql = "SELECT module, level, uuid, date, price FROM `tuition_centre`.`lessons` WHERE lesson_id = '$lessonID'";
 
     $result = $conn->query($sql);
 
@@ -188,10 +189,11 @@ function getlessonsByID($lessonID) {
         while($row = $result->fetch_assoc()) {
             // Create an associative array that matches your expected structure
             $lesson = [
-                'lesson_id' => $row['lesson_id'],
                 'module' => $row['module'],
                 'level' => $row['level'],
-                'teacher_name' => $row['teacher_name']
+                'uuid' => $row['uuid'],
+                'date' => $row['date'],
+                'price' => $row['price']
             ];
             $lessonDetails[] = $lesson;
         }
@@ -200,7 +202,7 @@ function getlessonsByID($lessonID) {
     }
     $conn->close();
 
-    return $lessons;
+    return $lessonDetails;
 }
 
 
@@ -310,13 +312,13 @@ function updateUserNames($newFname, $newLname) {
     }
 }
 
-function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date) {
+function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date, $price) {
     // Establish database connection
     $conn = getDbConnection();
     
     // Prepare the SQL statement to insert a lesson
-    $sql = "INSERT INTO `tuition_centre`.`lessons` (uuid, time_slot, module, level, approvel, teacher_name, date) 
-    VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO `tuition_centre`.`lessons` (uuid, time_slot, module, level, approvel, teacher_name, date, price) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     
     // Prepare the statement
     $stmt = $conn->prepare($sql);
@@ -325,7 +327,37 @@ function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId, 
     }
     
     // Bind parameters to the prepared statement
-    $stmt->bind_param("ssssiss", $uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date);
+    $stmt->bind_param("ssssissi", $uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date, $price);
+    // Execute the statement and check for success/failure
+    if ($stmt->execute()) {
+        echo "Lesson inserted successfully.";
+
+    } else {
+        die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+    }
+    
+    // Close the statement and the connection
+    $stmt->close();
+    $conn->close();
+}
+
+function insertBooking($uuid, $timeSlot, $module, $level, $date, $lessonID) {
+    // Establish database connection
+    $conn = getDbConnection();
+    
+    // Prepare the SQL statement to insert a lesson
+    $sql = "INSERT INTO `tuition_centre`.`lesson_bookings` (lessonid, uuid, lesson_time, attended, lesson_date, lesson_module, lesson_level) 
+    VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+    }
+    
+    $attended = 0;
+    // Bind parameters to the prepared statement
+    $stmt->bind_param("ississs", $lessonID, $uuid, $timeSlot, $attended, $date, $module, $level);
     // Execute the statement and check for success/failure
     if ($stmt->execute()) {
         echo "Lesson inserted successfully.";

@@ -27,9 +27,10 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
             <div class="row">
                 <h4>Book Lessons</h4>
                 <br><br>
-                <form method="POST" action="payment.php">
+                <form method="POST" action="checkout.php">
                     <div id="lessonCardsContainer" class="row">
                     </div>
+                    <input type="text" id="price" name="price" value="" hidden>
                     <input type="text" id="selected_time_slot" name="selected_time_slot" value="" hidden>
                     <input type="text" id="lessonID" name="lessonID" value="" hidden>
                     <button type="submit" class="btn btn-primary" style="float:right;">Book Lesson</button>
@@ -60,6 +61,7 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
                         <div class="card-body">
                             <p class="card-text">Lesson ID: ${lesson.lesson_id}</p>
                             <p class="card-text">Tutor Name: ${lesson.teacher_name}</p>
+                            <p class="card-text">Price: $ ${lesson.price}</p>
                             <p class="card-text">Date: ${lesson.date}</p>
                             `;
                 

@@ -158,6 +158,15 @@ if(isset($_SESSION['uuid'])) {
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="price" class="col-sm-2 col-form-label">Price</label>
+                                    <div class="col-sm-1">
+                                        $
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control-plaintext" id="price" name="price" required placeholder="60">
+                                    </div>
+                                </div>
                                 <button type="submit" class="btn btn-primary" onclick="createLesson()" style="float:right;">Create</button>
                             </form>
                         </div>
@@ -331,6 +340,7 @@ if(isset($_SESSION['uuid'])) {
             var subject = document.getElementById('subject').value;
             var level = document.getElementById('level').value;
             var date = document.getElementById('date').value;
+            var price = document.getElementById('price').value;
             var all_time_slot = document.getElementById('timeSlot').value;
 
             // Get UUID from the session
@@ -352,6 +362,7 @@ if(isset($_SESSION['uuid'])) {
             + '&timeSlot=' + encodeURIComponent(all_time_slot)
             + '&approvel=0'
             + '&uuid=' + encodeURIComponent(uuid)
+            + '&price=' + encodeURIComponent(price)
             + '&date=' + encodeURIComponent(date));
             console.log(date);
 
