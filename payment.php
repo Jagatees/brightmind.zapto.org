@@ -15,8 +15,9 @@
     <br>
     <br>
     <div class="container">
-        <div class="row">
-            <table class="table">
+    <div class="row">
+
+    <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">Lesson ID</th>
@@ -36,37 +37,27 @@
                         <th scope="col">Time</th>
                         <td><?php echo $_POST['selected_time_slot'] ?></td>
                     </tr>
+                    <tr>
+                        <th scope="col">price</th>
+                        <td><?php echo $_POST['price'] ?></td>
+                    </tr>
                 </tbody>
             </table>
-        </div> 
-        <div class="row">
-            <div id="paypal-button-container"></div> <!-- PayPal button will be rendered here -->
-        </div>
+            
+        <form action="checkout.php" method="POST">
+            <input type="hidden" name="lessonID" value="<?php echo htmlspecialchars($_POST['lessonID']); ?>">
+            <input type="hidden" name="module" value="<?php echo htmlspecialchars($_POST['module']); ?>">
+            <input type="hidden" name="date" value="<?php echo htmlspecialchars($_POST['date']); ?>">
+            <input type="hidden" name="selected_time_slot" value="<?php echo htmlspecialchars($_POST['selected_time_slot']); ?>">
+            <input type="hidden" name="price" value="<?php echo htmlspecialchars($_POST['price']); ?>">
+            
+            <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+        </form>
     </div>
+</div>
+
     <?php include "inc/footer.inc.php"; // Include footer components ?>
 
 </body>
-<script>
-        // Paypal wants people to use strings. they hate ints and floats
-
-        paypal.Buttons({
-            createOrder: function(data, actions) {
-                // This function sets up the details of the transaction, including the amount and line item details.
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '0.01'
-                        }
-                    }]
-                });
-            },
-            onApprove: function(data, actions) {
-                // This function captures the funds from the transaction.
-                return actions.order.capture().then(function(details) {
-                    // This function shows a transaction success message to your buyer.
-                    window.location.href = 'successful.php'; 
-                });
-            }
-        }).render('#paypal-button-container'); // This function displays Smart Payment Buttons on your web page.
-    </script>
+       
 </html>

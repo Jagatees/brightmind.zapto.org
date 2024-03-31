@@ -27,7 +27,7 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
             <div class="row">
                 <h4>Book Lessons</h4>
                 <br><br>
-                <form method="POST" action="checkout.php">
+                <form method="POST" action="payment.php">
                     <div id="lessonCardsContainer" class="row">
                     </div>
                     <input type="text" id="price" name="price" value="" hidden>
@@ -38,9 +38,6 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
             </div>
         </div>        
     </div>
-    <?php if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] && $_SESSION['role'] == 'student'): ?>
-        <a href="#" class="btn btn-light">Book now</a>
-    <?php endif; ?>
     <br>
     <?php include "inc/footer.inc.php"; ?>
     <script>
@@ -72,7 +69,7 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
                     if (time_slot_array[i] != '')
                     {
                         cardHTML += `
-                        <button type="button" onclick="selectTimeSlot(this, ${lesson.lesson_id})" class="btn btn-light">${time_slot_array[i]}</button><br><br>`;
+                        <button type="button" onclick="selectTimeSlot(this, ${lesson.lesson_id}, ${lesson.price})" class="btn btn-light">${time_slot_array[i]}</button><br><br>`;
                     }
                 }
                 cardHTML += `
@@ -86,7 +83,7 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
             lessonCardsContainer.appendChild(cardDiv);
         });
 
-        function selectTimeSlot(element, lessonID, uuid){
+        function selectTimeSlot(element, lessonID, price){
             const btnList = document.querySelectorAll('.btn-light');
             btnList.forEach(btn => {
                 btn.classList.remove('active');
@@ -95,6 +92,7 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
             element.classList.add('active');
             document.getElementById('lessonID').value = lessonID;
             document.getElementById('selected_time_slot').value = element.innerHTML;
+            document.getElementById('price').value = price
         }
     </script>
 </body>

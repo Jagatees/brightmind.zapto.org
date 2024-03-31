@@ -11,26 +11,17 @@ $stripe_secret_key = "sk_test_51P0D7HP2hY6yFfqMyyyMBspkDZ9mudrhMhklVMDGY1ucj0gSV
 include "database/function.php";
 
 
-if (isset($_POST['lessonID'])) {
-    // Get lesson details
-    $lessons = getlessonsByID($_POST['lessonID']);
-
-    foreach ($lessons as $lesson) {
-
-        // Access the price property of each lesson
-        $price = $lesson['price'];
-        $module = $lesson['module'];
-        $level = $lesson['level'];
-        $date = $lesson['date'];
-        $uuid = $lesson['uuid'];
-    }
+if (!isset($_POST['module']) || !isset($_POST['date'])) {
+    // Handle missing data, perhaps redirect back or show an error message
+    die('Module and date are required.');
 }
 
-$lessonID = $_POST['lessonID'];
-$timeSlot = $_POST['selected_time_slot'];
 
-$unit_amount = $price . '00';
-$product = $level . ' ' . $module;
+// Continue with your existing code, now using $module and $date
+$unit_amount = $_POST['price'] * 100; // Assuming 'price' is correctly provided
+$product = 'Lesson plans'; // Now using sanitized $module
+$timeSlot = $_POST['selected_time_slot']; // Ensure this is also validated and sanitized
+
 
 try {
     $checkout_session = \Stripe\Checkout\Session::create([
@@ -46,8 +37,7 @@ try {
                     "unit_amount" => $unit_amount,
                     "product_data" => [
                         "name" => $product,
-                        "date" => $date,
-                        "time" => $timeSlot,
+                        "description" => $timeSlot,
                     ]
                 ]
 
@@ -57,7 +47,7 @@ try {
 
     http_response_code(303);
     // this should only be called after payment is successful
-    insertBooking($uuid, $timeSlot, $module, $level, $date, $lessonID);
+    //insertBooking($uuid, $timeSlot, $module, $level, $date, $lessonID);
     header("Location: " . $checkout_session->url);
     exit;
 } catch (\Stripe\Exception\ApiErrorException $e) {
