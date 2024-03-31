@@ -24,6 +24,8 @@ if (session_status() == PHP_SESSION_NONE) {
     <?php else: ?>
         <a href="login.php">Login</a>
         <a href="register.php">Register</a>
+        <a href="index2.php">test-payment</a>
+
     <?php endif; ?>
 </div>
 

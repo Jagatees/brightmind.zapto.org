@@ -7,6 +7,10 @@
 <body>
 
     <h1>Stripe Example</h1>
-    <p>Thank you for your payment!</p>
+    <form method="post" action="checkout.php">
+        <p>T-shirt</p>
+        <p><strong>US$10.00</strong></p>
+        <button>Pay</button>
+    </form>
 </body>
 </html>
