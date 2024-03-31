@@ -67,11 +67,13 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
                 
                 for (let i = 0; i < time_slot_array.length; i ++)
                 {
-                    cardHTML += `
-                    <button type="button" onclick="selectTimeSlot(this, ${lesson.lesson_id})" class="btn btn-light">${time_slot_array[i]}</button>`;
+                    if (time_slot_array[i] != '')
+                    {
+                        cardHTML += `
+                        <button type="button" onclick="selectTimeSlot(this, ${lesson.lesson_id})" class="btn btn-light">${time_slot_array[i]}</button><br><br>`;
+                    }
                 }
                 cardHTML += `
-                            <br><br>
                             <!-- You can add additional buttons or content here if needed -->
                         </div>
                     </div>
