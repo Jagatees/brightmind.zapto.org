@@ -6,6 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <div id="mySidenav" class="sidenav">
     <a href="home.php">Home</a>
+    <a href="aboutUs.php">About Us</a>
     <a href="ourTeacher.php">Our Teachers</a>
     <a href="lessons.php">Lessons</a>
 

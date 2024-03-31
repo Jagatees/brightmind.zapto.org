@@ -38,7 +38,6 @@
       background: #fbfbfb;
       border-radius: 8px;
       box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
-      height: 490px;
       margin: 6rem auto 8.1rem auto;
       width: 329px;
     }
@@ -117,26 +116,63 @@
             <div class="underline-title"></div>
           </div>
           <form method="post" class="form" action="process_login.php">
+            <?php
+              echo '<label for="email" style="padding-top:13px">&nbsp;Email</label>';
+              echo '<input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" value="' . $_SESSION["email"] . '"/>';
+              unset($_SESSION['email']);
+              echo '<div class="form-border"></div>';
 
-            <label for="user-email" style="padding-top:13px">&nbsp;Email</label>
-            <input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" />
-              
-            <div class="form-border"></div>
+              if ($_SESSION['emailError'] != "") {
+                echo '<label for="emailError" style="padding-top:2px; color:red;">&nbsp;' . $_SESSION["emailError"] . '</label>';
+                unset($_SESSION['emailError']);
+                echo '<label for="role" style="padding-top:10px">&nbsp;Role</label>';
+              } else {
+                echo '<label for="role" style="padding-top:34px">&nbsp;Role</label>';
+              }
 
-            <label for="role" style="padding-top:22px">&nbsp;Role</label>
-            <select id="role" class="form-content" name="role" required>
-              <option value="" disabled selected>Select your role</option>
-              <option value="student">student</option>
-              <option value="teacher">teacher</option>
-              <option value="admin">admin</option>
-            </select>
               
-            <label for="user-password" style="padding-top:22px">&nbsp;Password</label>
-            <input id="pwd" class="form-content" type="password" name="password" required />
-              
-            <div class="form-border"></div>
-              
-            <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
+              echo '<select id="role" class="form-content" name="role" required>';
+                echo '<option value="" disabled selected>Select your role</option>';
+                if ($_SESSION['role'] == "student") {
+                  echo '<option value="student" selected>student</option>';
+                } else {
+                  echo '<option value="student">student</option>';
+                }
+                if ($_SESSION['role'] == "teacher") {
+                  echo '<option value="teacher" selected>teacher</option>';
+                } else {
+                  echo '<option value="teacher">teacher</option>';
+                }
+                if ($_SESSION['role'] == "admin") {
+                  echo '<option value="admin" selected>admin</option>';
+                } else {
+                  echo '<option value="admin">admin</option>';
+                }
+              echo '</select>';
+              unset($_SESSION['role']);
+
+
+              if ($_SESSION['roleError'] != "") {
+                echo '<label for="roleError" style="padding-top:2px; color:red;">&nbsp;' . $_SESSION["roleError"] . '</label>';
+                unset($_SESSION['roleError']);
+                echo '<label for="password" style="padding-top:10px">&nbsp;Password</label>';
+              } else {
+                echo '<label for="password" style="padding-top:34px">&nbsp;Password</label>';
+              }
+                
+    
+              echo '<input id="pwd" class="form-content" type="password" name="password" value="' . $_SESSION["password"] . '" required/>';
+              unset($_SESSION['password']);
+              echo '<div class="form-border"></div>';
+
+              if ($_SESSION['pwError'] != "") {
+                echo '<label for="error" style="padding-top:2px; color:red;">&nbsp;' . $_SESSION["pwError"] . '</label>';
+                unset($_SESSION['pwError']);
+                echo '<input id="submit-btn" type="submit" name="submit" value="LOGIN" style="margin-top:26px;"/>';
+              } else {
+                echo '<input id="submit-btn" type="submit" name="submit" value="LOGIN" />';
+              }
+            ?>
             <p id="signup">New? Sign up <a href=register.php>here</a>!</p>
           </form>
         </div>

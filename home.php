@@ -132,8 +132,8 @@ session_start();
 
         .logo {
             text-align: center;
-            margin-right:100px;
-            margin-left: 100px;
+            margin-right: 20%;
+            margin-left: 20%;
             font-family: 'Roboto';
             font-size: 20px; 
             font-weight: bold;
@@ -372,19 +372,19 @@ a.book-now-btn:hover {
                     <div class="row justify-content-around">
                         <div class="col-lg-4 col-md-6">
                             <div class="logo text-center">
-                                <img src="images/Google.png" alt="icon1" height="100px" width="210px">
+                                <img src="images/Google.png" alt="icon1" height="110px" width="200px">
                                 <p>Our tution centre has been rated an average of <span style="color: orange;">5.0 stars on Google</span> with over <span style="color: orange;"> 1000 user reviews </span>. Reviews often state how easy it is to navigate and use our website.</p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="logo text-center">
-                                <img src="images/teacher.png" alt="icon2" height="100px" width="210px">
+                                <img src="images/teacher.png" alt="icon2" height="110px" width="115px">
                                 <p>Our teachers are graduates from some of the <span style="color: orange;">top universities</span> around the world. They have <span style="color: orange;">many years</span> of teaching experience and are extremely passionate about teaching! Thus, our tuition centre can ensure your child is in good hands.</p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="logo text-center">
-                                <img src="images/A+.png" alt="icon3" height="100px" width="210px">
+                                <img src="images/A+.png" alt="icon3" height="110px" width="186px">
                                 <p>From data collected from all our past and current students, on average, <span style="color: orange;">80%</span> of our students score <span style="color: orange;">A+</span> for their <span style="color: orange;">PSLE</span>. 19% score a B and only 1% score less than that. We can guarantee our tuition centre provides some of the best results across Singapore!</p>
                             </div>
                         </div>

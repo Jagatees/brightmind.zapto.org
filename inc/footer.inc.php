@@ -106,7 +106,7 @@ ul{
   	 		<div class="footer-col">
   	 			<h4>Bright Minds Academy</h4>
   	 			<ul>
-  	 				<li><a href="home.php#">about us</a></li>
+  	 				<li><a href="aboutUs.php">about us</a></li>
   	 				<li><a href="home.php#services">our services</a></li>
   	 				<li><a href="#">privacy policy</a></li>
   	 			</ul>

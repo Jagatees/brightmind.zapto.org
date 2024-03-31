@@ -48,7 +48,7 @@ if(isset($_SESSION['uuid'])) {
                         <li class="nav-item">
                             <span class="nav-link active">
                                 <img src="student.jpg" class="rounded-circle" width="50" height="50">
-                                <span class="ml-2">NAME</span>
+                                <span class="ml-2"><?php echo $_SESSION['fname']; ?></span>
                             </span>
                         </li>
                         <li class="nav-item">

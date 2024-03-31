@@ -37,7 +37,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
                         <li class="nav-item">
                             <span class="nav-link active">
                                 <img src="student.jpg" class="rounded-circle" width="50" height="50">
-                                <span class="ml-2">Javier</span>
+                                <span class="ml-2"><?php echo $_SESSION['fname']; ?></span>
                             </span>
                         </li>
                         <li class="nav-item">

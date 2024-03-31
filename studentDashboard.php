@@ -11,7 +11,7 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bright Minds Academy - Tutor Dashboard</title>
+    <title>Bright Minds Academy - Student Dashboard</title>
     <?php include "inc/head.inc.php"; // This should include your styles and Bootstrap ?>
     <!-- Include jQuery UI CSS -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -80,7 +80,7 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
                         <li class="nav-item">
                             <span class="nav-link active">
                                 <img src="student.jpg" class="rounded-circle" width="50" height="50">
-                                <span class="ml-2">John</span>
+                                <span class="ml-2"><?php echo $_SESSION['fname']; ?></span>
                             </span>
                         </li>
                         <li class="nav-item">
