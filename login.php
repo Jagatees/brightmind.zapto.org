@@ -118,7 +118,7 @@
           <form method="post" class="form" action="process_login.php">
             <?php
               echo '<label for="email" style="padding-top:13px">&nbsp;Email</label>';
-              echo '<input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" value="' . $_SESSION["email"] . '"/>';
+              echo '<input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" placeholder="Enter email" value="' . $_SESSION["email"] . '"/>';
               unset($_SESSION['email']);
               echo '<div class="form-border"></div>';
 
@@ -161,7 +161,7 @@
               }
                 
     
-              echo '<input id="pwd" class="form-content" type="password" name="password" value="' . $_SESSION["password"] . '" required/>';
+              echo '<input id="pwd" class="form-content" type="password" name="password" placeholder="Enter password" value="' . $_SESSION["password"] . '" required/>';
               unset($_SESSION['password']);
               echo '<div class="form-border"></div>';
 
