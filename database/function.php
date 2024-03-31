@@ -200,7 +200,7 @@ function getlessonsByID($lessonID) {
     }
     $conn->close();
 
-    return $lessons;
+    return $lessonDetails;
 }
 
 
