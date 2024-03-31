@@ -147,33 +147,39 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
 
     <script>
     $(document).ready(function(){
+        var bookedLessons = {
+            "2024-04-23": [
+                {"time": "10:00 AM - 11:00 AM", "subject": "Math"},
+                {"time": "1:00 PM - 2:00 PM", "subject": "Science"}
+            ],
+            "2024-04-24": [
+                {"time": "11:00 AM - 12:00 PM", "subject": "English"}
+            ]
+        };
 
-        // Initialize the calendar
         $("#calendarContainer").datepicker({
             beforeShowDay: function(date) {
-                var bookedDates = ["2024-03-23", "2024-03-24"];
                 var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                return [true, bookedDates.includes(dateString) ? 'ui-state-highlight' : '', ''];
+                return [bookedLessons.hasOwnProperty(dateString), bookedLessons.hasOwnProperty(dateString) ? 'ui-state-highlight' : '', ''];
             },
             onSelect: function(dateText) {
-                // Define the booked timeslots for each date
-                var bookedTimeslots = {
-                    "2024-03-23": ["10:00 AM - 11:00 AM", "1:00 PM - 2:00 PM"],
-                    "2024-03-24": ["11:00 AM - 12:00 PM"]
-                };
-                // Check if there are timeslots for the selected date
-                if (bookedTimeslots[dateText]) {
-                    // Create the HTML for the modal body
-                    var timeslotHtml = bookedTimeslots[dateText].map(function(timeslot) {
-                        return "<p>" + timeslot + "</p>";
+                var formattedDate = $.datepicker.formatDate('yy-mm-dd', new Date(dateText));
+                if (bookedLessons[formattedDate]) {
+                    var detailsHtml = bookedLessons[formattedDate].map(function(lesson) {
+                        return "<p>" + lesson.time + " - " + lesson.subject + "</p>";
                     }).join('');
-                    // Set the modal content
-                    $('#timeslotModal .modal-body').html(timeslotHtml);
-                    // Show the modal
+                    $('#timeslotModal .modal-body').html(detailsHtml);
+                    $('#timeslotModalLabel').text('Booked Lessons for ' + formattedDate);
                     $('#timeslotModal').modal('show');
                 }
             }
         });
+        // Explicitly handle the modal close functionality
+        $('#timeslotModal').on('click', '.close, .btn-secondary[data-dismiss="modal"]', function() {
+            $('#timeslotModal').modal('hide');
+        });
+    });
+
 
         $("#viewClassesLink").click(function(event){
             event.preventDefault(); // Prevents direct navigation to the link
@@ -209,7 +215,6 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
             // Hide the timeslot container to prevent overlapping containers
             $("#calendarContainer").fadeOut();
         });
-    });
     </script>
 </body>
 </html>
