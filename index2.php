@@ -9,7 +9,7 @@
     <h1>Stripe Example</h1>
     <form method="post" action="checkout.php">
         <p>T-shirt</p>
-        <p><strong>US$10.00</strong></p>
+        <input type="hidden" name="unit_amount" value="10000" />
         <button>Pay</button>
     </form>
 </body>

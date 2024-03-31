@@ -8,6 +8,9 @@ $stripe_secret_key = "sk_test_51P0D7HP2hY6yFfqMyyyMBspkDZ9mudrhMhklVMDGY1ucj0gSV
 
 \Stripe\Stripe::setApiKey($stripe_secret_key);
 
+$unit_amount = $_POST['unit_amount'];
+
+
 try {
     $checkout_session = \Stripe\Checkout\Session::create([
         "mode" => "payment",
@@ -19,22 +22,12 @@ try {
                 "quantity" => 1,
                 "price_data" => [
                     "currency" => "usd",
-                    "unit_amount" => 2000,
+                    "unit_amount" => $unit_amount,
                     "product_data" => [
                         "name" => "T-shirt"
                     ]
                 ]
             ],
-            [
-                "quantity" => 2,
-                "price_data" => [
-                    "currency" => "usd",
-                    "unit_amount" => 700,
-                    "product_data" => [
-                        "name" => "Hat"
-                    ]
-                ]
-            ]        
         ]
     ]);
 
