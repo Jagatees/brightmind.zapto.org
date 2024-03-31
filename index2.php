@@ -5,11 +5,10 @@
     <meta charset="UTF-8" />
 </head>
 <body>
-
     <h1>Stripe Example</h1>
     <form method="post" action="checkout.php">
-        <p>T-shirt</p>
-        <input type="hidden" name="unit_amount" value="10000" />
+        <input name="unit_amount" value="10000" />
+        <input name="product_name" value="Math_Lesson" />
         <button>Pay</button>
     </form>
 </body>

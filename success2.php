@@ -33,7 +33,6 @@
     <h1>Stripe Example</h1>
     <p>Thank you for your payment!</p>
     
-    <!-- Button to go to another page -->
     <a href="home.php" class="button">Go to Another Page</a>
 
 </body>

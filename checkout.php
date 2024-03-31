@@ -9,6 +9,7 @@ $stripe_secret_key = "sk_test_51P0D7HP2hY6yFfqMyyyMBspkDZ9mudrhMhklVMDGY1ucj0gSV
 \Stripe\Stripe::setApiKey($stripe_secret_key);
 
 $unit_amount = $_POST['unit_amount'];
+$product_name = $_POST['product_name'];
 
 
 try {
@@ -21,10 +22,10 @@ try {
             [
                 "quantity" => 1,
                 "price_data" => [
-                    "currency" => "usd",
+                    "currency" => "sgd",
                     "unit_amount" => $unit_amount,
                     "product_data" => [
-                        "name" => "T-shirt"
+                        "name" => $product_name 
                     ]
                 ]
             ],
