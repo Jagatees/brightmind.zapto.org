@@ -7,8 +7,6 @@
     <?php if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in']): ?>
         <?php if($_SESSION['role'] === 'admin'): ?>
             <a href="adminDashboard.php">Admin Dashboard</a>
-            <a href="studentDashboard.php">Student Dashboard</a>
-            <a href="teacherDashboard.php">Teacher Dashboard</a>
         <?php elseif($_SESSION['role'] === 'student'): ?>
             <a href="studentDashboard.php">Student Dashboard</a>
         <?php elseif($_SESSION['role'] === 'teacher'): ?>

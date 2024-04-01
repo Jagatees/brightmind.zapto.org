@@ -218,24 +218,18 @@
         <section class="team">
         <h1>Meet Our Team</h1>
         <div class="team-cards">
-           
-            <!-- Cards here -->
-            <!-- Card 1 -->
-           
+                      
             <div class="card">
                 <div class="card-img">
                         <img src=
                          "images/teacher.png" alt="User 1">
                     </div>
                     <div class="card-info">
-                        <h2 class="card-name">Jane</h2>
+                        <h2 class="card-name">Wang Kexiang</h2>
                         <p class="card-role">CEO and Founder</p>
-                        <p class="card-email">jane@example.com</p>
-                        <p><button class="button">Contact</button></p>
                     </div>
                 </div>
     
-                <!-- Card 2 -->
             
                 <div class="card">
                     <div class="card-img">
@@ -243,25 +237,56 @@
                         "images/teacher.png" alt="User 2">
                     </div>
                     <div class="card-info">
-                        <h2 class="card-name">Miller</h2>
+                        <h2 class="card-name">Xavier Teh Jun Ying</h2>
                         <p class="card-role">Co-Founder</p>
-                        <p class="card-email">Miller@example.com</p>
-                        <p><button class="button">Contact</button></p>
                     </div>
                 </div>
             
-                <!-- Card 3 -->
             
                 <div class="card">
                     <div class="card-img">
                         <img src=
-                        "images/student.png" alt="User 3">
+                        "images/teacher.png" alt="User 3">
                     </div>
                     <div class="card-info">
-                        <h2 class="card-name">Joe</h2>
+                        <h2 class="card-name">Leon See Hao Jun</h2>
                         <p class="card-role">Co-Founder</p>
-                        <p class="card-email">Joe@example.com</p>
-                        <p><button class="button">Contact</button></p>
+                    </div>
+                </div>
+
+            
+                <div class="card">
+                    <div class="card-img">
+                        <img src=
+                        "images/teacher.png" alt="User 2">
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-name">K Jagateesvaran Rajoo</h2>
+                        <p class="card-role">Co-Founder</p>
+                    </div>
+                </div>
+
+            
+                <div class="card">
+                    <div class="card-img">
+                        <img src=
+                        "images/teacher.png" alt="User 2">
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-name">Wong Che Khei</h2>
+                        <p class="card-role">Co-Founder</p>
+                    </div>
+                </div>
+
+            
+                <div class="card">
+                    <div class="card-img">
+                        <img src=
+                        "images/teacher.png" alt="User 2">
+                    </div>
+                    <div class="card-info">
+                        <h2 class="card-name">Xavier Teh Jun Ying</h2>
+                        <p class="card-role">Co-Founder</p>
                     </div>
                 </div>
             </div>

@@ -122,6 +122,7 @@
   </style>
 </head>
 
+
 <body>
   <div id="main">
     <?php include "inc/header.inc.php"; ?>
@@ -146,7 +147,6 @@
               } else {
                 echo '<label for="lname" style="padding-top:34px">&nbsp;Last Name</label>';
               }
-
               
               echo '<input required maxlength="45" class="form-content" type="text" id="lname" name="lname" placeholder="Enter last name" value="' . $_SESSION["lname"] . '"/>';
               unset($_SESSION['lname']);
@@ -160,7 +160,6 @@
                 echo '<label for="email" style="padding-top:34px">&nbsp;Email</label>';
               }
 
-
               echo '<input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" placeholder="Enter email" value="' . $_SESSION["email"] . '" />';
               unset($_SESSION['email']);
               echo '<div class="form-border"></div>';
@@ -168,42 +167,10 @@
               if ($_SESSION['emailError'] != "") {
                 echo '<label for="emailError" style="padding-top:2px; color:red;">&nbsp;' . $_SESSION["emailError"] . '</label>';
                 unset($_SESSION['emailError']);
-                echo '<label for="role" style="padding-top:10px">&nbsp;Role</label>';
-              } else {
-                echo '<label for="role" style="padding-top:34px">&nbsp;Role</label>';
-              }
-
-              
-              echo '<select id="role" class="form-content" name="role" required>';
-                echo '<option value="" disabled selected>Select your role</option>';
-                if ($_SESSION['role'] == "student") {
-                  echo '<option value="student" selected>student</option>';
-                } else {
-                  echo '<option value="student">student</option>';
-                }
-
-                // Remove teacher and admin for final submission
-                if ($_SESSION['role'] == "teacher") {
-                  echo '<option value="teacher" selected>teacher</option>';
-                } else {
-                  echo '<option value="teacher">teacher</option>';
-                }
-                if ($_SESSION['role'] == "admin") {
-                  echo '<option value="admin" selected>admin</option>';
-                } else {
-                  echo '<option value="admin">admin</option>';
-                }
-              echo '</select>';
-              unset($_SESSION['role']);
-
-              if ($_SESSION['roleError'] != "") {
-                echo '<label for="roleError" style="padding-top:2px; color:red;">&nbsp;' . $_SESSION["roleError"] . '</label>';
-                unset($_SESSION['roleError']);
                 echo '<label for="password" style="padding-top:10px">&nbsp;Password</label>';
               } else {
                 echo '<label for="password" style="padding-top:34px">&nbsp;Password</label>';
               }
-
 
               echo '<input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter password" value="' . $_SESSION["password"] . '" />';
               unset($_SESSION['password']);
@@ -216,7 +183,6 @@
               } else {
                 echo '<label for="pwd_confirm" style="padding-top:34px">&nbsp;Confirm Password</label>';
               }
-
 
               echo '<input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password" value="' . $_SESSION["cpassword"] . '" />';
               unset($_SESSION['cpassword']);
@@ -256,6 +222,5 @@
 
     // Call setUUID function when the page loads
     window.onload = setUUID;
-
   </script>
 </body>

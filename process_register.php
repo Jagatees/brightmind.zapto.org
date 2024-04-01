@@ -1,5 +1,5 @@
 <?php
-$fname = $email = $lname = $errorMsg = $pwd = $role = $uuid = "";
+$fname = $email = $lname = $errorMsg = $pwd = $uuid = "";
 $success = true;
 
 ini_set('display_errors', 1);
@@ -7,23 +7,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-// Define an array of valid roles
-$validRoles = ['student', 'teacher', 'admin'];
 
-// Sanitize the input
-$role = sanitize_input($_POST["role"]);
-
-// Check if the role is valid
-if (empty($role)) {
-    $errorMsg .= "Role is required.<br>";
-    $roleError = "Role is required.";
-    $success = false;
-} else if (!in_array($role, $validRoles)) {
-    // If the role is not in the array of valid roles
-    $errorMsg .= "Invalid role selected.<br>";
-    $roleError = "Invalid role selected.";
-    $success = false;
-}
 
 
 // Sanitize and validate the email
@@ -92,12 +76,12 @@ if (isset($_POST['uuid'])) {
 session_start();
 // Final output based on success
 if ($success) {
-    saveMemberToDB($fname ,$lname, $email, $pwd, $role, $uuid);
+    saveMemberToDB($fname ,$lname, $email, $pwd, 'student', $uuid);
     $_SESSION['user_logged_in'] = true;
     $_SESSION['fname'] = $fname;
     $_SESSION['lname'] = $lname;
     $_SESSION['user_name'] = $fname . ' ' . $lname;
-    $_SESSION['role'] = $role;
+    $_SESSION['role'] = 'student';
     $_SESSION['uuid'] = $uuid; 
     $_SESSION['bio'] = $row["bio"]; // Retrieve role from DB and store in session
     
@@ -154,7 +138,6 @@ function checkEmailInUse($email) {
     }
 
     $tableName = "`tuition_centre`.`user`";
-    // Prepare and execute query to check if email already in DB
     $stmt = $conn->prepare("SELECT email FROM $tableName WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -174,13 +157,6 @@ function checkEmailInUse($email) {
  */
 function saveMemberToDB($fname, $lname, $email, $pwd_hashed, $role, $uuid)
 {
-
-    // Check to Prevent Error
-    $allowedTypes = ['student', 'teacher', 'admin'];
-
-    if (!in_array($role, $allowedTypes)) {
-        die("Invalid type specified.");
-    }
 
 
     $config = parse_ini_file('/var/www/private/db-config.ini');
