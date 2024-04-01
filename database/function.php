@@ -381,7 +381,7 @@ function getBookingByUUID($uuid) {
     $conn = getDbConnection();
 
     // Use prepared statements to avoid SQL injection
-    $stmt = $conn->prepare("SELECT * FROM `tuition_centre`.`lesson_bookings` WHERE `uid` = ?");
+    $stmt = $conn->prepare("SELECT * FROM `tuition_centre`.`lesson_bookings` WHERE `uuid_student` = ?");
     $stmt->bind_param("s", $uuid);
 
     $stmt->execute();
@@ -391,7 +391,7 @@ function getBookingByUUID($uuid) {
         while($row = $result->fetch_assoc()) {
             $lesson = [
                 'lessonid' => $row['lessonid'],
-                'uuid' => $row['uid'], // use actual column name here
+                'uuid_student' => $row['uuid_student'],
                 'lesson_time' => $row['lesson_time'],
                 'attended' => $row['attended'],
                 'lesson_date' => $row['lesson_date'],

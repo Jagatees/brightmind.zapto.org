@@ -4,6 +4,16 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
     header('Location: login.php');
     exit;
 }
+
+include "database/function.php";
+
+if (isset($_SESSION['uuid'])) {
+    $uuid = $_SESSION['uuid'];
+    $lessons = getBookingByUUID($uuid);
+    $allbookingJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+} else {
+    echo "UUID not found in session.";
+}
 ?>  
 
 <!DOCTYPE html>
@@ -144,16 +154,42 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
         var userLastName = <?php echo isset($_SESSION['lname']) ? json_encode($_SESSION['lname']) : json_encode(""); ?>;
         var bio = <?php echo isset($_SESSION['bio']) ? json_encode($_SESSION['bio']) : json_encode(""); ?>;
 
+
+        var allbookingJSON = '<?php echo $allbookingJSON; ?>';
+        var allbookings = allbookingJSON ? JSON.parse(allbookingJSON) : {};
+
+
+        console.log(allbookings);
+        console.log(allbookings[0]['lesson_date']);
+        var bookedLessons = {};
+
+
+
+
     $(document).ready(function(){
-        var bookedLessons = {
-            "2024-04-23": [
-                {"time": "10:00 AM - 11:00 AM", "subject": "Math"},
-                {"time": "1:00 PM - 2:00 PM", "subject": "Science"}
-            ],
-            "2024-04-24": [
-                {"time": "11:00 AM - 12:00 PM", "subject": "English"}
-            ]
-        };
+        var bookedLessons = {}; // Initialize bookedLessons as an empty object
+
+       // Loop through all bookings
+        for (var i = 0; i < allbookings.length; i++) {
+            var date = allbookings[i]['lesson_date'];
+            var module = allbookings[i]['lesson_module'];
+            var time = allbookings[i]['lesson_time'];
+
+            // Check if the date key already exists in bookedLessons
+            if (!bookedLessons[date]) {
+                bookedLessons[date] = [];
+            }
+
+            // Push a new lesson object onto the array for the given date
+            bookedLessons[date].push({
+                "time": time,   // Time of the lesson
+                "subject": module // Subject of the lesson
+            });
+        }
+    
+
+        console.log(bookedLessons);
+
 
         $("#calendarContainer").datepicker({
             beforeShowDay: function(date) {
