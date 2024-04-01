@@ -2,35 +2,23 @@
 
 require __DIR__ . "/vendor/autoload.php";
 
-// Set your secret key. Remember to switch to your live secret key in production!
-// See your keys here: https://dashboard.stripe.com/apikeys
 $stripe_secret_key = "sk_test_51P0D7HP2hY6yFfqMyyyMBspkDZ9mudrhMhklVMDGY1ucj0gSVBc9Vj8n01MWpWA5pWorlMZYD0g4AMrMa3ZlgaNs00JIX6wWB0";
 
 \Stripe\Stripe::setApiKey($stripe_secret_key);
 
 include "database/function.php";
 
-
 if (!isset($_POST['module']) || !isset($_POST['date'])) {
-    // Handle missing data, perhaps redirect back or show an error message
     die('Module and date are required.');
 }
 
-if (isset($_SESSION['uuid'])) {
-    $uuid = $_SESSION['uuid'];
-
-} else {
-    echo "UUID not found in session.";
-}
-
-
-// Continue with your existing code, now using $module and $date
-$unit_amount = $_POST['price'] * 100; // Assuming 'price' is correctly provided
-$product = 'Lesson plans'; // Now using sanitized $module
-$timeSlot = $_POST['selected_time_slot']; // Ensure this is also validated and sanitized
+$unit_amount = $_POST['price'] * 100;
+$product = 'Lesson plans'; 
+$timeSlot = $_POST['selected_time_slot']; 
 $module = $_POST['module'];
 $level = $_POST['level'];
 $date = $_POST['date'];
+$uuid = $_POST['uuid'];
 $lessonID =  $_POST['lessonID'];
 
 

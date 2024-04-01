@@ -184,8 +184,6 @@
                 echo '<label for="pwd_confirm" style="padding-top:34px">&nbsp;Confirm Password</label>';
               }
 
-              echo '<input type="text" id="uuid" name="uuid" value="">';
-
               echo '<input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password" value="' . $_SESSION["cpassword"] . '" />';
               unset($_SESSION['cpassword']);
               echo '<div class="form-border"></div>';

@@ -4,19 +4,6 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
     header('Location: login.php');
     exit;
 }
-
-include "database/function.php";
-
-
-if (isset($_SESSION['uuid'])) {
-    $uuid = $_SESSION['uuid'];
-    $booking = getBookingByUUID($uuid);
-    $allbookingJSON = json_encode($booking, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-    echo "<script>console.log(" . $allbookingJSON . ");</script>";
-
-} else {
-    echo "UUID not found in session.";
-}
 ?>  
 
 <!DOCTYPE html>
@@ -157,52 +144,39 @@ if (isset($_SESSION['uuid'])) {
         var userLastName = <?php echo isset($_SESSION['lname']) ? json_encode($_SESSION['lname']) : json_encode(""); ?>;
         var bio = <?php echo isset($_SESSION['bio']) ? json_encode($_SESSION['bio']) : json_encode(""); ?>;
 
-        $(document).ready(function(){
-            var allbookingJSON = '<?php echo $allbookingJSON; ?>';
-            var allbookings = allbookingJSON ? JSON.parse(allbookingJSON) : {};
-            var bookedLessons = {};
+    $(document).ready(function(){
+        var bookedLessons = {
+            "2024-04-23": [
+                {"time": "10:00 AM - 11:00 AM", "subject": "Math"},
+                {"time": "1:00 PM - 2:00 PM", "subject": "Science"}
+            ],
+            "2024-04-24": [
+                {"time": "11:00 AM - 12:00 PM", "subject": "English"}
+            ]
+        };
 
-            // Iterate over all bookings to populate bookedLessons
-            Object.keys(allbookings).forEach(function(date) {
-                var lessons = allbookings[date];
-                if (!bookedLessons[date]) {
-                    bookedLessons[date] = [];
+        $("#calendarContainer").datepicker({
+            beforeShowDay: function(date) {
+                var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                return [bookedLessons.hasOwnProperty(dateString), bookedLessons.hasOwnProperty(dateString) ? 'ui-state-highlight' : '', ''];
+            },
+            onSelect: function(dateText) {
+                var formattedDate = $.datepicker.formatDate('yy-mm-dd', new Date(dateText));
+                if (bookedLessons[formattedDate]) {
+                    var detailsHtml = bookedLessons[formattedDate].map(function(lesson) {
+                        return "<p>" + lesson.time + " - " + lesson.subject + "</p>";
+                    }).join('');
+                    $('#timeslotModal .modal-body').html(detailsHtml);
+                    $('#timeslotModalLabel').text('Booked Lessons for ' + formattedDate);
+                    $('#timeslotModal').modal('show');
                 }
-
-                
-
-                lessons.forEach(function(lesson) {
-                    bookedLessons[date].push({
-                        time: lesson.lesson_date, // Replace 'lesson_time' with the correct key from your PHP array
-                        subject: lesson.lesson_module // Replace 'lesson_module' with the correct key from your PHP array
-                    });
-                });
-            });
-
-            $("#calendarContainer").datepicker({
-                beforeShowDay: function(date) {
-                    var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [bookedLessons.hasOwnProperty(dateString), bookedLessons.hasOwnProperty(dateString) ? 'ui-state-highlight' : '', ''];
-                },
-                onSelect: function(dateText) {
-                    var formattedDate = $.datepicker.formatDate('yy-mm-dd', new Date(dateText));
-                    if (bookedLessons[formattedDate]) {
-                        var detailsHtml = bookedLessons[formattedDate].map(function(lesson) {
-                            return "<p>" + lesson.time + " - " + lesson.subject + "</p>";
-                        }).join('');
-                        $('#timeslotModal .modal-body').html(detailsHtml);
-                        $('#timeslotModalLabel').text('Booked Lessons for ' + formattedDate);
-                        $('#timeslotModal').modal('show');
-                    }
-                }
-            });
-
-            // Explicitly handle the modal close functionality
-            $('#timeslotModal').on('click', '.close, .btn-secondary[data-dismiss="modal"]', function() {
-                $('#timeslotModal').modal('hide');
-            });
+            }
         });
-
+        // Explicitly handle the modal close functionality
+        $('#timeslotModal').on('click', '.close, .btn-secondary[data-dismiss="modal"]', function() {
+            $('#timeslotModal').modal('hide');
+        });
+    });
 
 
         $("#viewClassesLink").click(function(event){

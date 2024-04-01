@@ -7,9 +7,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 
-function getAllUsers()
-{
-    $users = [];
+function getAllUsers() {
+    $users = []; 
 
     $conn = getDbConnection();
 
@@ -18,8 +17,8 @@ function getAllUsers()
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $user = [
+        while($row = $result->fetch_assoc()) {
+            $user = [ 
                 'fname' => $row['fname'],
                 'lname' => $row['lname'],
                 'subject' => isset($row['subject']) ? $row['subject'] : '',
@@ -37,8 +36,7 @@ function getAllUsers()
 }
 
 
-function getTeachers()
-{
+function getTeachers() {
     $teachers = [];
 
     $conn = getDbConnection();
@@ -47,7 +45,7 @@ function getTeachers()
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
+        while($row = $result->fetch_assoc()) {
             // Create an associative array that matches your expected structure
             $teacher = [
                 'fname' => $row['fname'],
@@ -67,8 +65,7 @@ function getTeachers()
 }
 
 
-function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $price, $subject, $uuid)
-{
+function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $price, $subject, $uuid) {
 
     $allowedTypes = ['student', 'teacher', 'admin'];
 
@@ -101,19 +98,8 @@ function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $pri
     $age = (int)$age;
     $price = (float)$price;
 
-    $stmt->bind_param(
-        "ssssssssss",
-        $fname,
-        $lname,
-        $email,
-        $pwd_hashed,
-        $role,
-        $bio,
-        $age,
-        $price,
-        $subject,
-        $uuid
-    );
+    $stmt->bind_param("ssssssssss", $fname, $lname, $email, $pwd_hashed, $role, 
+    $bio, $age, $price, $subject, $uuid);
     if (!$stmt->execute()) {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }
@@ -124,9 +110,8 @@ function insertRole($fname, $lname, $email, $pwd_hashed, $role, $bio, $age, $pri
 
 
 
-function getlessons()
-{
-    $lessons = [];
+function getlessons() {
+    $lessons = []; 
 
     $conn = getDbConnection();
 
@@ -135,7 +120,7 @@ function getlessons()
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
+        while($row = $result->fetch_assoc()) {
             // Create an associative array that matches your expected structure
             $lesson = [
                 'lesson_id' => $row['lesson_id'],
@@ -158,9 +143,8 @@ function getlessons()
     return $lessons;
 }
 
-function getlessonsUUID($uuid)
-{
-    $lessons = [];
+function getlessonsUUID($uuid) {
+    $lessons = []; 
 
     $conn = getDbConnection();
 
@@ -170,7 +154,7 @@ function getlessonsUUID($uuid)
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
+        while($row = $result->fetch_assoc()) {
             // Create an associative array that matches your expected structure
             $lesson = [
                 'lesson_id' => $row['lesson_id'],
@@ -191,9 +175,8 @@ function getlessonsUUID($uuid)
     return $lessons;
 }
 
-function getlessonsByID($lessonID)
-{
-    $lessonDetails = [];
+function getlessonsByID($lessonID) {
+    $lessonDetails = []; 
 
     $conn = getDbConnection();
 
@@ -203,7 +186,7 @@ function getlessonsByID($lessonID)
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
+        while($row = $result->fetch_assoc()) {
             // Create an associative array that matches your expected structure
             $lesson = [
                 'module' => $row['module'],
@@ -223,14 +206,13 @@ function getlessonsByID($lessonID)
 }
 
 
-function updateLessonApproval($uuid, $approvalStatus)
-{
+function updateLessonApproval($uuid, $approvalStatus) {
     // Establish database connection
     $conn = getDbConnection();
 
     // Prepare the SQL statement to update the approval column based on uuid
     $sql = "UPDATE `tuition_centre`.`lessons` SET approvel = ? WHERE uuid = ?";
-
+    
     // Prepare the statement
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
@@ -256,23 +238,22 @@ function updateLessonApproval($uuid, $approvalStatus)
 
 
 
-function deleteUserByDetails($fname, $lname)
-{
+function deleteUserByDetails($fname, $lname) {
     // Establish database connection
     $conn = getDbConnection();
-
+    
     // Prepare the SQL statement to delete a user where fname, lname, and subject match
     $sql = "DELETE FROM `tuition_centre`.`user` WHERE fname = ? AND lname = ?";
-
+    
     // Prepare the statement
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
     }
-
+    
     // Bind parameters to the prepared statement
     $stmt->bind_param("ss", $fname, $lname);
-
+    
     // Execute the statement and check for success/failure
     if ($stmt->execute()) {
         // Check how many rows were affected
@@ -284,15 +265,14 @@ function deleteUserByDetails($fname, $lname)
     } else {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }
-
+    
     // Close the statement and the connection
     $stmt->close();
     $conn->close();
 }
 
 
-function updateUserNames($newFname, $newLname, $newbio)
-{
+function updateUserNames($newFname, $newLname, $newbio) {
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
@@ -304,13 +284,13 @@ function updateUserNames($newFname, $newLname, $newbio)
     $conn = getDbConnection();
 
     $sql = "UPDATE `tuition_centre`.`user` SET fname = ?, lname = ?, bio = ? WHERE fname = ? AND lname = ? AND bio = ?";
-
+    
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
     }
 
-    $stmt->bind_param("ssssss", $newFname, $newLname, $newbio, $currentFname, $currentLname, $currentBio);
+    $stmt->bind_param("ssssss", $newFname, $newLname, $newbio , $currentFname, $currentLname, $currentBio);
 
     $success = false;
     if ($stmt->execute()) {
@@ -334,96 +314,65 @@ function updateUserNames($newFname, $newLname, $newbio)
     }
 }
 
-function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date, $price)
-{
+function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date, $price) {
     // Establish database connection
     $conn = getDbConnection();
-
+    
     // Prepare the SQL statement to insert a lesson
     $sql = "INSERT INTO `tuition_centre`.`lessons` (uuid, time_slot, module, level, approvel, teacher_name, date, price) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
+    
     // Prepare the statement
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
     }
-
+    
     // Bind parameters to the prepared statement
     $stmt->bind_param("ssssissi", $uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date, $price);
     // Execute the statement and check for success/failure
     if ($stmt->execute()) {
         echo "Lesson inserted successfully.";
+
     } else {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }
-
+    
     // Close the statement and the connection
     $stmt->close();
     $conn->close();
 }
 
-function insertBooking($uuid, $timeSlot, $module, $level, $date, $lessonID)
-{
+function insertBooking($uuid, $timeSlot, $module, $level, $date, $lessonID) {
+    // Establish database connection
     $conn = getDbConnection();
-
+    
+    // Prepare the SQL statement to insert a lesson
     $sql = "INSERT INTO `tuition_centre`.`lesson_bookings` (lessonid, uuid, lesson_time, attended, lesson_date, lesson_module, lesson_level) 
     VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+    
+    // Prepare the statement
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
     }
-
+    
     $attended = 0;
+    // Bind parameters to the prepared statement
     $stmt->bind_param("ississs", $lessonID, $uuid, $timeSlot, $attended, $date, $module, $level);
+    // Execute the statement and check for success/failure
     if ($stmt->execute()) {
         echo "Lesson inserted successfully.";
+
     } else {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }
-
+    
+    // Close the statement and the connection
     $stmt->close();
     $conn->close();
 }
 
-
-// Get lesson booking with uuid
-function getBookingByUUID($uuid)
-{
-    $lessonDetails = [];
-
-    $conn = getDbConnection();
-
-
-    $stmt = $conn->prepare("SELECT * FROM `tuition_centre`.`lesson_bookings` WHERE `uuid` = ?");
-    $stmt->bind_param("s", $uuid);
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $lesson = [
-                'lessonid' => $row['lessonid'],
-                'uuid' => $row['uid'], 
-                'lesson_time' => $row['lesson_time'],
-                'attended' => $row['attended'],
-                'lesson_date' => $row['lesson_date'],
-                'lesson_module' => $row['lesson_module'],
-                'lesson_level' => $row['lesson_level'],
-                'bookingid' => $row['bookingid']
-            ];
-            $lessonDetails = $lesson;
-        }
-    } else {
-        echo "0 results";
-    }
-    $stmt->close();
-    $conn->close();
-
-    return $lessonDetails;
-}
 
 
 
