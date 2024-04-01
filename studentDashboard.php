@@ -226,7 +226,7 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
 
             
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'teacherDashboard-updateProfile.php', true);
+            xhr.open('POST', 'Dashboard-updateProfile.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function() {
                 if (this.status == 200) {
