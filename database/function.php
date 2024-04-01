@@ -376,6 +376,60 @@ function insertBooking($uuid_user, $timeSlot, $module, $level, $date, $lessonID,
     $conn->close();
 }
 
+function updateLessonBooking($uuid_teacher, $lessonID) {
+    // Get the database connection
+    $conn = getDbConnection();
+
+    // Check the connection
+    if($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Begin a transaction to ensure atomicity
+    $conn->begin_transaction();
+
+    try {
+        // Prepare the SQL statement to select the current number of students
+        $stmt_select = $conn->prepare("SELECT numOfStudent FROM `tuition_centre`.`lessons` WHERE uuid = ? AND lesson_id = ?");
+        $stmt_select->bind_param("si", $uuid_teacher, $lessonID);
+
+        // Execute the query
+        $stmt_select->execute();
+
+        // Bind the result
+        $stmt_select->bind_result($numOfStudent);
+        $stmt_select->fetch();
+        $stmt_select->close();
+
+        // Check if we have a valid numOfStudent
+        if ($numOfStudent > 0) {
+            // Prepare the SQL statement to update the number of students
+            $stmt_update = $conn->prepare("UPDATE `tuition_centre`.`lessons` SET numOfStudent = numOfStudent - 1 WHERE uuid = ? AND lesson_id = ?");
+            $stmt_update->bind_param("si", $uuid_teacher, $lessonID);
+
+            // Execute the update query
+            $stmt_update->execute();
+            $stmt_update->close();
+        } else {
+            // Handle the case where numOfStudent cannot be decremented
+            echo "Number of students cannot be less than zero.";
+        }
+
+        // If we reach here, all operations were successful, commit the transaction
+        $conn->commit();
+    } catch(Exception $e) {
+        // An error occurred, roll back the transaction
+        $conn->rollback();
+        // You could log this error and/or return a message to the caller
+        echo "Error: " . $e->getMessage();
+    }
+
+    // Close the connection
+    $conn->close();
+}
+
+
+
 
 function getBookingByUUID($uuid) {
     $lessonDetails = []; 

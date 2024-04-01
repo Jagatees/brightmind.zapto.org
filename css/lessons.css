@@ -2,3 +2,8 @@
     color: black;
     background-color: #cecece;
 }
+
+.disabled-card {
+    background-color: red;
+    /* Any other styles you want to apply to disabled cards */
+}

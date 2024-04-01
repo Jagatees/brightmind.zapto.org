@@ -51,6 +51,8 @@ try {
 
     // this should only be called after payment is successful
     insertBooking($uuid_user, $timeSlot, $module, $level, $date, $lessonID, $uuid_teacher);
+    //update cart of lesson
+    updateLessonBooking($uuid_teacher, $lessonID);
 
     http_response_code(303);
     header("Location: " . $checkout_session->url);
