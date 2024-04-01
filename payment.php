@@ -1,3 +1,24 @@
+<?php
+include "database/function.php";
+
+$price = 0;
+$module = $level = $date = $uuid = '';
+
+$lessons = getlessonsByID($_POST['lessonID']);
+    
+foreach ($lessons as $lesson) {
+
+    // Access the price property of each lesson
+    $price = $lesson['price'];
+    $module = $lesson['module'];
+    $level = $lesson['level'];
+    $date = $lesson['date'];
+    $uuid = $lesson['uuid'];
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,11 +48,11 @@
                 <tbody>
                     <tr>
                         <th scope="col">Subject</th>
-                        <td><?php echo  $_POST['module'] ?></td>
+                        <td><?php echo  $module ?></td>
                     </tr>
                     <tr>
                         <th scope="col">Date</th>
-                        <td><?php echo  $_POST['date'] ?></td>
+                        <td><?php echo  $date ?></td>
                     </tr>
                     <tr>
                         <th scope="col">Time</th>
@@ -46,8 +67,10 @@
             
         <form action="checkout.php" method="POST">
             <input type="hidden" name="lessonID" value="<?php echo htmlspecialchars($_POST['lessonID']); ?>">
-            <input type="hidden" name="module" value="<?php echo htmlspecialchars($_POST['module']); ?>">
-            <input type="hidden" name="date" value="<?php echo htmlspecialchars($_POST['date']); ?>">
+            <input type="hidden" name="module" value="<?php echo htmlspecialchars($module); ?>">
+            <input type="hidden" name="uuid" value="<?php echo htmlspecialchars($uuid); ?>">
+            <input type="hidden" name="date" value="<?php echo htmlspecialchars($date); ?>">
+            <input type="hidden" name="level" value="<?php echo htmlspecialchars($level); ?>">
             <input type="hidden" name="selected_time_slot" value="<?php echo htmlspecialchars($_POST['selected_time_slot']); ?>">
             <input type="hidden" name="price" value="<?php echo htmlspecialchars($_POST['price']); ?>">
             

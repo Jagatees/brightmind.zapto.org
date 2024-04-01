@@ -21,6 +21,11 @@ if (!isset($_POST['module']) || !isset($_POST['date'])) {
 $unit_amount = $_POST['price'] * 100; // Assuming 'price' is correctly provided
 $product = 'Lesson plans'; // Now using sanitized $module
 $timeSlot = $_POST['selected_time_slot']; // Ensure this is also validated and sanitized
+$module = $_POST['module'];
+$level = $_POST['level'];
+$date = $_POST['date'];
+$uuid = $_POST['uuid'];
+$lessonID =  $_POST['lessonID'];
 
 
 try {
@@ -45,9 +50,10 @@ try {
         ]
     ]);
 
-    http_response_code(303);
     // this should only be called after payment is successful
-    //insertBooking($uuid, $timeSlot, $module, $level, $date, $lessonID);
+    insertBooking($uuid, $timeSlot, $module, $level, $date, $lessonID);
+
+    http_response_code(303);
     header("Location: " . $checkout_session->url);
     exit;
 } catch (\Stripe\Exception\ApiErrorException $e) {

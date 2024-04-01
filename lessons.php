@@ -92,7 +92,7 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
             element.classList.add('active');
             document.getElementById('lessonID').value = lessonID;
             document.getElementById('selected_time_slot').value = element.innerHTML;
-            document.getElementById('price').value = price
+            document.getElementById('price').value = price;
         }
     </script>
 </body>
