@@ -16,6 +16,13 @@ if (!isset($_POST['module']) || !isset($_POST['date'])) {
     die('Module and date are required.');
 }
 
+if (isset($_SESSION['uuid'])) {
+    $uuid = $_SESSION['uuid'];
+
+} else {
+    echo "UUID not found in session.";
+}
+
 
 // Continue with your existing code, now using $module and $date
 $unit_amount = $_POST['price'] * 100; // Assuming 'price' is correctly provided
@@ -24,7 +31,6 @@ $timeSlot = $_POST['selected_time_slot']; // Ensure this is also validated and s
 $module = $_POST['module'];
 $level = $_POST['level'];
 $date = $_POST['date'];
-$uuid = $_POST['uuid'];
 $lessonID =  $_POST['lessonID'];
 
 
