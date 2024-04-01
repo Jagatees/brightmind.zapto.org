@@ -3,7 +3,7 @@ body, html {
     margin: 0;
     font-family: Arial, sans-serif;
     overflow: hidden;
-    background: linear-gradient(direction, color-stop1, color-stop2);
+    background: linear-gradient(to right, #c0bdff, #E3E6E6);
 }
 
 .splash-container {
@@ -14,19 +14,26 @@ body, html {
     align-items: center;
     text-align: center;
     padding: 20px;
-    color: white; 
-    background: linear-gradient(direction, color-stop1, color-stop2,);
-    background: linear-gradient(to right, #FFD814, #E3E6E6);
+    color: #000000; 
+}
+
+.splash-container h1 {
+    color: #000000; 
+}
+
+.splash-container p {
+    color: #000000;
 }
 
 .enter-button {
-    display: inline-block;
-    margin-top: 20px;
+    background-color: #837dff; 
+    color: #000000; 
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
     text-decoration: none;
     border-radius: 5px;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
     transition: background-color 0.3s ease;
 }
 

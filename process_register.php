@@ -7,6 +7,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
+
 // Sanitize and validate the email
 if (empty($_POST["email"])) {
     $errorMsg .= "Email is required.<br>";
@@ -73,7 +74,7 @@ if (isset($_POST['uuid'])) {
 session_start();
 // Final output based on success
 if ($success) {
-    saveMemberToDB($fname ,$lname, $email, $pwd, 'student', $uuid);
+    saveMemberToDB($fname ,$lname, $email, $pwd, 'student', 'This is my bio', $uuid);
     $_SESSION['user_logged_in'] = true;
     $_SESSION['fname'] = $fname;
     $_SESSION['lname'] = $lname;
@@ -152,7 +153,7 @@ function checkEmailInUse($email) {
 /*
  * Helper function to write the member data to the database.
  */
-function saveMemberToDB($fname, $lname, $email, $pwd_hashed, $role, $uuid)
+function saveMemberToDB($fname, $lname, $email, $pwd_hashed, $role, $bio, $uuid)
 {
 
 
@@ -174,12 +175,12 @@ function saveMemberToDB($fname, $lname, $email, $pwd_hashed, $role, $uuid)
     }
 
     $tableName = "`tuition_centre`.`user`";
-    $stmt = $conn->prepare("INSERT INTO $tableName (fname, lname, email, password, role, uuid) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO $tableName (fname, lname, email, password, role, bio, uuid) VALUES (?, ?, ?, ?, ?, ?, ?)");
     if (!$stmt) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
     }
 
-    $stmt->bind_param("ssssss", $fname, $lname, $email, $pwd_hashed, $role, $uuid);
+    $stmt->bind_param("sssssss", $fname, $lname, $email, $pwd_hashed, $role, $bio, $uuid);
     if (!$stmt->execute()) {
         die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
     }

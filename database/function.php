@@ -238,12 +238,12 @@ function updateLessonApproval($uuid, $approvalStatus) {
 
 
 
-function deleteUserByDetails($fname, $lname, $subject) {
+function deleteUserByDetails($fname, $lname) {
     // Establish database connection
     $conn = getDbConnection();
     
     // Prepare the SQL statement to delete a user where fname, lname, and subject match
-    $sql = "DELETE FROM `tuition_centre`.`user` WHERE fname = ? AND lname = ? AND subject = ?";
+    $sql = "DELETE FROM `tuition_centre`.`user` WHERE fname = ? AND lname = ?";
     
     // Prepare the statement
     $stmt = $conn->prepare($sql);
@@ -252,7 +252,7 @@ function deleteUserByDetails($fname, $lname, $subject) {
     }
     
     // Bind parameters to the prepared statement
-    $stmt->bind_param("sss", $fname, $lname, $subject);
+    $stmt->bind_param("ss", $fname, $lname);
     
     // Execute the statement and check for success/failure
     if ($stmt->execute()) {

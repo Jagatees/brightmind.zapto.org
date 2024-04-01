@@ -30,7 +30,6 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
     <?php include "inc/header.inc.php"; ?>
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
             <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
@@ -309,7 +308,6 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
                 userCard.className = 'user-card';
                 userCard.innerHTML = '<p><strong>First Name:</strong> ' + user.fname + '</p>';
                 userCard.innerHTML += '<p><strong>Last Name:</strong> ' + user.lname + '</p>';
-                userCard.innerHTML += '<p><strong>Subject:</strong> ' + user.subject + '</p>';
                 userCard.innerHTML += '<button onclick="deleteUser(\'' + user.fname.replace(/'/g, "\\'") + '\',\'' + user.lname.replace(/'/g, "\\'") + '\',\'' + user.subject.replace(/'/g, "\\'") + '\')">Delete</button>';
                 userCard.innerHTML += '<hr>';
                 
