@@ -225,7 +225,7 @@
             <div class="card">
                 <div class="card-img">
                         <img src=
-                         "images/teacher/banane.jpg" alt="User 1">
+                         "images/teacher.png" alt="User 1">
                     </div>
                     <div class="card-info">
                         <h2 class="card-name">Jane</h2>

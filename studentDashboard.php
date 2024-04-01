@@ -140,6 +140,10 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
+        var userFirstName = <?php echo isset($_SESSION['fname']) ? json_encode($_SESSION['fname']) : json_encode(""); ?>;
+        var userLastName = <?php echo isset($_SESSION['lname']) ? json_encode($_SESSION['lname']) : json_encode(""); ?>;
+        var bio = <?php echo isset($_SESSION['bio']) ? json_encode($_SESSION['bio']) : json_encode(""); ?>;
+
     $(document).ready(function(){
         var bookedLessons = {
             "2024-04-23": [
@@ -187,18 +191,22 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
         $("#editProfileLink").click(function(event){
             event.preventDefault(); // Prevents direct navigation
             var editProfileHtml = `
-            <div class ="edit-prof-form"
-                <h4>Edit Profile</h4>
+             <div class= "edit-prof-form">
+                <h2>Edit Profile</h2>
                 <form id="editProfileForm">
                     <div class="form-group">
-                        <label for="firstName">First Name:</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="fname" class="form-control" required value="${userFirstName}">
                     </div>
                     <div class="form-group">
-                        <label for="lastName">Last Name:</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lname" class="form-control" required value="${userLastName}">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <input type="text" id="bio" name="bio" class="form-control" required value="${bio}">
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="updateProfile()">Update Profile</button>
                 </form>
             </div>
             `;
@@ -209,6 +217,25 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
             // Hide the timeslot container to prevent overlapping containers
             $("#calendarContainer").fadeOut();
         });
+
+
+        function updateProfile() {
+            var fname = document.getElementById('fname').value;
+            var lname = document.getElementById('lname').value;
+            var bio = document.getElementById('bio').value;
+
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'teacherDashboard-updateProfile.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    alert(this.responseText); 
+                }
+            };
+            xhr.send('fname=' + encodeURIComponent(fname) + '&lname=' + encodeURIComponent(lname) + 
+            '&bio=' + encodeURIComponent(bio));
+        }
     </script>
 </body>
 </html>
