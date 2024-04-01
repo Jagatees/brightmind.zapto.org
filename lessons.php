@@ -62,6 +62,7 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
                         <div class="card-body">
                             <p class="card-text">Lesson ID: ${lesson.lesson_id}</p>
                             <p class="card-text">Tutor Name: ${lesson.teacher_name}</p>
+                            <p class="card-text">numOfStudent: ${lesson.numOfStudent}</p>
                             <p class="card-text">Price: $ ${lesson.price}</p>
                             <p class="card-text">Date: ${lesson.date}</p>
                             `;

@@ -171,6 +171,12 @@ if (isset($_SESSION['uuid'])) {
                                             <input type="number" class="form-control-plaintext" id="price" name="price" required placeholder="60">
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <label for="numOfStudent" class="col-sm-2 col-form-label">Number of Students</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" id="numOfStudent" name="numOfStudent" required placeholder="e.g., 10" min="1" max="10">
+                                        </div>
+                                    </div>
                                     <button type="submit" class="btn btn-primary" onclick="createLesson()" style="float:right;">Create</button>
                                 </form>
                             </div>
@@ -300,8 +306,9 @@ if (isset($_SESSION['uuid'])) {
             var date = document.getElementById('date').value;
             var price = document.getElementById('price').value;
             var timeSlot = document.getElementById('timeSlot').value;
+            var numOfStudent = document.getElementById('numOfStudent').value;
 
-            if (!fname || !subject || !level || !date || !price || !timeSlot) {
+            if (!fname || !subject || !level || !date || !price || !timeSlot || !numOfStudent) {
                 alert("All fields must be filled out");
                 return false;
             }
@@ -323,7 +330,8 @@ if (isset($_SESSION['uuid'])) {
                 '&approvel=0' +
                 '&uuid=' + encodeURIComponent(uuid) +
                 '&price=' + encodeURIComponent(price) +
-                '&date=' + encodeURIComponent(date));
+                '&date=' + encodeURIComponent(date) + 
+                '&numOfStudent=' + encodeURIComponent(numOfStudent) );
         }
     </script>
 </body>

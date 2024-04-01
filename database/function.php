@@ -115,7 +115,7 @@ function getlessons() {
 
     $conn = getDbConnection();
 
-    $sql = "SELECT lesson_id, uuid, time_slot, module, level, approvel, teacher_name, date, price FROM `tuition_centre`.`lessons`";
+    $sql = "SELECT lesson_id, uuid, time_slot, module, level, approvel, teacher_name, date, price, numOfStudent FROM `tuition_centre`.`lessons`";
 
     $result = $conn->query($sql);
 
@@ -131,7 +131,9 @@ function getlessons() {
                 'approvel' => $row['approvel'],
                 'teacher_name' => $row['teacher_name'],
                 'date' => $row['date'],
-                'price' => $row['price']
+                'price' => $row['price'],
+                'numOfStudent' => $row['numOfStudent']
+
             ];
             $lessons[] = $lesson;
         }
@@ -314,13 +316,13 @@ function updateUserNames($newFname, $newLname, $newbio) {
     }
 }
 
-function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date, $price) {
+function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date, $price, $numOfStudent) {
     // Establish database connection
     $conn = getDbConnection();
     
     // Prepare the SQL statement to insert a lesson
-    $sql = "INSERT INTO `tuition_centre`.`lessons` (uuid, time_slot, module, level, approvel, teacher_name, date, price) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO `tuition_centre`.`lessons` (uuid, time_slot, module, level, approvel, teacher_name, date, price, numOfStudent) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     // Prepare the statement
     $stmt = $conn->prepare($sql);
@@ -329,7 +331,7 @@ function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId, 
     }
     
     // Bind parameters to the prepared statement
-    $stmt->bind_param("ssssissi", $uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date, $price);
+    $stmt->bind_param("ssssissii", $uuid, $timeSlot, $module, $level, $approvel, $teacherId, $date, $price, $numOfStudent);
     // Execute the statement and check for success/failure
     if ($stmt->execute()) {
         echo "Lesson inserted successfully.";
