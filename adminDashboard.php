@@ -265,7 +265,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function() {
                 if (this.status == 200) {
-                    alert(this.responseText);
+                    alert('Teacher created successfully'); 
                 }
             };
             xhr.send('fname=' + encodeURIComponent(fname) +
