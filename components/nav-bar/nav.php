@@ -1,12 +1,6 @@
-<?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-?>
-
 <div id="mySidenav" class="sidenav">
     <?php if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in']): ?>
-        <span>Welcome Back, <?php echo htmlspecialchars($_SESSION['uuid']); ?></span>
+        <span>Welcome Back, <?php echo htmlspecialchars($_SESSION['fname']) . ' ' . htmlspecialchars($_SESSION['lname']) . ' (' . htmlspecialchars(ucfirst($_SESSION['role'])) . ')'; ?></span>
     <?php endif; ?>
 
     <a href="home.php">Home</a>
