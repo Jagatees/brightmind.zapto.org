@@ -7,10 +7,6 @@
         .card {  
             transition: background-color 0.3s ease; 
         }
-
-        .card:hover {
-            background-color: #FFFDF3; 
-        }
         h1 {
             padding-top: 20px;
             padding-bottom: 20px;
@@ -20,7 +16,31 @@
             padding-top: 10px;
         }
         .filter-container {
-            margin-left: 20px;
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            margin: 20px; 
+        }
+
+        .filter-container button {
+            background-color: #ffffff;
+            border: 2px solid #007bff; 
+            color: #007bff; 
+            padding: 10px 20px; 
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px; 
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 20px; 
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12); /* Slight shadow for depth */
+        }
+
+        .filter-container button:hover {
+            background-color: #007bff;
+            color: #ffffff; 
         }
     </style>
     <?php
@@ -37,15 +57,13 @@
         <main class="container">
             <h1>Our Teachers</h1>
             <div class="filter-container">
-                <label for="subjectFilter">Filter by subject:</label>
-                <select id="subjectFilter" onchange="filterCards()">
-                    <option value="all">All</option>
-                    <option value="Science">Science</option>
-                    <option value="English">English</option>
-                    <option value="Math">Math</option>
-                    <option value="MotherTongue">MotherTongue</option>
-                </select>
+                <button onclick="filterCards('all')">All</button>
+                <button onclick="filterCards('Science')">Science</button>
+                <button onclick="filterCards('English')">English</button>
+                <button onclick="filterCards('Math')">Math</button>
+                <button onclick="filterCards('MotherTongue')">Mother Tongue</button>
             </div>
+
             <div class="grid-container">
                 <?php foreach ($teachers as $teacher) : ?>
                     <div class="card" data-subject="<?php echo htmlspecialchars($teacher['subject']); ?>">
@@ -71,18 +89,18 @@
         <?php include "inc/footer.inc.php"; ?>
     </div>
     <script>
-        function filterCards() {
-            var selectedSubject = document.getElementById('subjectFilter').value;
-            var cards = document.getElementsByClassName('card');
+      function filterCards(selectedSubject) {
+        var cards = document.getElementsByClassName('card');
 
-            for (var i = 0; i < cards.length; i++) {
-                if (selectedSubject == 'all' || cards[i].getAttribute('data-subject') == selectedSubject) {
-                    cards[i].style.display = '';
-                } else {
-                    cards[i].style.display = 'none';
-                }
+        for (var i = 0; i < cards.length; i++) {
+            if (selectedSubject == 'all' || cards[i].getAttribute('data-subject') === selectedSubject) {
+                cards[i].style.display = '';
+            } else {
+                cards[i].style.display = 'none';
             }
         }
+    }
+
     </script>
 </body>
 

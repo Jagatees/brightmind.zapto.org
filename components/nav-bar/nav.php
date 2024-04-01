@@ -5,13 +5,16 @@ if (session_status() == PHP_SESSION_NONE) {
 ?>
 
 <div id="mySidenav" class="sidenav">
-    <a href="home.php">Home</a>
-    <a href="aboutUs.php">About Us</a>
-    <a href="ourTeacher.php">Our Teachers</a>
-    <a href="lessons.php">Lessons</a>
-
     <?php if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in']): ?>
         <span>Welcome Back, <?php echo htmlspecialchars($_SESSION['uuid']); ?></span>
+    <?php endif; ?>
+
+    <a href="home.php">Home</a>
+    <a href="aboutUs.php">AboutUs</a>
+    <a href="ourTeacher.php">Our Teachers</a>
+    <a href="lessons.php">Enroll in Lesson</a>
+
+    <?php if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in']): ?>
         <?php if($_SESSION['role'] === 'admin'): ?>
             <a href="adminDashboard.php">Admin Dashboard</a>
             <a href="studentDashboard.php">Student Dashboard</a>
@@ -25,8 +28,6 @@ if (session_status() == PHP_SESSION_NONE) {
     <?php else: ?>
         <a href="login.php">Login</a>
         <a href="register.php">Register</a>
-        <a href="index2.php">test-payment</a>
-
     <?php endif; ?>
 </div>
 
