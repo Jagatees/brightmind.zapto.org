@@ -11,6 +11,7 @@ session_start();
         body {
         background: -webkit-linear-gradient(bottom, #dde2f2, #dde2f2);
         background-repeat: no-repeat;
+        overflow-x: hidden;
         }
                 
         .blur {
