@@ -101,23 +101,9 @@ if ($success) {
     $_SESSION['uuid'] = $uuid; 
     $_SESSION['bio'] = $row["bio"]; // Retrieve role from DB and store in session
     
-    header('Location: welcome.php');
+    header('Location: home.php');
     exit; //
 } else {
-    // echo "<div class='alert alert-danger' role='alert'>";
-    // echo "<h4 class='alert-heading'>Oops!</h4>";
-    // echo "<p>The following errors were detected:</p>";
-    // echo "<hr>";
-    // echo "<ul>";
-    // foreach (explode("<br>", $errorMsg) as $message) {
-    //     if (!empty($message)) {
-    //         echo "<li>" . htmlspecialchars($message) . "</li>";
-    //     }
-    // }
-    // echo "</ul>";
-    // echo "<a href='register.php' class='btn btn-primary'>Return to Sign Up</a>";
-    // echo "</div>";
-
     $_SESSION['fnameError'] = $fnameError;
     $_SESSION['lnameError'] = $lnameError;
     $_SESSION['roleError'] = $roleError;

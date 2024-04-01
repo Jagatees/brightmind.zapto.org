@@ -38,7 +38,7 @@ if ($success) {
 
 // Redirect or store error messages in session
 if ($success) {
-    header('Location: welcome.php'); 
+    header('Location: home.php'); 
     exit();
 } else {
     $_SESSION['emailError'] = $errorMsg;
