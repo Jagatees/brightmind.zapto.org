@@ -272,24 +272,25 @@ function deleteUserByDetails($fname, $lname, $subject) {
 }
 
 
-function updateUserNames($newFname, $newLname) {
+function updateUserNames($newFname, $newLname, $newbio) {
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
 
     $currentFname = isset($_SESSION['fname']) ? $_SESSION['fname'] : '';
     $currentLname = isset($_SESSION['lname']) ? $_SESSION['lname'] : '';
+    $currentBio = isset($_SESSION['bio']) ? $_SESSION['bio'] : '';
 
     $conn = getDbConnection();
 
-    $sql = "UPDATE `tuition_centre`.`user` SET fname = ?, lname = ? WHERE fname = ? AND lname = ?";
+    $sql = "UPDATE `tuition_centre`.`user` SET fname = ?, lname = ?, bio = ? WHERE fname = ? AND lname = ? AND bio = ?";
     
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
         die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
     }
 
-    $stmt->bind_param("ssss", $newFname, $newLname, $currentFname, $currentLname);
+    $stmt->bind_param("ssssss", $newFname, $newLname, $newbio , $currentFname, $currentLname, $currentBio);
 
     $success = false;
     if ($stmt->execute()) {
@@ -309,6 +310,7 @@ function updateUserNames($newFname, $newLname) {
     if ($success) {
         $_SESSION['fname'] = $newFname;
         $_SESSION['lname'] = $newLname;
+        $_SESSION['bio'] = $newbio;
     }
 }
 

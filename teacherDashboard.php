@@ -184,6 +184,7 @@ if(isset($_SESSION['uuid'])) {
     <script>
         var userFirstName = <?php echo isset($_SESSION['fname']) ? json_encode($_SESSION['fname']) : json_encode(""); ?>;
         var userLastName = <?php echo isset($_SESSION['lname']) ? json_encode($_SESSION['lname']) : json_encode(""); ?>;
+        var bio = <?php echo isset($_SESSION['bio']) ? json_encode($_SESSION['bio']) : json_encode(""); ?>;
 
         var allLessonsJSON = '<?php echo $allLessonsJSON; ?>';
         var allLessons = allLessonsJSON ? JSON.parse(allLessonsJSON) : [];
@@ -205,9 +206,7 @@ if(isset($_SESSION['uuid'])) {
             var checkLessonContainer = document.getElementById('checkLessonContainer');
             checkLessonContainer.style.display = 'block'; // Ensure container is visible
             checkLessonContainer.innerHTML = ''; // Clear previous content
-            // Loop through all lessons to create approval cards
             allLessons.forEach(function(lesson) {
-                // Check for undefined values and print to console if found
                 Object.entries(lesson).forEach(([key, value]) => {
                     if (value === undefined) {
                         console.log('Undefined found for key:', key);
@@ -247,6 +246,10 @@ if(isset($_SESSION['uuid'])) {
                         <label for="lname">Last Name</label>
                         <input type="text" id="lname" name="lname" class="form-control" required value="${userLastName}">
                     </div>
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <input type="text" id="bio" name="bio" class="form-control" required value="${bio}">
+                    </div>
                     <button type="submit" class="btn btn-primary" onclick="updateProfile()">Update Profile</button>
                 </form>
             </div>
@@ -258,7 +261,8 @@ if(isset($_SESSION['uuid'])) {
         function updateProfile() {
             var fname = document.getElementById('fname').value;
             var lname = document.getElementById('lname').value;
-          
+            var bio = document.getElementById('bio').value;
+
             
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'teacherDashboard-updateProfile.php', true);
@@ -268,62 +272,10 @@ if(isset($_SESSION['uuid'])) {
                     alert(this.responseText); 
                 }
             };
-            xhr.send('fname=' + encodeURIComponent(fname) + '&lname=' + encodeURIComponent(lname));
+            xhr.send('fname=' + encodeURIComponent(fname) + '&lname=' + encodeURIComponent(lname) + 
+            '&bio=' + encodeURIComponent(bio));
         }
 
-        // EDIT PROFILE : END
-
-
-        // // SUBMITLESSONS : START
-        // function CreateLessons() {
-        //     var contentDiv = document.getElementById('createLessonContainer');
-        //     contentDiv.innerHTML = ''; // Clear previous content
-        //     contentDiv.style.display = 'block'; // Make sure to display the container
-        //     // Hide other sections
-        //     document.getElementById('editProfileContainer').style.display = 'none';
-        //     document.getElementById('checkLessonContainer').style.display = 'none';
-        //     var formHtml = `
-        //     <div class= "create-lesson-form">
-        //         <h2>Create Lessons</h2>
-        //         <form id="editProfileForm">
-        //             <div class="form-group">
-        //                 <label for="fname">Teacher-Name</label>
-        //                 <input type="text" id="fname" name="fname" class="form-control readonly" required value="${userFirstName}" readonly>
-        //             </div>
-        //             <div class="form-group">
-        //                 <label>Subject</label><br>
-        //                 <select id="subject" name="subject" class="form-control">
-        //                     <option value="Math">Math</option>
-        //                     <option value="English">English</option>
-        //                     <option value="Science">Science</option>
-        //                     <option value="MotherTongue">MotherTongue</option>
-
-        //                 </select>
-        //             </div>
-        //             <div class="form-group">
-        //                 <label>Level</label><br>
-        //                 <select id="level" name="level" class="form-control">
-        //                     <option value="P1">P1</option>
-        //                     <option value="P2">P2</option>
-        //                     <option value="P3">P3</option>
-        //                     <option value="P4">P4</option>
-        //                     <option value="P5">P5</option>
-        //                     <option value="P6">P6</option>
-        //                 </select>
-        //             </div>
-        //             <div class="form-group">
-        //                 <label for="timeSlot">Time Slot</label>
-        //                 <select id="timeSlot" name="timeSlot" class="form-control">
-        //                     <option value="1:00pm to 3:00pm">1:00pm to 3:00pm</option>
-        //                     <option value="3:00pm to 5:00pm">3:00pm to 5:00pm</option>
-        //                 </select>
-        //             </div>
-        //             <button type="submit" class="btn btn-primary" onclick="createLesson()">Submit Lessons</button>
-        //         </form>
-        //     </div>
-        //     `;
-        //     contentDiv.innerHTML = formHtml;
-        // }
 
         function CreateLessons() {
             var contentDiv = document.getElementById('createLessonContainer');

@@ -106,22 +106,17 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
             <!-- Main content -->
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div id="timeslotContainer" class="container">
-                    <!-- Timeslots will be inserted here -->
                 </div>
 
-                <!-- Container for editing profile -->
                 <div id="editProfileContainer" class="container">
-                    <!-- Edit Profile form will be inserted here -->
                 </div>
 
-                <!-- Container for the calendar -->
                 <div id="calendarContainer" class="container">
-                    <!-- Calendar will be initialized here -->
                 </div>
             </main>
         </div>
     </div>
-    <?php include "inc/footer.inc.php"; // Include footer components ?>
+    <?php include "inc/footer.inc.php"; ?>
     <div class="modal fade" id="timeslotModal" tabindex="-1" role="dialog" aria-labelledby="timeslotModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -132,7 +127,6 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Content will be loaded dynamically -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

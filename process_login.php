@@ -61,7 +61,7 @@ function authenticateUser($email, $pwd) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $stmt = $conn->prepare("SELECT fname, lname, password, role, uuid FROM `tuition_centre`.`user` WHERE email = ?");
+    $stmt = $conn->prepare("SELECT fname, lname, password, role, bio, uuid FROM `tuition_centre`.`user` WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -75,6 +75,8 @@ function authenticateUser($email, $pwd) {
             $_SESSION['lname'] = $row["lname"];
             $_SESSION['uuid'] = $row["uuid"];
             $_SESSION['role'] = $row["role"]; // Retrieve role from DB and store in session
+            $_SESSION['bio'] = $row["bio"]; // Retrieve role from DB and store in session
+
         } else {
             // Password doesn't match
             $success = false;
