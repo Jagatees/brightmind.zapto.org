@@ -343,13 +343,14 @@ function insertLesson($uuid, $timeSlot, $module, $level, $approvel, $teacherId, 
     $conn->close();
 }
 
-function insertBooking($uuid, $timeSlot, $module, $level, $date, $lessonID) {
+function insertBooking($uuid_user, $timeSlot, $module, $level, $date, $lessonID, $uuid_teacher) {
     // Establish database connection
     $conn = getDbConnection();
     
     // Prepare the SQL statement to insert a lesson
-    $sql = "INSERT INTO `tuition_centre`.`lesson_bookings` (lessonid, uuid, lesson_time, attended, lesson_date, lesson_module, lesson_level) 
-    VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO `tuition_centre`.`lesson_bookings` (lessonid, uuid_student, lesson_time, attended, 
+    lesson_date, lesson_module, lesson_level, uuid_teacher) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     
     // Prepare the statement
     $stmt = $conn->prepare($sql);
@@ -359,7 +360,7 @@ function insertBooking($uuid, $timeSlot, $module, $level, $date, $lessonID) {
     
     $attended = 0;
     // Bind parameters to the prepared statement
-    $stmt->bind_param("ississs", $lessonID, $uuid, $timeSlot, $attended, $date, $module, $level);
+    $stmt->bind_param("ississss", $lessonID, $uuid_user, $timeSlot, $attended, $date, $module, $level,$uuid_teacher);
     // Execute the statement and check for success/failure
     if ($stmt->execute()) {
         echo "Lesson inserted successfully.";
@@ -371,6 +372,42 @@ function insertBooking($uuid, $timeSlot, $module, $level, $date, $lessonID) {
     // Close the statement and the connection
     $stmt->close();
     $conn->close();
+}
+
+
+function getBookingByUUID($uuid) {
+    $lessonDetails = []; 
+
+    $conn = getDbConnection();
+
+    // Use prepared statements to avoid SQL injection
+    $stmt = $conn->prepare("SELECT * FROM `tuition_centre`.`lesson_bookings` WHERE `uid` = ?");
+    $stmt->bind_param("s", $uuid);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $lesson = [
+                'lessonid' => $row['lessonid'],
+                'uuid' => $row['uid'], // use actual column name here
+                'lesson_time' => $row['lesson_time'],
+                'attended' => $row['attended'],
+                'lesson_date' => $row['lesson_date'],
+                'lesson_module' => $row['lesson_module'],
+                'lesson_level' => $row['lesson_level'],
+                'bookingid' => $row['bookingid']
+            ];
+            $lessonDetails[] = $lesson;
+        }
+    } else {
+        echo "0 results";
+    }
+    $stmt->close();
+    $conn->close();
+
+    return $lessonDetails;
 }
 
 

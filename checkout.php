@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require __DIR__ . "/vendor/autoload.php";
 
@@ -7,6 +8,10 @@ $stripe_secret_key = "sk_test_51P0D7HP2hY6yFfqMyyyMBspkDZ9mudrhMhklVMDGY1ucj0gSV
 \Stripe\Stripe::setApiKey($stripe_secret_key);
 
 include "database/function.php";
+
+if (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] && isset($_SESSION['uuid'])) {
+    $uuid_user = $_SESSION['uuid'];
+}
 
 if (!isset($_POST['module']) || !isset($_POST['date'])) {
     die('Module and date are required.');
@@ -18,7 +23,7 @@ $timeSlot = $_POST['selected_time_slot'];
 $module = $_POST['module'];
 $level = $_POST['level'];
 $date = $_POST['date'];
-$uuid = $_POST['uuid'];
+$uuid_teacher = $_POST['uuid'];
 $lessonID =  $_POST['lessonID'];
 
 
@@ -45,7 +50,7 @@ try {
     ]);
 
     // this should only be called after payment is successful
-    insertBooking($uuid, $timeSlot, $module, $level, $date, $lessonID);
+    insertBooking($uuid_user, $timeSlot, $module, $level, $date, $lessonID, $uuid_teacher);
 
     http_response_code(303);
     header("Location: " . $checkout_session->url);

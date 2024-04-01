@@ -135,6 +135,8 @@
           </div>
           <form method="post" class="form" action="process_register.php">
             <?php
+              echo '<input type="text" id="uuid" name="uuid">';
+
               echo '<label for="fname" style="padding-top:13px">&nbsp;First Name</label>';
               echo '<input required maxlength="45" class="form-content" type="text" id="fname" name="fname" placeholder="Enter first name" value="' . $_SESSION["fname"] . '"/>';
               unset($_SESSION['fname']);
@@ -183,6 +185,7 @@
               } else {
                 echo '<label for="pwd_confirm" style="padding-top:34px">&nbsp;Confirm Password</label>';
               }
+              
 
               echo '<input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password" value="' . $_SESSION["cpassword"] . '" />';
               unset($_SESSION['cpassword']);

@@ -30,8 +30,8 @@
 </head>
 <body>
 
-    <h1>Stripe Example</h1>
-    <p>Thank you for your payment!</p>
+    <h1>Payment Complete</h1>
+    <p>Go check in your calender to see the new lessons u bought</p>
     
     <a href="home.php" class="button">Go to Another Page</a>
 
