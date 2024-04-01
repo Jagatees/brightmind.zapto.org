@@ -58,7 +58,7 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true)
                 echo '}, 1000);';
             echo '</script>';
         } else {
-            echo "<p>You are not logged in.</p>";
+            echo "<p>Login in Success</p>";
             echo '<p><a href="home.php">Go Back to Main Page</a></p>';
         }
         ?>

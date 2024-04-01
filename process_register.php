@@ -99,6 +99,8 @@ if ($success) {
     $_SESSION['user_name'] = $fname . ' ' . $lname;
     $_SESSION['role'] = $role;
     $_SESSION['uuid'] = $uuid; 
+    $_SESSION['bio'] = $row["bio"]; // Retrieve role from DB and store in session
+    
     header('Location: welcome.php');
     exit; //
 } else {

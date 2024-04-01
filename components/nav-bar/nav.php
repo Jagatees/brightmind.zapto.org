@@ -1,8 +1,4 @@
 <div id="mySidenav" class="sidenav">
-    <?php if(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in']): ?>
-        <span style="font-size:15px; cursor:pointer; padding-left:5px; color:#ffffff;" >Welcome Back, <?php echo htmlspecialchars($_SESSION['fname']) . ' ' . htmlspecialchars($_SESSION['lname']) . ' ( Role :' . htmlspecialchars(ucfirst($_SESSION['role'])) . ')'; ?></span>
-    <?php endif; ?>
-
     <a href="home.php">Home</a>
     <a href="aboutUs.php">AboutUs</a>
     <a href="ourTeacher.php">Our Teachers</a>
@@ -25,4 +21,4 @@
     <?php endif; ?>
 </div>
 
-<span style="font-size:30px; cursor:pointer; padding-left:5px; color:#ffffff;" onclick="toggleNav()">&#9776; Open Menu</span>
+<span style="font-size:30px; cursor:pointer; padding-left:5px; color:#ffffff;" onclick="toggleNav()">&#9776;</span>
