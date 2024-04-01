@@ -130,10 +130,10 @@ ul{
   	 		<div class="footer-col">
   	 			<h4>follow us</h4>
   	 			<div class="social-links">
-  	 				<a href="#" target="_blank" class="fab fa-twitch" style="text-decoration: none;"></a>
-  	 				<a href="#" target="_blank" class="fab fa-twitter" style="text-decoration: none;"></a>
-  	 				<a href="#" target="_blank" class="fab fa-youtube" style="text-decoration: none;"></a>
-  	 				<a href="#" target="_blank" class="fab fa-linkedin-in" style="text-decoration: none;"></a>
+  	 				<a href="https://www.twitch.tv/directory/category/software-and-game-development" target="_blank" class="fab fa-twitch" style="text-decoration: none;"></a>
+  	 				<a href="https://twitter.com/singaporetech?lang=en" target="_blank" class="fab fa-twitter" style="text-decoration: none;"></a>
+  	 				<a href="https://www.youtube.com/user/singaporetech" target="_blank" class="fab fa-youtube" style="text-decoration: none;"></a>
+  	 				<a href="https://www.linkedin.com/school/singapore-institute-of-technology/?originalSubdomain=sg" target="_blank" class="fab fa-linkedin-in" style="text-decoration: none;"></a>
   	 			</div>
   	 		</div>
   	 	</div>

@@ -34,7 +34,7 @@ foreach ($lessons as $lesson) {
     <br>
     <div class="container">
     <div class="row">
-
+    <h2 class="text-center mb-4">Review Your Selected Product Before Payment</h2> 
     <table class="table">
                 <thead>
                     <tr>
