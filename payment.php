@@ -7,8 +7,6 @@ $module = $level = $date = $uuid = '';
 $lessons = getlessonsByID($_POST['lessonID']);
     
 foreach ($lessons as $lesson) {
-
-    // Access the price property of each lesson
     $price = $lesson['price'];
     $module = $lesson['module'];
     $level = $lesson['level'];
@@ -25,8 +23,7 @@ foreach ($lessons as $lesson) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
-    <!-- Include Bootstrap CSS, existing stylesheets, and additional styles -->
-    <?php include "inc/head.inc.php"; // This should include your styles and Bootstrap ?>
+    <?php include "inc/head.inc.php";?>
     <script src="https://www.paypal.com/sdk/js?client-id=AR4se4kZHzxccoSPrrXXHyaJW17rZuqTV97FHFEUVjUatJOSWApEUSwiWFRzk2OfMxtNmAndbH90Jtdt&currency=USD"></script>
     
    
@@ -79,7 +76,7 @@ foreach ($lessons as $lesson) {
     </div>
 </div>
 
-    <?php include "inc/footer.inc.php"; // Include footer components ?>
+    <?php include "inc/footer.inc.php"; ?>
 
 </body>
        

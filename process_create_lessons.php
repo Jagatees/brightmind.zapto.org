@@ -5,7 +5,6 @@ $success = true;
 
 $teacher_id = $_POST["teacherName"];
 
-// Ensure module is provided
 if (empty($_POST["module"])) {
     $errorMsg .= "Module is required.<br>";
     $success = false;
@@ -13,7 +12,6 @@ if (empty($_POST["module"])) {
     $module = sanitize_input($_POST["module"]);
 }
 
-// Ensure level is provided
 if (empty($_POST["level"])) {
     $errorMsg .= "Level is required.<br>";
     $success = false;
@@ -21,7 +19,6 @@ if (empty($_POST["level"])) {
     $level = sanitize_input($_POST["level"]);
 }
 
-// Ensure time slot is selected
 if (empty($_POST["timeSlots"])) {
     $errorMsg .= "Please select at least 1 time slot.<br>";
     $success = false;
@@ -29,11 +26,9 @@ if (empty($_POST["timeSlots"])) {
     $all_time_slot = sanitize_input($_POST["timeSlots"]);
 }
 
-// Define an array of time slot
 $time_slot_array = explode("|", $all_time_slot);
 
 
-// Final output based on success
 if ($success) {
     foreach ($time_slot_array as $time_slot)
     {
@@ -61,7 +56,6 @@ if ($success) {
 }
 
 
-// Function to sanitize input
 function sanitize_input($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -84,7 +78,6 @@ function createLesson($teacher_id, $module, $level, $time_slot)
         $config['dbname']
     );
 
-    // Check the connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }

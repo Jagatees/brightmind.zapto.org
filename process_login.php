@@ -23,7 +23,6 @@ if (empty($_POST["email"])) {
     }
 }
 
-// Sanitize and validate the password
 if (empty($_POST["password"])) {
     $errorMsg .= "Password is required.<br>";
     $success = false;
@@ -31,12 +30,10 @@ if (empty($_POST["password"])) {
     $pwd = sanitize_input($_POST["password"]);
 }
 
-// Authenticate user if validation successful
 if ($success) {
     authenticateUser($email, $pwd);
 }
 
-// Redirect or store error messages in session
 if ($success) {
     header('Location: home.php'); 
     exit();
@@ -47,15 +44,12 @@ if ($success) {
     exit();
 }
 
-// Function to authenticate user and retrieve role
 function authenticateUser($email, $pwd) {
     global $success;
 
-    // Database connection
     $config = parse_ini_file('/var/www/private/db-config.ini');
     $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     
-    // Check connection
     if ($conn->connect_error) {
         $success = false;
         die("Connection failed: " . $conn->connect_error);
@@ -69,21 +63,18 @@ function authenticateUser($email, $pwd) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         if (password_verify($pwd, $row["password"])) {
-            // Password is correct, set session variables
             $_SESSION['user_logged_in'] = true;
             $_SESSION['fname'] = $row["fname"];
             $_SESSION['lname'] = $row["lname"];
             $_SESSION['uuid'] = $row["uuid"];
-            $_SESSION['role'] = $row["role"]; // Retrieve role from DB and store in session
-            $_SESSION['bio'] = $row["bio"]; // Retrieve role from DB and store in session
+            $_SESSION['role'] = $row["role"]; 
+            $_SESSION['bio'] = $row["bio"]; 
 
         } else {
-            // Password doesn't match
             $success = false;
             $_SESSION['pwError'] = "Incorrect password.";
         }
     } else {
-        // Email not found
         $success = false;
         $_SESSION['emailError'] = "Email not found.";
     }

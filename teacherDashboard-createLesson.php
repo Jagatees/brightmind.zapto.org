@@ -2,7 +2,6 @@
 session_start();
 include "database/function.php";
 
-// Check if the necessary data is provided
 if (isset($_POST['fname'], $_POST['subject'], $_POST['level'], $_POST['timeSlot'], $_POST['approvel'], $_POST['uuid'], $_POST['date'], $_POST['price'])) {
     $fname = $_POST['fname'];
     $subject = $_POST['subject'];

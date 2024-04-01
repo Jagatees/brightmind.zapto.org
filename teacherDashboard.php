@@ -41,7 +41,6 @@ if(isset($_SESSION['uuid'])) {
     <?php include "inc/header.inc.php"; ?>
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
             <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
@@ -75,7 +74,6 @@ if(isset($_SESSION['uuid'])) {
                 </div>
             </nav>
 
-            <!-- Main content -->
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div id="content">
                 </div>
@@ -197,15 +195,13 @@ if(isset($_SESSION['uuid'])) {
 
         function CheckLessonApprovel() {
             
-            // Hide various containers
             document.getElementById('content').style.display = 'none';
             document.getElementById('createLessonContainer').style.display = 'none';
             document.getElementById('editProfileContainer').style.display = 'none';
 
-            // Clear and display the lesson cards container
             var checkLessonContainer = document.getElementById('checkLessonContainer');
-            checkLessonContainer.style.display = 'block'; // Ensure container is visible
-            checkLessonContainer.innerHTML = ''; // Clear previous content
+            checkLessonContainer.style.display = 'block'; 
+            checkLessonContainer.innerHTML = ''; 
             allLessons.forEach(function(lesson) {
                 Object.entries(lesson).forEach(([key, value]) => {
                     if (value === undefined) {
@@ -230,8 +226,8 @@ if(isset($_SESSION['uuid'])) {
         // EDIT PROFILE : START
         function editProfile() {
             var contentDiv = document.getElementById('editProfileContainer');
-            contentDiv.innerHTML = ''; // Clear previous content
-            contentDiv.style.display = 'block'; // Make sure to display the container
+            contentDiv.innerHTML = '';
+            contentDiv.style.display = 'block'; 
             document.getElementById('createLessonContainer').style.display = 'none';
             document.getElementById('checkLessonContainer').style.display = 'none';
             var formHtml = `
@@ -279,15 +275,12 @@ if(isset($_SESSION['uuid'])) {
 
         function CreateLessons() {
             var contentDiv = document.getElementById('createLessonContainer');
-            // contentDiv.innerHTML = ''; // Clear previous content
-            contentDiv.style.display = 'block'; // Make sure to display the container
-            // Hide other sections
+            contentDiv.style.display = 'block'; 
             document.getElementById('editProfileContainer').style.display = 'none';
             document.getElementById('checkLessonContainer').style.display = 'none';
         }
 
         function createLesson() {
-            // Get values from the form fields
             var fname = document.getElementById('fname').value;
             var subject = document.getElementById('subject').value;
             var level = document.getElementById('level').value;
@@ -295,19 +288,16 @@ if(isset($_SESSION['uuid'])) {
             var price = document.getElementById('price').value;
             var all_time_slot = document.getElementById('timeSlot').value;
 
-            // Get UUID from the session
             var uuid = "<?php echo isset($_SESSION['uuid']) ? $_SESSION['uuid'] : ''; ?>";
             
-            // Make an AJAX request to submit the lesson data
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'teacherDashboard-createLesson.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function() {
                 if (this.status == 200) {
-                    alert(this.responseText); // Display response from the server
+                    alert(this.responseText); 
                 }
             };
-            // Encode and send the data to the server, including approvel and UUID
             xhr.send('fname=' + encodeURIComponent(fname) 
             + '&subject=' + encodeURIComponent(subject) 
             + '&level=' + encodeURIComponent(level) 
@@ -319,12 +309,6 @@ if(isset($_SESSION['uuid'])) {
             console.log(date);
 
         }
-        // SUBMITLESSONS : END
-
-        // ApproveLesson : START
-
-        
-        // ApproveLesson : END
     </script>
 </body>
 </html>

@@ -7,9 +7,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-
-
-
 // Sanitize and validate the email
 if (empty($_POST["email"])) {
     $errorMsg .= "Email is required.<br>";
