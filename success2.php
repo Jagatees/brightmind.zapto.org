@@ -5,35 +5,34 @@
     <meta charset="UTF-8" />
     <style>
         .button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            outline: none;
-            color: #fff;
-            background-color: #4CAF50;
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 9px #999;
+            background-color: #ffffff; /* White background */
+            border: 2px solid #007bff; /* Blue border */
+            color: #007bff; /* Blue text */
+            padding: 10px 20px; /* Padding */
+            text-align: center; /* Centered text */
+            text-decoration: none; /* No underline */
+            display: inline-block; /* Inline-block display */
+            font-size: 16px; /* Font size */
+            margin: 5px; /* Margin */
+            transition-duration: 0.4s; /* Transition effect duration */
+            cursor: pointer; /* Pointer cursor on hover */
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12); /* Slight shadow */
         }
 
-        .button:hover {background-color: #3e8e41}
-
-        .button:active {
-            background-color: #3e8e41;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
+        .button:hover {
+            background-color: #007bff; /* Blue background on hover */
+            color: #ffffff; /* White text on hover */
         }
     </style>
 </head>
 <body>
 
-    <h1>Payment Complete</h1>
-    <p>Go check in your calender to see the new lessons u bought</p>
+    <h1>Payment Success</h1>
+    <p>Go to your dashboard , Under Calender to View your lessons</p>
     
-    <a href="home.php" class="button">Go to Another Page</a>
+    <a href="home.php" class="button">Home Page</a>
+    <a href="studentDashboard.php" class="button">Dashboard</a>
 
 </body>
 </html>
