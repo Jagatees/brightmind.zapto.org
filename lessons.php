@@ -19,6 +19,8 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
     <?php include "inc/head.inc.php"; ?>
 </head>
 <body>
+<div id="main">
+
     <?php include "inc/header.inc.php"; ?>
     <br>
     <br>
@@ -39,6 +41,8 @@ $allLessonsJSON = json_encode($lessons, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_
         </div>        
     </div>
     <br>
+    </main>
+
     <?php include "inc/footer.inc.php"; ?>
     <script>
         // JavaScript to dynamically load lesson cards
