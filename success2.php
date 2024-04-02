@@ -5,24 +5,24 @@
     <meta charset="UTF-8" />
     <style>
         .button {
-            background-color: #ffffff; /* White background */
-            border: 2px solid #007bff; /* Blue border */
-            color: #007bff; /* Blue text */
-            padding: 10px 20px; /* Padding */
-            text-align: center; /* Centered text */
-            text-decoration: none; /* No underline */
-            display: inline-block; /* Inline-block display */
-            font-size: 16px; /* Font size */
-            margin: 5px; /* Margin */
-            transition-duration: 0.4s; /* Transition effect duration */
-            cursor: pointer; /* Pointer cursor on hover */
-            border-radius: 20px; /* Rounded corners */
-            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12); /* Slight shadow */
+            background-color: #ffffff; 
+            border: 2px solid #007bff; 
+            color: #007bff; 
+            padding: 10px 20px; 
+            text-align: center; 
+            text-decoration: none; 
+            display: inline-block; 
+            font-size: 16px; 
+            margin: 5px;
+            transition-duration: 0.4s; 
+            cursor: pointer; 
+            border-radius: 20px; 
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12); 
         }
 
         .button:hover {
-            background-color: #007bff; /* Blue background on hover */
-            color: #ffffff; /* White text on hover */
+            background-color: #007bff; 
+            color: #ffffff; 
         }
     </style>
 </head>
