@@ -51,7 +51,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" onclick="event.preventDefault(); userall()">
-                                Delete Teacher Account
+                                Delete Account
                             </a>
                         </li>
                         <li class="nav-item">

@@ -267,6 +267,7 @@ if (isset($_SESSION['uuid'])) {
             xhr.onload = function() {
                 if (this.status == 200) {
                     alert(this.responseText); 
+                    window.location.reload();
                 }
             };
             xhr.send('fname=' + encodeURIComponent(fname) + '&lname=' + encodeURIComponent(lname) + 
