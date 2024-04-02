@@ -1,4 +1,4 @@
-# Web-Dev-A1
+# Bright Minds
 
 Accessing Bright Minds
 Website URL: Bright Minds [http://brightmind.zapto.org/] is accessible through this link. You can explore the various educational services offered, including browsing lessons, booking sessions, and more.
