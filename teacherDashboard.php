@@ -37,8 +37,114 @@ if (isset($_SESSION['uuid'])) {
             cursor: not-allowed;
             /* Change cursor to not-allowed */
         }
+        .checklesson-card {
+            flex: 0 0 calc(50% - 20px);
+            background: #525abd; /* Update the color */
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-sizing: border-box;
+        }
 
-        /* Additional styles can be added as needed */
+        .checklesson-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .checklesson-title {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px; /* Spacing between title and cards */
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* or 'flex-start' if you want them aligned to the left */
+            align-items: flex-start; /* Aligns the items to the top */
+            gap: 20px; /* This creates space between the cards */
+        }
+                /* Create Lesson */
+                /* This is to ensure that the main container centers its children */
+            .createlesson-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            }
+
+            /* This is the style for the card itself */
+            .createlesson-card {
+            width: 100%; /* Set width to 100% of the container */
+            max-width: 600px; /* Max width to restrict its growth */
+            background: #525abd;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            padding: 20px; /* Padding inside the card */
+            margin: 0 auto; /* Margin auto for left and right to center the card */
+            box-sizing: border-box;
+            }
+
+            /* Style for the title of the card */
+            .createlesson-title {
+            color: #000; /* Title color */
+            text-align: center; /* Align text to center */
+            width: 100%;
+            margin-bottom: 20px;
+            }
+
+
+
+        /* Edit Profile */
+        .edit-prof-form {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #525abd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .edit-prof-form h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .edit-prof-form input,
+        .edit-prof-form button {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+        }
+        
+        .edit-prof-form button {
+            background-color: #5c6bc0;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .edit-prof-form label {
+            font-weight: bold;
+        }
+        
+        .edit-prof-form input:focus {
+            outline: none;
+            border-color: #5c6bc0;
+        }
+        
+        .edit-prof-form button:hover {
+            background-color: #3949ab;
+        } 
+
     </style>
 </head>
 
@@ -87,10 +193,10 @@ if (isset($_SESSION['uuid'])) {
 
                     </div>
 
-                    <div id="createLessonContainer" class="container" style="display: none;">
-                        <div class="create-lesson-form">
+                    <div id="createLessonContainer" class="createlesson-container" style="display: none;">
+                        <div class="createlesson-card">
+                        <h2 class="createlesson-title">Create Lessons</h2>
                             <div class="row">
-                                <h4>Create Lessons</h4>
                                 <br><br>
                                 <form id="createLessonForm">
                                     <div class="form-group row">
@@ -182,7 +288,7 @@ if (isset($_SESSION['uuid'])) {
                             </div>
                         </div>
                     </div>
-                    <div id="checkLessonContainer" class="container checklesson-container">
+                    <div id="checkLessonContainer" class="checklesson-container">
                     </div>
                 </main>
             </div>
@@ -213,7 +319,15 @@ if (isset($_SESSION['uuid'])) {
 
             var checkLessonContainer = document.getElementById('checkLessonContainer');
             checkLessonContainer.style.display = 'block';
-            checkLessonContainer.innerHTML = '';
+
+            // Clear any previous content except the title
+            checkLessonContainer.innerHTML = '<h2 class="checklesson-title">Check Lesson Approvals</h2>';
+
+            // Create and append the container that will hold the cards
+            var cardsContainer = document.createElement('div');
+            cardsContainer.className = 'cards-container'; // Ensure this class has the desired styles in CSS
+            checkLessonContainer.appendChild(cardsContainer);
+
             allLessons.forEach(function(lesson) {
                 Object.entries(lesson).forEach(([key, value]) => {
                     if (value === undefined) {
@@ -221,19 +335,23 @@ if (isset($_SESSION['uuid'])) {
                     }
                 });
 
-                var cardHtml = '<div class= "checklesson-card">';
-                cardHtml += '<p><strong>ID:</strong> ' + (lesson.lesson_id) + '</p>';
-                cardHtml += '<p><strong>Teacher ID:</strong> ' + (lesson.uuid) + '</p>';
-                cardHtml += '<p><strong>Teacher Name:</strong> ' + (lesson.teacher_name) + '</p>';
-                cardHtml += '<p><strong>Time Slot:</strong> ' + (lesson.time_slot) + '</p>';
-                cardHtml += '<p><strong>Module:</strong> ' + (lesson.module) + '</p>';
-                cardHtml += '<p><strong>Level:</strong> ' + (lesson.level) + '</p>';
-                cardHtml += '<p><strong>Approval:</strong> ' + (lesson.approvel) + '</p>';
-                cardHtml += '</div>';
-
-                checkLessonContainer.innerHTML += cardHtml;
+                // Create a new div element for each card
+                var cardDiv = document.createElement('div');
+                cardDiv.className = 'checklesson-card';
+                cardDiv.innerHTML = `
+                    <p><strong>ID:</strong> ${lesson.lesson_id}</p>
+                    <p><strong>Teacher ID:</strong> ${lesson.uuid}</p>
+                    <p><strong>Teacher Name:</strong> ${lesson.teacher_name}</p>
+                    <p><strong>Time Slot:</strong> ${lesson.time_slot}</p>
+                    <p><strong>Module:</strong> ${lesson.module}</p>
+                    <p><strong>Level:</strong> ${lesson.level}</p>
+                    <p><strong>Approval:</strong> ${lesson.approvel}</p>
+                `; // Use template literals for better readability
+                
+                cardsContainer.appendChild(cardDiv); // Append the card to the cards container
             });
-        }
+            }
+
 
         // EDIT PROFILE : START
         function editProfile() {

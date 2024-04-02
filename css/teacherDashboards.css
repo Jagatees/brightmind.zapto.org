@@ -35,7 +35,7 @@
     max-width: 500px;
     margin: 2rem auto;
     padding: 2rem;
-    background: #eaeb9e;
+    background: #525abd;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     display: flex;
@@ -80,7 +80,7 @@
     max-width: 500px;
     margin: 2rem auto;
     padding: 2rem;
-    background: #eaeb9e;
+    background: #525abd;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     display: flex;
@@ -123,21 +123,34 @@
 
   /* Check Lesson */
   .checklesson-card {
-    flex: 1 1 calc(50% - 40px); /* Allow cards to grow and shrink but not exceed half the container's width */
-    max-width: calc(50% - 40px); /* Max width so two cards fit side by side */
-    background: #eaeb9e;
+    flex: 0 0 calc(50% - 20px);
+    background: #525abd; /* Update the color */
+    padding: 20px;
+    margin: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    padding: 20px;
-    box-sizing: border-box; /* Include padding in width calculations */
-  }
+    box-sizing: border-box;
+}
 
-  .checklesson-container {
+.checklesson-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start; /* Align to the start of the main content */
-    gap: 20px; /* Space between cards */
-    align-items: flex-start; /* Align items to the top */
-    width: 100%; /* Take up 100% of the main container */
-    max-width: calc(100% - 40px); /* Max width accounting for padding */
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Adjust if you want a different layout */
+  gap: 20px; /* This creates space between the cards */
+}
+  .checklesson-header {
+    width: 100%; /* Ensure the header takes the full width */
   }
+  
+  .checklesson-title {
+    position: absolute; /* Absolute position for the title */
+    top: 0; /* Align to the top of the nearest positioned ancestor */
+    left: 0; /* Align to the right of the nearest positioned ancestor */
+  }
+
