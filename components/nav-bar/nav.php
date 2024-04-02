@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <div id="mySidenav" class="sidenav">
     <a href="home.php">Home</a>
     <a href="aboutUs.php">AboutUs</a>

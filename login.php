@@ -112,7 +112,7 @@
           <form method="post" class="form" action="process_login.php">
             <?php
               echo '<label for="email" style="padding-top:13px">&nbsp;Email</label>';
-              echo '<input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" placeholder="Enter your email"/>';
+              echo '<input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" placeholder="Enter email" value="' . $_SESSION["email"] . '"/>';
               echo '<div class="form-border"></div>';
 
               if (!empty($_SESSION['emailError'])) {
@@ -123,16 +123,16 @@
                 echo '<label for="password" style="padding-top:34px">&nbsp;Password</label>';
               }
 
-              echo '<input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter your password"/>';
+              echo '<input id="pwd" class="form-content" type="password" name="password" placeholder="Enter password" value="' . $_SESSION["password"] . '" required/>';
               echo '<div class="form-border"></div>';
 
               if (!empty($_SESSION['pwError'])) {
                 echo '<label for="pwError" style="padding-top:2px; color:red;">&nbsp;' . $_SESSION["pwError"] . '</label>';
                 unset($_SESSION['pwError']);
                 echo '<input id="submit-btn" type="submit" name="submit" value="LOGIN" style="margin-top:26px;"/>';
+              } else {
+                echo '<input id="submit-btn" type="submit" name="submit" value="LOGIN" />';
               }
-
-              echo '<input id="submit-btn" type="submit" name="submit" value="LOGIN" />';
             ?>
             <p id="signup">New? Sign up <a href="register.php">here</a>!</p>
           </form>

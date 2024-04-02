@@ -54,7 +54,7 @@ if ($success) {
 }
 
 function authenticateUser($email, $pwd) {
-    global $success;
+    global $success, $emailError, $pwError;
 
     $config = parse_ini_file('/var/www/private/db-config.ini');
     $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
@@ -81,11 +81,11 @@ function authenticateUser($email, $pwd) {
 
         } else {
             $success = false;
-            $_SESSION['pwError'] = "Incorrect password.";
+            $pwError = "Incorrect password.";
         }
     } else {
         $success = false;
-        $_SESSION['emailError'] = "Email not found.";
+        $emailError = "Email not found.";
     }
 
     $stmt->close();
