@@ -118,18 +118,21 @@
               if (!empty($_SESSION['emailError'])) {
                 echo '<label for="emailError" style="padding-top:2px; color:red;">&nbsp;' . $_SESSION["emailError"] . '</label>';
                 unset($_SESSION['emailError']);
+                echo '<label for="password" style="padding-top:10px">&nbsp;Password</label>';
+              } else {
+                echo '<label for="password" style="padding-top:34px">&nbsp;Password</label>';
               }
 
-              echo '<label for="password" style="padding-top:34px">&nbsp;Password</label>';
               echo '<input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter your password"/>';
               echo '<div class="form-border"></div>';
 
               if (!empty($_SESSION['pwError'])) {
                 echo '<label for="pwError" style="padding-top:2px; color:red;">&nbsp;' . $_SESSION["pwError"] . '</label>';
                 unset($_SESSION['pwError']);
+                echo '<input id="submit-btn" type="submit" name="submit" value="LOGIN" style="margin-top:26px;"/>';
               }
 
-              echo '<input id="submit-btn" type="submit" name="submit" value="LOGIN"/>';
+              echo '<input id="submit-btn" type="submit" name="submit" value="LOGIN" />';
             ?>
             <p id="signup">New? Sign up <a href="register.php">here</a>!</p>
           </form>
