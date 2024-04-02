@@ -11,20 +11,26 @@ function sanitize_input($data) {
 $email = $pwd = $errorMsg = "";
 $success = true;
 
+
+$emailError = "";
 // Sanitize and validate the email
 if (empty($_POST["email"])) {
     $errorMsg .= "Email is required.<br>";
+    $emailError = "Email is required.";
     $success = false;
 } else {
     $email = sanitize_input($_POST["email"]);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailError = "Invalid email format.";
         $errorMsg .= "Invalid email format.<br>";
         $success = false;
     }
 }
 
+$pwError = "";
 if (empty($_POST["password"])) {
     $errorMsg .= "Password is required.<br>";
+    $pwError = "Password is required.";
     $success = false;
 } else {
     $pwd = sanitize_input($_POST["password"]);
@@ -38,8 +44,11 @@ if ($success) {
     header('Location: home.php'); 
     exit();
 } else {
-    $_SESSION['emailError'] = $errorMsg;
     $_SESSION['email'] = $email; // Keep email input
+    $_SESSION['emailError'] = $emailError;
+    $_SESSION['pwError'] = $pwError;
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['password'] = $_POST['password'];
     header('Location: login.php');
     exit();
 }
