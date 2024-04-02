@@ -4,6 +4,15 @@
     <title>Stripe Example</title>
     <meta charset="UTF-8" />
     <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
         .button {
             background-color: #ffffff; 
             border: 2px solid #007bff; 
@@ -24,15 +33,21 @@
             background-color: #007bff; 
             color: #ffffff; 
         }
+
+        .container {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Payment Success</h1>
-    <p>Go to your dashboard , Under Calender to View your lessons</p>
-    
-    <a href="home.php" class="button">Home Page</a>
-    <a href="studentDashboard.php" class="button">Dashboard</a>
+    <div class="container">
+        <h1>Payment Success</h1>
+        <p>Go to your dashboard, Under Calendar to View your lessons</p>
+        
+        <a href="home.php" class="button">Home Page</a>
+        <a href="studentDashboard.php" class="button">Dashboard</a>
+    </div>
 
 </body>
 </html>
