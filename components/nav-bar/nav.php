@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
 <div id="mySidenav" class="sidenav">
     <a href="home.php">Home</a>
     <a href="aboutUs.php">AboutUs</a>
