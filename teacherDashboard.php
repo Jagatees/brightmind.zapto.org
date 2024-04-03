@@ -172,11 +172,10 @@ if (isset($_SESSION['uuid'])) {
                     <div class="sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="#" onclick=" event.preventDefault(); editProfile()">
-                                    <br>
+                                <a class="nav-link" href="#" onclick=" event.preventDefault(); mainContent()">
                                     <img src="images/account.png" class="rounded-circle" width="100" style="display: block; margin-left: auto; margin-right: auto;">
                                     <br>
-                                    <span class="ml-2" style="text-align: center;"><?php echo $_SESSION['fname']; ?></span>
+                                    <p class="ml-2" style="text-align: center;"><?php echo $_SESSION['fname']; ?></p>
                                 </a>
                             </li>
                             <hr>
@@ -206,8 +205,7 @@ if (isset($_SESSION['uuid'])) {
 
                 <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                     <br>
-                    <div id="content">
-                        
+                    <div id="content" mainContent()>                        
                     </div>
                     <div id="editProfileContainer" class="container">
 
@@ -231,7 +229,7 @@ if (isset($_SESSION['uuid'])) {
                                     <div class="form-group row">
                                         <label for="date" class="col-sm-3 offset-md-1 col-form-label">Date</label>
                                         <div class="col-sm-7">
-                                            <input type="date" class="form-control" id="date" name="date" required placeholder="DD/MM/YYYY">
+                                            <input type="date" class="form-control" id="date" name="date" min="<?php echo date("Y/m/d"); ?>" required placeholder="Date">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -314,9 +312,10 @@ if (isset($_SESSION['uuid'])) {
                                     </div>
                                     <div class="col-md-3 offset-md-8">
                                     <button type="submit" class="btn btn-primary" onclick="createLesson()" style="float:right;">Create</button>
+                                    <br>
+                                    <br>
                                     </div>
                                 </form>
-                                <br>
                             </div>
                         <!-- </div> -->
                     </div>
@@ -348,6 +347,7 @@ if (isset($_SESSION['uuid'])) {
             document.getElementById('content').style.display = 'none';
             document.getElementById('createLessonContainer').style.display = 'none';
             document.getElementById('editProfileContainer').style.display = 'none';
+            document.getElementById('content').style.display = 'none';
 
             var checkLessonContainer = document.getElementById('checkLessonContainer');
             checkLessonContainer.style.display = 'block';
@@ -392,6 +392,7 @@ if (isset($_SESSION['uuid'])) {
             contentDiv.style.display = 'block';
             document.getElementById('createLessonContainer').style.display = 'none';
             document.getElementById('checkLessonContainer').style.display = 'none';
+            document.getElementById('content').style.display = 'none';
             var formHtml = `
             <div class= "edit-prof-form">
                 <h2>Edit Profile</h2>
@@ -439,12 +440,77 @@ if (isset($_SESSION['uuid'])) {
                 '&bio=' + encodeURIComponent(bio));
         }
 
+        function mainContent() {
+            var contentDiv = document.getElementById('content');
+            contentDiv.style.display = 'block';
+            document.getElementById('editProfileContainer').style.display = 'none';
+            document.getElementById('checkLessonContainer').style.display = 'none';
+            document.getElementById('createLessonContainer').style.display = 'none';
+
+            var tableContainer = document.createElement('table');
+            tableContainer.className = 'table table-hover'; 
+            contentDiv.appendChild(tableContainer);
+
+            var tableHead = document.createElement('thead');
+            tableHead.innerHTML = `
+                <thead>
+                    <tr>
+                    <th scope="col">Lesson ID</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Module</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time Slot</th>
+                    <th></th>
+                    </tr>
+                </thead>
+            `;
+
+            tableContainer.appendChild(tableHead);
+
+
+            var tableBody = document.createElement('tbody');
+            tableContainer.appendChild(tableBody);
+
+            allLessons.forEach(function(lesson) {
+                Object.entries(lesson).forEach(([key, value]) => {
+                    if (value === undefined) {
+                        console.log('Undefined found for key:', key);
+                    }
+                });
+
+                // Create a new div element for each card
+                var tableRow = document.createElement('tr');
+                tableRow.innerHTML = ` 
+                    <td>${lesson.lesson_id}</td>
+                    <td>${lesson.level}</td>
+                    <td>${lesson.module}</td>
+                    <td>${lesson.date}</td>
+                    `;
+                
+                const time_slot_array = lesson.time_slot.split("|");
+                for (let i = 0; i < time_slot_array.length; i++) {
+                    if (time_slot_array[i] != '') {
+                        tableRow.innerHTML += `
+                            <li class="list-group-item">${time_slot_array[i]}</li>
+                            `;
+                    }
+                }
+
+                tableRow.innerHTML += `
+
+                    <td><a href="#">attendance</a></td>
+                `;
+                
+                tableBody.appendChild(tableRow); // Append the card to the cards container
+            });
+        }
 
         function CreateLessons() {
             var contentDiv = document.getElementById('createLessonContainer');
             contentDiv.style.display = 'block';
             document.getElementById('editProfileContainer').style.display = 'none';
             document.getElementById('checkLessonContainer').style.display = 'none';
+            document.getElementById('content').style.display = 'none';
         }
 
         function createLesson() {

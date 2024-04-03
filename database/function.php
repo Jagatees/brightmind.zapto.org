@@ -151,7 +151,7 @@ function getlessonsUUID($uuid) {
     $conn = getDbConnection();
 
     // Prepare SQL statement with a WHERE clause to filter lessons by UUID
-    $sql = "SELECT lesson_id, uuid, time_slot, module, level, approvel, teacher_name FROM `tuition_centre`.`lessons` WHERE uuid = '$uuid'";
+    $sql = "SELECT lesson_id, uuid, time_slot, module, level, approvel, teacher_name, date FROM `tuition_centre`.`lessons` WHERE uuid = '$uuid'";
 
     $result = $conn->query($sql);
 
@@ -165,7 +165,8 @@ function getlessonsUUID($uuid) {
                 'module' => $row['module'],
                 'level' => $row['level'],
                 'approvel' => $row['approvel'],
-                'teacher_name' => $row['teacher_name']
+                'teacher_name' => $row['teacher_name'],
+                'date' => $row['date']
             ];
             $lessons[] = $lesson;
         }
