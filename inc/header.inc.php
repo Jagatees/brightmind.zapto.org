@@ -3,7 +3,7 @@
         <?php include "components/nav-bar/nav.php"; ?>
     </div>
     <div class="header-title" style="padding-top:10px; padding-bottom:10px; width:40%;">
-    <img src="images/BMALogo2.png" alt="" height="80px" width="262px">
+    <img src="images/BMALogo2.png" alt="" height="80" width="262">
     </div>
 
     <div style="width:30%; text-align:right; padding-right:5px;">

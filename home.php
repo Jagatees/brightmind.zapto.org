@@ -1,51 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <?php
 session_start();
 ?>
 
-<head>
-    <title>Bright Minds Academy</title>
     <style>
         body {
-        background: -webkit-linear-gradient(bottom, #dde2f2, #dde2f2);
-        background-repeat: no-repeat;
-        overflow-x: hidden;
-        }
+            background: -webkit-linear-gradient(bottom, #dde2f2, #dde2f2);
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+            }
                 
         .blur {
-        overflow: hidden;
-        position: relative;
-        width: 100%;
-
-        + .blur {
-            margin-top: 20px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
         }
+
+        .blur + .blur {
+            margin-top: 20px;
         }
 
         .blurry {
-        background-repeat: no-repeat;
-        background-position: left top;
-        background-size: cover;
-        content: '';
-        filter: blur(8px);
-        height: 100%;
-        position: absolute;
-        left: 0;    
-        top: 0;
-        width: 50%;
-
-        .alt & {
+            background-repeat: no-repeat;
             background-position: left top;
-            left: 0;
-            right: auto;
-        }
-
-        .middle & {
-            background-position: center top;
-            transform: translateX(-50%);
-        }
+            background-size: cover;
+            content: '';
+            filter: blur(8px);
+            height: 100%;
+            position: absolute;
+            left: 0;    
+            top: 0;
+            width: 50%;
         }
 
         .blur img {
@@ -54,25 +42,43 @@ session_start();
         }
 
         .over {
-        align-items: center;
-        box-sizing: border-box;
-        color: white;
-        display: flex;
-        font-size: 20px;
-        height: 100%;
-        padding: 20px 100px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 50%;
-        z-index: 1;
+            align-items: center;
+            box-sizing: border-box;
+            color: white;
+            display: flex;
+            font-size: 20px;
+            height: 100%;
+            padding: 20px 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            z-index: 1;
+        }
 
-        .alt & {
+        .over .flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .alt .blurry {
+            background-position: left top;
             left: 0;
             right: auto;
         }
 
-        .middle & {
+        .middle .blurry {
+            background-position: center top;
+            transform: translateX(-50%);
+        }
+
+        .alt .over {
+            left: 0;
+            right: auto;
+        }
+
+        .middle .over {
             transform: translateX(-50%);
         }
 
@@ -80,7 +86,7 @@ session_start();
             font-size: 36px;
             margin: 0;
         }
-        }
+
         a.book-now-btn {
             display: inline-block;
             padding: 20px 40px;
@@ -101,17 +107,16 @@ session_start();
             background-color: #ff6347; 
         }
 
-
-            .section-below-carousel {
+        .section-below-carousel {
             background-color: #f8fcfc;
             color: black;
             padding: 40px 0;
             text-align: center;       
-            width:100vw;
-            position:relative;  
-            max-width:100vw;
-            left:50%;
-            margin-left:-50vw;
+            width: 100vw;
+            position: relative;  
+            max-width: 100vw;
+            left: 50%;
+            margin-left: -50vw;
         }
 
         .section-below-carousel .content {
@@ -123,6 +128,8 @@ session_start();
             font-size: 36px;
             margin-bottom: 20px;
         }
+
+        
 
 
         .logos-section {
@@ -335,19 +342,19 @@ session_start();
     font-weight: bold;
     letter-spacing: 1px;
     text-decoration: none; /* Remove underline */
-}
+    }
 
-a.book-now-btn:hover {
-    background-color: #232F3E; /* Button background color on hover */
-}
+    a.book-now-btn:hover {
+        background-color: #232F3E; /* Button background color on hover */
+    }
 
     </style>  
     <?php
         include "inc/head.inc.php";
     ?>
-</head>
+
 <body>
-    <div id="main">
+    
         <?php
             include "inc/header.inc.php";
         ?>
@@ -357,7 +364,7 @@ a.book-now-btn:hover {
                 <span class="blurry" style="background-image: url(images/tutioncentre.jpeg)"></span>
                 <div class="over">
                     <div class="flex">
-                        <img src="images/BMALogo2.png" alt="logo" width="auto" height="auto" style="padding-bottom: 50px;"/>
+                        <img src="images/BMALogo2.png" class="img-fluid" alt="logo" style="padding-bottom: 50px;">
                         <h2>The Best For Your Child</h2>
                         <p> At Bright Minds Academy,  we believe that every student is capable of greatness, and we are here to guide them on their journey to success.</p>
                         <a href="lessons.php" class="book-now-btn">Book Now</a>
@@ -373,19 +380,19 @@ a.book-now-btn:hover {
                     <div class="row justify-content-around">
                         <div class="col-lg-4 col-md-6">
                             <div class="logo text-center">
-                                <img src="images/Google.png" alt="icon1" height="110px" width="200px">
+                                <img src="images/Google.png" alt="icon1" height="110" width="200">
                                 <p>Our tution centre has been rated an average of <span style="color: orange;">5.0 stars on Google</span> with over <span style="color: orange;"> 1000 user reviews </span>. Reviews often state how easy it is to navigate and use our website.</p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="logo text-center">
-                                <img src="images/teacher.png" alt="icon2" height="110px" width="115px">
+                                <img src="images/teacher.png" alt="icon2" height="110" width="115">
                                 <p>Our teachers are graduates from some of the <span style="color: orange;">top universities</span> around the world. They have <span style="color: orange;">many years</span> of teaching experience and are extremely passionate about teaching! Thus, our tuition centre can ensure your child is in good hands.</p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="logo text-center">
-                                <img src="images/A+.png" alt="icon3" height="110px" width="186px">
+                                <img src="images/A+.png" alt="icon3" height="110" width="186">
                                 <p>From data collected from all our past and current students, on average, <span style="color: orange;">80%</span> of our students score <span style="color: orange;">A+</span> for their <span style="color: orange;">PSLE</span>. 19% score a B and only 1% score less than that. We can guarantee our tuition centre provides some of the best results across Singapore!</p>
                             </div>
                         </div>
@@ -393,36 +400,37 @@ a.book-now-btn:hover {
                 </div>
             </section>
 
+            
+        
+            <section class="subject-section">
             <div class="testimonial-heading">
                     <h1> What subjects do we teach?</h1>
                     <p style="font-size:20px">We provide tuition for all primary school subjects for from P1 to P6. Click a subject below to find a class session that best suits your child! </p>
             </div>  
-        
-            <section class="subject-section">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="math-page.html" class="subject-box math"> <img src="images/math.png" height="40px" width="60px"> Math</a>
+                            <a href="math-page.html" class="subject-box math"> <img src="images/math.png" alt="mathlogo" height="40" width="60"> Math</a>
                         </div><div class="col-md-6">
-                            <a href="science-page.html" class="subject-box science"> <img src="images/science.png" height="70px" width="70px"> Science</a>
+                            <a href="science-page.html" class="subject-box science"> <img src="images/science.png" alt="sciencelogo" height="70" width="70"> Science</a>
                         </div>
                         <div class="col-md-6">
-                            <a href="english-page.html" class="subject-box english">  <img src="images/english.png" height="70px" width="70px"> English</a>
+                            <a href="english-page.html" class="subject-box english">  <img src="images/english.png" alt="englishlogo" height="70" width="70"> English</a>
                         </div><div class="col-md-6">
-                            <a href="mother-tongue-page.html" class="subject-box mother-tongue">  <img src="images/MT.png" height="70px" width="70px">  Mother Tongue</a>
+                            <a href="mother-tongue-page.html" class="subject-box mother-tongue">  <img src="images/MT.png" alt="mothertonguelogo" height="70" width="70">  Mother Tongue</a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <div class="testimonial-heading">
-                <h1>Want to find us?</h1>
-                <p style="font-size:20px">Here is our address!</p>
-            </div>
 
             <section class="map" style="margin-bottom:30px;">
+                <div class="testimonial-heading">
+                    <h1>Want to find us?</h1>
+                    <p style="font-size:20px">Here is our address!</p>
+                </div>
                 <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.665394053238!2d103.8462120742383!3d1.377438761488071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da16e96db0a1ab%3A0x3d0be54fbbd6e1cd!2sSingapore%20Institute%20of%20Technology%20(SIT%40NYP)!5e0!3m2!1sen!2ssg!4v1710602407815!5m2!1sen!2ssg"  style="border:0; width:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.665394053238!2d103.8462120742383!3d1.377438761488071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da16e96db0a1ab%3A0x3d0be54fbbd6e1cd!2sSingapore%20Institute%20of%20Technology%20(SIT%40NYP)!5e0!3m2!1sen!2ssg!4v1710602407815!5m2!1sen!2ssg" title="Map Location of Bright Minds Academy" style="border:0; width:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </section>
         
@@ -437,7 +445,7 @@ a.book-now-btn:hover {
                         <div class="box-top">
                             <div class="profile">
                                 <div class="profile-img">
-                                    <img src="images/tabby_small.jpg">
+                                    <img src="images/student.png" alt="studentprofilepic">
                                 </div>
                                 <div class="name-user">
                                     <strong> Tan Ah Ben </strong>
@@ -461,7 +469,7 @@ a.book-now-btn:hover {
                         <div class="box-top">
                             <div class="profile">
                                 <div class="profile-img">
-                                    <img src="images/poodle_small.jpg">
+                                    <img src="images/student.png" alt="studentprofilepic">
                                 </div>
                                 <div class="name-user">
                                     <strong> Jaime Lee </strong>
@@ -486,7 +494,7 @@ a.book-now-btn:hover {
                         <div class="box-top">
                             <div class="profile">
                                 <div class="profile-img">
-                                    <img src="images/chihuahua_small.jpg">
+                                    <img src="images/student.png" alt="studentprofilepic">
                                 </div>
                                 <div class="name-user">
                                     <strong> John Smith </strong>
@@ -511,7 +519,7 @@ a.book-now-btn:hover {
                         <div class="box-top">
                             <div class="profile">
                                 <div class="profile-img">
-                                    <img src="images/calico_small.jpg">
+                                    <img src="images/student.png" alt="studentprofilepic">
                                 </div>
                                 <div class="name-user">
                                     <strong> Albert Einstein </strong>
@@ -536,6 +544,6 @@ a.book-now-btn:hover {
         <?php
             include "inc/footer.inc.php";
         ?>
-    </div>
+   
 </body>
 </html>
