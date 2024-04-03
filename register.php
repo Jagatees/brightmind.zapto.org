@@ -187,7 +187,7 @@
                 echo '<input id="submit-btn" type="submit" name="submit" value="SIGNUP" />';
               }
             ?>
-            <p id="login">Already have an account? Log in <a href=login.php style="color:blue">here</a>!</p>
+            <p id="login">Already have an account? Log in <a href=login.php style="color:blue; text-decoration:underline;">here</a>!</p>
           </form>
         </div>
       </div>

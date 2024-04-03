@@ -72,7 +72,7 @@ if (isset($_SESSION['role'])) {
                     if (lesson.numOfStudent === '0') {
                         cardClasses += ' disabled-card'; // Add class to change card color
                         isDisabled = 'disabled'; // Disable buttons
-                        cardStyle = 'style="background-color: red;"'; // Additional style if needed
+                        cardStyle = 'style="background-color: #d5545d;"'; // Additional style if needed
                     }
 
                     var cardHTML = `

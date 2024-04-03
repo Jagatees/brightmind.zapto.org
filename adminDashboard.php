@@ -25,6 +25,9 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="css/bubble.css" rel="stylesheet">
     <style>
+    p {
+        color:whitesmoke;
+    }
     /* Approving lessons */
     .main-container {
     display: flex;
@@ -167,6 +170,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
 
     .create-teacher-form label {
     font-weight: bold;
+    color:#FFFFFF;
     }
 
     .create-teacher-form input:focus {
@@ -182,7 +186,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
 <body onload="approveLesson()">
 <div id="main">
     <?php include "inc/header.inc.php"; ?>
-    <div class="container-fluid">
+    <div class="container-fluid" style="min-height: 54vh;">
         <div class="row">
             <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
