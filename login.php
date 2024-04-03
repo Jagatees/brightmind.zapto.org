@@ -127,7 +127,7 @@
                 echo '<input id="submit-btn" type="submit" name="submit" value="LOGIN" />';
               }
             ?>
-            <p id="signup">New? Sign up <a href="register.php" style="color:blue">here</a>!</p>
+            <p id="signup">New? Sign up <a href="register.php" style="color:blue;text-decoration:underline;">here</a>!</p>
           </form>
         </div>
       </div>
