@@ -35,47 +35,92 @@ if (isset($_SESSION['uuid'])) {
         /* Custom Calendar Styles */
         .ui-datepicker {
             width: 100%;
-            background: #eaeb9e; /* Changed to yellow background */
-            border: 1px solid #555;
-            color: #333; /* Changed to a darker text color for readability */
+            background: #6c82b5; /* Light blue background */
+            border: 1px solid #fff;
+            color: #fff; /* White text for better contrast */
         }
 
         .ui-datepicker-title {
             margin: 10px 0;
-            color: #333; /* Ensure the title is readable on a light background */
+            color: #fff; /* White title for better readability */
         }
 
         .ui-state-default, .ui-widget-content .ui-state-default {
             background: transparent;
-            color: #333; /* Changed to a darker text color for readability */
+            color: #fff; /* White text for better readability */
         }
 
         .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-            background: #ffc107; /* Changed to a highlighted yellow for selection */
-            color: #212121; /* Changed to a darker text color for readability */
+            background: #5c6bc0; /* Blue highlight for selection */
+            color: #FFFFFF; /* White text for readability */
         }
 
         .ui-datepicker-header {
-            color: #212121; /* Changed to a darker text color for readability */
-            background-color: #fdd835; /* Changed to a darker yellow */
+            color: #fff; /* White text for readability */
+            background-color: #3949ab; /* Deeper blue header */
         }
 
         .ui-datepicker-prev, .ui-datepicker-next {
             cursor: pointer;
-            color: #212121; /* Changed to a darker text color for readability */
+            color: #fff; /* White arrows for readability */
         }
 
-        /* If you have hover styles, you might want to update those as well */
+        /* Hover styles */
         .ui-state-default:hover, .ui-widget-content .ui-state-default:hover {
-            background: #ffee58; /* Lighter yellow for hover */
+            background: #7986cb; /* Lighter blue for hover */
         }
 
         /* Current day or selected day styling */
         .ui-datepicker-today .ui-state-default {
-            background: #fbc02d; /* A different shade of yellow for the current day */
-            color: #212121; /* Changed to a darker text color for readability */
+            background: #303f9f; /* Even darker blue for the current day */
+            color: #fff; /* White text for readability */
         }
-        /* More custom styles can be added here as needed */
+        /* Edit Profile */
+        .edit-prof-form {
+            max-width: 500px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #525abd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .edit-prof-form h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #FFFFFF;
+        }
+        
+        .edit-prof-form input,
+        .edit-prof-form button {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+        }
+        
+        .edit-prof-form button {
+            background-color: #5c6bc0;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .edit-prof-form label {
+            font-weight: bold;
+        }
+        
+        .edit-prof-form input:focus {
+            outline: none;
+            border-color: #5c6bc0;
+        }
+        
+        .edit-prof-form button:hover {
+            background-color: #3949ab;
+        } 
     </style>
 </head>
 <body>
@@ -231,15 +276,15 @@ if (isset($_SESSION['uuid'])) {
                 <h2>Edit Profile</h2>
                 <form id="editProfileForm">
                     <div class="form-group">
-                        <label for="fname">First Name</label>
+                        <label for="fname" style="color: #FFFFFF;">First Name</label>
                         <input type="text" id="fname" name="fname" class="form-control" required value="${userFirstName}">
                     </div>
                     <div class="form-group">
-                        <label for="lname">Last Name</label>
+                        <label for="lname" style="color: #FFFFFF;">Last Name</label>
                         <input type="text" id="lname" name="lname" class="form-control" required value="${userLastName}">
                     </div>
                     <div class="form-group">
-                        <label for="bio">Bio</label>
+                        <label for="bio" style="color: #FFFFFF;">Bio</label>
                         <input type="text" id="bio" name="bio" class="form-control" required value="${bio}">
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="updateProfile()">Update Profile</button>
