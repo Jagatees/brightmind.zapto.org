@@ -13,7 +13,7 @@
 .lesson-card {
   flex: 1 1 calc(50% - 40px); /* Allow cards to grow and shrink but not exceed half the container's width */
   max-width: calc(50% - 40px); /* Max width so two cards fit side by side */
-  background: #eaeb9e;
+  background: #525abd;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   padding: 20px;
@@ -91,7 +91,7 @@ main {
 .user-card {
   flex: 1 1 calc(50% - 40px); /* Allow cards to grow and shrink but not exceed half the container's width */
   max-width: calc(50% - 40px); /* Max width so two cards fit side by side */
-  background: #eaeb9e;
+  background: #525abd;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   padding: 20px;
@@ -103,7 +103,7 @@ main {
   max-width: 500px;
   margin: 2rem auto;
   padding: 2rem;
-  background: #eaeb9e;
+  background: #525abd;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   display: flex;
