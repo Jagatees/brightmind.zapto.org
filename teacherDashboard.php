@@ -163,7 +163,7 @@ if (isset($_SESSION['uuid'])) {
     </style>
 </head>
 
-<body>
+<body onload="mainContent()">
     <div id="main">
         <?php include "inc/header.inc.php"; ?>
         <div class="container-fluid">
@@ -186,12 +186,12 @@ if (isset($_SESSION['uuid'])) {
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" onclick=" event.preventDefault(); CreateLessons()">
-                                    Create-Lesson
+                                    Create Lesson
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" onclick=" event.preventDefault(); CheckLessonApprovel()">
-                                    Check-Lesson-Approval
+                                    Check Lesson Approval
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -205,7 +205,7 @@ if (isset($_SESSION['uuid'])) {
 
                 <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                     <br>
-                    <div id="content" mainContent()>                        
+                    <div id="content" class="table-responsive-sm" style="width: 80%; margin-left: auto; margin-right: auto;">                        
                     </div>
                     <div id="editProfileContainer" class="container">
 
@@ -297,11 +297,16 @@ if (isset($_SESSION['uuid'])) {
                                     </div>
                                     <div class="form-group row">
                                         <label for="price" class="col-sm-3 offset-md-1 col-form-label">Price</label>
-                                        <div class="col-sm-1">
+                                        <!-- <div class="col-sm-1">
                                             <input type="text" class="form-control-plaintext" readonly value="$">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="number" class="form-control" id="price" name="price" required placeholder="60">
+                                        </div> -->
+                                        <div class="col-sm-7">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">$</span>
+                                                </div>
+                                                <input type="number" class="form-control" id="price" name="price" required placeholder="60">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -329,6 +334,7 @@ if (isset($_SESSION['uuid'])) {
     </div>
 
     <script>
+        
         var userFirstName = <?php echo isset($_SESSION['fname']) ? json_encode($_SESSION['fname']) : json_encode(""); ?>;
         var userLastName = <?php echo isset($_SESSION['lname']) ? json_encode($_SESSION['lname']) : json_encode(""); ?>;
         var bio = <?php echo isset($_SESSION['bio']) ? json_encode($_SESSION['bio']) : json_encode(""); ?>;
@@ -442,25 +448,26 @@ if (isset($_SESSION['uuid'])) {
 
         function mainContent() {
             var contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = '<h4>Upcoming Lessons</h4>';
             contentDiv.style.display = 'block';
             document.getElementById('editProfileContainer').style.display = 'none';
             document.getElementById('checkLessonContainer').style.display = 'none';
             document.getElementById('createLessonContainer').style.display = 'none';
 
             var tableContainer = document.createElement('table');
-            tableContainer.className = 'table table-hover'; 
+            tableContainer.className = 'table table-sm table-hover'; 
             contentDiv.appendChild(tableContainer);
 
             var tableHead = document.createElement('thead');
             tableHead.innerHTML = `
                 <thead>
                     <tr>
-                    <th scope="col">Lesson ID</th>
-                    <th scope="col">Level</th>
-                    <th scope="col">Module</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time Slot</th>
-                    <th></th>
+                        <th scope="col">#</th>
+                        <th scope="col">Level</th>
+                        <th scope="col">Module</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time Slot</th>
+                        <th></th>
                     </tr>
                 </thead>
             `;
@@ -476,33 +483,59 @@ if (isset($_SESSION['uuid'])) {
                     if (value === undefined) {
                         console.log('Undefined found for key:', key);
                     }
-                });
+                }); 
 
-                // Create a new div element for each card
-                var tableRow = document.createElement('tr');
-                tableRow.innerHTML = ` 
-                    <td>${lesson.lesson_id}</td>
-                    <td>${lesson.level}</td>
-                    <td>${lesson.module}</td>
-                    <td>${lesson.date}</td>
-                    `;
-                
-                const time_slot_array = lesson.time_slot.split("|");
-                for (let i = 0; i < time_slot_array.length; i++) {
-                    if (time_slot_array[i] != '') {
-                        tableRow.innerHTML += `
-                            <li class="list-group-item">${time_slot_array[i]}</li>
-                            `;
+                if (lesson.approvel == 1)
+                {
+                    // Create a new div element for each card
+                    var tableRow = document.createElement('tr');
+                    tableRow.innerHTML = ` 
+                        <td>${lesson.lesson_id}</td>
+                        <td>${lesson.level}</td>
+                        <td>${lesson.module}</td>
+                        <td>${lesson.date}</td>
+                        `;
+                    
+                    const time_slot_array = lesson.time_slot.split("|");
+                    for (let i = 0; i < time_slot_array.length; i++) {
+                        if (time_slot_array[i] != '') {
+                            tableRow.innerHTML += `
+                                <li class="list-group-item">${time_slot_array[i]}</li>
+                                `;
+                        }
                     }
+
+                    tableRow.innerHTML += `
+                        <td><button type="button" class="btn" onclick="confirmDeleteMsg(${lesson.lesson_id})"><i class="fa-solid fa-trash"></i></button></td>
+                    `;
+                    
+                    tableBody.appendChild(tableRow); 
                 }
-
-                tableRow.innerHTML += `
-
-                    <td><a href="#">attendance</a></td>
-                `;
-                
-                tableBody.appendChild(tableRow); // Append the card to the cards container
             });
+        }
+
+        function confirmDeleteMsg(lessonID) {
+            var txt;
+            if (confirm("Are you sure you want to delete this lesson?")) {
+                deleteLesson(lessonID);
+            } else
+            {
+                return;
+            }
+        }
+
+        function deleteLesson(lessonID)
+        {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'teacherDashboard-deleteLesson.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    alert(this.responseText); // Alert the result from the server
+                    location.reload(); // Reload the page to reflect the changes
+                }
+            };
+            xhr.send('lessonID=' + encodeURIComponent(lessonID));
         }
 
         function CreateLessons() {

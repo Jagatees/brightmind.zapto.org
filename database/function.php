@@ -238,8 +238,73 @@ function updateLessonApproval($uuid, $approvalStatus) {
     $conn->close();
 }
 
+function deleteLesson($lessonID) {
+    // Establish database connection
+    $conn = getDbConnection();
+    
+    // Prepare the SQL statement to delete a user where fname, lname, and subject match
+    $sql = "DELETE FROM `tuition_centre`.`lessons` WHERE lesson_id = ? ";
+    
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+    }
+    
+    // Bind parameters to the prepared statement
+    $stmt->bind_param("s", $lessonID);
+    
+    // Execute the statement and check for success/failure
+    if ($stmt->execute()) {
+        // Check how many rows were affected
+        if ($stmt->affected_rows > 0) {
+            
+        } else {
+            echo "No lesson found with the lesson ID.";
+        }
+    } else {
+        die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+    }
+    
+    // Close the statement and the connection
+    $stmt->close();
+    $conn->close();
 
+    deleteBookingByLessonID(lessonID);
+}
 
+function deleteBookingByLessonID($lessonID) {
+    // Establish database connection
+    $conn = getDbConnection();
+    
+    // Prepare the SQL statement to delete a user where fname, lname, and subject match
+    $sql = "DELETE FROM `tuition_centre`.`lesson_bookings` WHERE lessonid = ? ";
+    
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
+    }
+    
+    // Bind parameters to the prepared statement
+    $stmt->bind_param("s", $lessonID);
+    
+    // Execute the statement and check for success/failure
+    if ($stmt->execute()) {
+        // Check how many rows were affected
+        if ($stmt->affected_rows > 0) {
+            echo "Lesson deleted successfully.";
+        } else {
+            echo "No lesson found with the lesson ID.";
+        }
+    } else {
+        die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+    }
+    
+    // Close the statement and the connection
+    $stmt->close();
+    $conn->close();
+}
 
 function deleteUserByDetails($fname, $lname) {
     // Establish database connection
@@ -429,8 +494,40 @@ function updateLessonBooking($uuid_teacher, $lessonID) {
     $conn->close();
 }
 
+function getBookingByLessonID($lessonID) {
+    $lessonDetails = []; 
 
+    $conn = getDbConnection();
 
+    // Use prepared statements to avoid SQL injection
+    $stmt = $conn->prepare("SELECT * FROM `tuition_centre`.`lesson_bookings` WHERE `lessonid` = ?");
+    $stmt->bind_param("s", $lessonID);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $lesson = [
+                'lessonid' => $row['lessonid'],
+                'uuid_student' => $row['uuid_student'],
+                'lesson_time' => $row['lesson_time'],
+                'attended' => $row['attended'],
+                'lesson_date' => $row['lesson_date'],
+                'lesson_module' => $row['lesson_module'],
+                'lesson_level' => $row['lesson_level'],
+                'bookingid' => $row['bookingid']
+            ];
+            $lessonDetails[] = $lesson;
+        }
+    } else {
+        echo "0 results";
+    }
+    $stmt->close();
+    $conn->close();
+
+    return $lessonDetails;
+}
 
 function getBookingByUUID($uuid) {
     $lessonDetails = []; 

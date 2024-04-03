@@ -98,6 +98,7 @@ if (isset($_SESSION['role'])) {
                     <!-- You can add additional buttons or content here if needed -->
                 </div>
             </div>
+            <br>
         `;
 
                     cardDiv.innerHTML = cardHTML;

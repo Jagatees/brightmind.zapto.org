@@ -71,7 +71,9 @@ foreach ($lessons as $lesson) {
             <input type="hidden" name="selected_time_slot" value="<?php echo htmlspecialchars($_POST['selected_time_slot']); ?>">
             <input type="hidden" name="price" value="<?php echo htmlspecialchars($_POST['price']); ?>">
             
-            <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+            <button type="submit" class="btn btn-primary" style="float: right;">Proceed to Payment</button>
+            <br>
+            <br>
         </form>
     </div>
 </div>

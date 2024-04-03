@@ -179,7 +179,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
     }
     </style>
 </head>
-<body>
+<body onload="approveLesson()">
 <div id="main">
     <?php include "inc/header.inc.php"; ?>
     <div class="container-fluid">
@@ -189,10 +189,12 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <span class="nav-link active">
-                                <img src="student.jpg" class="rounded-circle" width="50" height="50">
-                                <span class="ml-2"><?php echo $_SESSION['fname']; ?></span>
+                                <img src="images/account.png" class="rounded-circle" width="100" style="display: block; margin-left: auto; margin-right: auto;">
+                                <br>
+                                <p class="ml-2" style="text-align: center;"><?php echo $_SESSION['fname']; ?></p>
                             </span>
                         </li>
+                        <hr>
                         <li class="nav-item">
                             <a class="nav-link" href="#" onclick=" event.preventDefault(); approveLesson()">
                                 Approve Teacher Lessons
