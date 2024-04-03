@@ -24,6 +24,160 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
     <!-- Include jQuery UI CSS -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="css/bubble.css" rel="stylesheet">
+    <style>
+    /* Approving lessons */
+    .main-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* This will align items to the start of the container */
+    padding-top: 20px; /* Add space from the header */
+    padding-bottom: 20px; /* Add space from the footer */
+    }
+
+    .row {
+    margin: 0;
+    padding: 0;
+    }
+
+    .lesson-card {
+    flex: 1 1 calc(50% - 40px); /* Allow cards to grow and shrink but not exceed half the container's width */
+    max-width: calc(50% - 40px); /* Max width so two cards fit side by side */
+    background: #525abd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in width calculations */
+    }
+
+    .approve, .deny {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    }
+
+    .approve {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    }
+
+    .deny {
+    background-color: #f44336; /* Red */
+    color: white;
+    }
+
+    @media (max-width: 768px) {
+    .lesson-card {
+        flex-basis: calc(100% - 40px); /* On small screens, take full width minus padding */
+        max-width: calc(100% - 40px); /* Adjust maximum width for small screens */
+    }
+    .user-card {
+        flex-basis: calc(100% - 40px); /* On small screens, take full width minus padding */
+        max-width: calc(100% - 40px); /* Adjust maximum width for small screens */
+    }
+    }
+
+    .lesson-header {
+    width: 100%; /* Ensure the header takes the full width */
+    }
+
+    .lessons-title {
+    text-align: center;
+    color: #000000; 
+    padding: 10px 0;
+    font-size: 24px;
+    width: 100%;
+    }   
+    .lesson-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align to the start of the main content */
+    margin-top: 30px;
+    margin-bottom: 30px;
+    gap: 20px; /* Space between cards */
+    align-items: flex-start; /* Align items to the top */
+    width: 100%; /* Take up 100% of the main container */
+    max-width: calc(100% - 40px); /* Max width accounting for padding */
+    }
+    main {
+    flex-direction: column; /* Stack sidebar and content vertically on smaller screens */
+    }
+
+    .lesson-container {
+    justify-content: center; /* Center cards within the lesson-container on smaller screens */
+    }
+
+
+    /* Delete Users*/
+    .user-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align to the start of the main content */
+    gap: 20px; /* Space between cards */
+    align-items: flex-start; /* Align items to the top */
+    width: 100%; /* Take up 100% of the main container */
+    max-width: calc(100% - 40px); /* Max width accounting for padding */
+    }
+
+    .user-card {
+    flex: 1 1 calc(50% - 40px); /* Allow cards to grow and shrink but not exceed half the container's width */
+    max-width: calc(50% - 40px); /* Max width so two cards fit side by side */
+    background: #525abd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in width calculations */
+    }
+
+    /* Create teacher page */
+    .create-teacher-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #525abd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    }
+
+    .create-teacher-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #FFFFFF;
+    }
+
+    .create-teacher-form input,
+    .create-teacher-form button {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    }
+
+    .create-teacher-form button {
+    background-color: #5c6bc0;
+    color: white;
+    cursor: pointer;
+    border: none;
+    }
+
+    .create-teacher-form label {
+    font-weight: bold;
+    }
+
+    .create-teacher-form input:focus {
+    outline: none;
+    border-color: #5c6bc0;
+    }
+
+    .create-teacher-form button:hover {
+    background-color: #3949ab;
+    }
+    </style>
 </head>
 <body>
 <div id="main">
@@ -113,8 +267,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
             var approveLessonContainer = document.getElementById('approveLessonContainer');
             approveLessonContainer.style.display = 'block'; // Make sure this is visible
             lessonCardsContainer.innerHTML = ''; // Clear previous cards
-
-
+            approveLessonContainer.innerHTML = '<h2>Approve Lessons</h2><div class="user-container">'; 
             // Loop through all lessons to create approval cards
             allLessons.forEach(function(lesson) {
                 // Check for undefined values and print to console if found
@@ -123,7 +276,6 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
                         console.log('Undefined found for key:', key);
                     }
                 });
-
                 var cardHtml = '<div class="lesson-card">';
                 cardHtml += '<p><strong>ID:</strong> ' + (lesson.lesson_id ) + '</p>';
                 cardHtml += '<p><strong>Teacher ID:</strong> ' + (lesson.uuid ) + '</p>';
@@ -138,6 +290,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
 
                 lessonCardsContainer.innerHTML += cardHtml;
             });
+            approveLessonContainer.appendChild(lessonCardsContainer); // Add this line
         }
 
 
