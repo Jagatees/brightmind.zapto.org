@@ -37,36 +37,50 @@ if (isset($_SESSION['uuid'])) {
             cursor: not-allowed;
             /* Change cursor to not-allowed */
         }
+        .user-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start; /* Align to the start of the main content */
+        gap: 20px; /* Space between cards */
+        align-items: flex-start; /* Align items to the top */
+        width: 100%; /* Take up 100% of the main container */
+        max-width: calc(100% - 40px); /* Max width accounting for padding */
+        }
         .checklesson-card {
-            flex: 0 0 calc(50% - 20px);
-            background: #525abd; /* Update the color */
+            flex: 1 1 auto; /* Allows the card to grow and shrink as needed */
+            background: #525abd;
             padding: 20px;
-            margin: 10px;
+            margin-right: -1px; /* Overlap cards slightly */
+            margin-bottom: -1px; /* Overlap cards slightly */
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             box-sizing: border-box;
+            min-width: calc(50% - 20px); /* Minimum width for two cards side-by-side */
         }
 
         .checklesson-container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: flex-start;
+            flex-wrap: wrap; /* This allows the cards to wrap onto the next line */
+            justify-content: flex-start; /* Aligns cards to the start */
+            align-items: flex-start; /* Aligns cards to the top */
+            gap: 10; 
+            margin-bottom: 20px;
         }
         .checklesson-title {
             width: 100%;
             text-align: center;
-            margin-bottom: 20px; /* Spacing between title and cards */
+            margin-top: 100px; /* Adjust this value to push the title down below the header */
+            margin-left: 100px;
         }
         .cards-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between; /* or 'flex-start' if you want them aligned to the left */
-            align-items: flex-start; /* Aligns the items to the top */
-            gap: 20px; /* This creates space between the cards */
+            justify-content: space-between; 
+            align-items: flex-start; 
+            gap: 20px; 
         }
-                /* Create Lesson */
-                /* This is to ensure that the main container centers its children */
+            /* Create Lesson */
+            /* This is to ensure that the main container centers its children */
             .createlesson-container {
             display: flex;
             flex-direction: column;
@@ -115,6 +129,7 @@ if (isset($_SESSION['uuid'])) {
         .edit-prof-form h2 {
             text-align: center;
             margin-bottom: 1.5rem;
+            color: #FFFFFF;
         }
         
         .edit-prof-form input,
@@ -166,7 +181,7 @@ if (isset($_SESSION['uuid'])) {
                             </li>
                             <hr>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" onclick=" event.preventDefault();">
+                                <a class="nav-link" href="#" onclick=" event.preventDefault(); editProfile()">
                                     Edit Profile
                                 </a>
                             </li>
@@ -356,13 +371,13 @@ if (isset($_SESSION['uuid'])) {
                 var cardDiv = document.createElement('div');
                 cardDiv.className = 'checklesson-card';
                 cardDiv.innerHTML = `
-                    <p><strong>ID:</strong> ${lesson.lesson_id}</p>
-                    <p><strong>Teacher ID:</strong> ${lesson.uuid}</p>
-                    <p><strong>Teacher Name:</strong> ${lesson.teacher_name}</p>
-                    <p><strong>Time Slot:</strong> ${lesson.time_slot}</p>
-                    <p><strong>Module:</strong> ${lesson.module}</p>
-                    <p><strong>Level:</strong> ${lesson.level}</p>
-                    <p><strong>Approval:</strong> ${lesson.approvel}</p>
+                    <p style="color: #FFFFFF;"><strong style="color: #FFFFFF;">ID:</strong> ${lesson.lesson_id}</p>
+                    <p style="color: #FFFFFF;"><strong style="color: #FFFFFF;">Teacher ID:</strong> ${lesson.uuid}</p>
+                    <p style="color: #FFFFFF;"><strong style="color: #FFFFFF;">Teacher Name:</strong> ${lesson.teacher_name}</p>
+                    <p style="color: #FFFFFF;"><strong style="color: #FFFFFF;">Time Slot:</strong> ${lesson.time_slot}</p>
+                    <p style="color: #FFFFFF;"><strong style="color: #FFFFFF;">Module:</strong> ${lesson.module}</p>
+                    <p style="color: #FFFFFF;"><strong style="color: #FFFFFF;">Level:</strong> ${lesson.level}</p>
+                    <p style="color: #FFFFFF;"><strong style="color: #FFFFFF;">Approval:</strong> ${lesson.approvel}</p>
                 `; // Use template literals for better readability
                 
                 cardsContainer.appendChild(cardDiv); // Append the card to the cards container
@@ -382,15 +397,15 @@ if (isset($_SESSION['uuid'])) {
                 <h2>Edit Profile</h2>
                 <form id="editProfileForm">
                     <div class="form-group">
-                        <label for="fname">First Name</label>
+                        <label for="fname" style="color: #FFFFFF;">First Name</label>
                         <input type="text" id="fname" name="fname" class="form-control" required value="${userFirstName}">
                     </div>
                     <div class="form-group">
-                        <label for="lname">Last Name</label>
+                        <label for="lname" style="color: #FFFFFF;">Last Name</label>
                         <input type="text" id="lname" name="lname" class="form-control" required value="${userLastName}">
                     </div>
                     <div class="form-group">
-                        <label for="bio">Bio</label>
+                        <label for="bio" style="color: #FFFFFF;">Bio</label>
                         <input type="text" id="bio" name="bio" class="form-control" required value="${bio}">
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="updateProfile()">Update Profile</button>
