@@ -157,13 +157,16 @@ if (isset($_SESSION['uuid'])) {
                     <div class="sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <span class="nav-link active">
-                                    <img src="student.jpg" class="rounded-circle" width="50" height="50">
-                                    <span class="ml-2"><?php echo $_SESSION['fname']; ?></span>
-                                </span>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="#" onclick=" event.preventDefault(); editProfile()">
+                                    <br>
+                                    <img src="images/account.png" class="rounded-circle" width="100" style="display: block; margin-left: auto; margin-right: auto;">
+                                    <br>
+                                    <span class="ml-2" style="text-align: center;"><?php echo $_SESSION['fname']; ?></span>
+                                </a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick=" event.preventDefault();">
                                     Edit Profile
                                 </a>
                             </li>
@@ -187,56 +190,67 @@ if (isset($_SESSION['uuid'])) {
                 </nav>
 
                 <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                    <br>
                     <div id="content">
+                        
                     </div>
                     <div id="editProfileContainer" class="container">
 
                     </div>
 
-                    <div id="createLessonContainer" class="createlesson-container" style="display: none;">
-                        <div class="createlesson-card">
-                        <h2 class="createlesson-title">Create Lessons</h2>
+                    <div id="createLessonContainer" class="container" style="display: none;">
+                        <!-- <div class="createlesson-card"> -->
+                            <br>
                             <div class="row">
+                                <div class="col-sm-4 offset-md-1">
+                                    <h4>Create Lessons</h4>
+                                </div>
                                 <br><br>
-                                <form id="createLessonForm">
+                                <form>
                                     <div class="form-group row">
-                                        <label for="fname" class="col-sm-2 col-form-label">Teacher name</label>
-                                        <div class="col-sm-10">
+                                        <label for="fname" class="col-sm-3 offset-md-1 col-form-label">Teacher name</label>
+                                        <div class="col-sm-7">
                                             <input type="text" readonly class="form-control-plaintext" id="fname" name="fname" required value="<?php echo htmlspecialchars($_SESSION['fname']); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="date" class="col-sm-2 col-form-label">Date</label>
-                                        <div class="col-sm-10">
-                                            <input type="date" class="form-control-plaintext" id="date" name="date" required placeholder="DD/MM/YYYY">
+                                        <label for="date" class="col-sm-3 offset-md-1 col-form-label">Date</label>
+                                        <div class="col-sm-7">
+                                            <input type="date" class="form-control" id="date" name="date" required placeholder="DD/MM/YYYY">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="timeSlot" class="col-sm-2 col-form-label">Time slots</label>
-                                        <div class="col-sm-10">
+                                        <label for="timeSlot" class="col-sm-3 offset-md-1 col-form-label">Time slots</label>
+                                        <div class="col-sm-7">
                                             <div class="row">
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <a href="#" id="8:00am - 10:00am" class="btn btn-light">8:00am - 10:00am</a>
                                                 </div>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <a href="#" class="btn btn-light">10:00am - 12:00pm</a>
                                                 </div>
-                                                <div class="col-sm-3">
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-4">
                                                     <a href="#" class="btn btn-light">12:00pm - 2:00pm</a>
                                                 </div>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <a href="#" class="btn btn-light">2:00pm - 4:00pm</a>
                                                 </div>
                                             </div>
                                             <br>
                                             <div class="row">
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <a href="#" class="btn btn-light">4:00pm - 6:00pm</a>
                                                 </div>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <a href="#" class="btn btn-light">6:00pm - 8:00pm</a>
                                                 </div>
-                                                <div class="col-sm-3">
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-4">
                                                     <a href="#" class="btn btn-light">8:00pm - 10:00pm</a>
                                                 </div>
                                             </div>
@@ -245,8 +259,8 @@ if (isset($_SESSION['uuid'])) {
                                         <input type="text" id="timeSlot" value="" name="timeSlot" hidden>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="subject" class="col-sm-2 col-form-label">Subject</label>
-                                        <div class="col-sm-10">
+                                        <label for="subject" class="col-sm-3 offset-md-1 col-form-label">Subject</label>
+                                        <div class="col-sm-7">
                                             <select id="subject" name="subject" class="form-select" aria-label="Subject">
                                                 <option value="Math" selected>Math</option>
                                                 <option value="English">English</option>
@@ -256,8 +270,8 @@ if (isset($_SESSION['uuid'])) {
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="level" class="col-sm-2 col-form-label">Level</label>
-                                        <div class="col-sm-10">
+                                        <label for="level" class="col-sm-3 offset-md-1 col-form-label">Level</label>
+                                        <div class="col-sm-7">
                                             <select id="level" name="level" class="form-select" aria-label="Level">
                                                 <option value="P1" selected>P1</option>
                                                 <option value="P2">P2</option>
@@ -269,24 +283,27 @@ if (isset($_SESSION['uuid'])) {
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="price" class="col-sm-2 col-form-label">Price</label>
+                                        <label for="price" class="col-sm-3 offset-md-1 col-form-label">Price</label>
                                         <div class="col-sm-1">
-                                            $
+                                            <input type="text" class="form-control-plaintext" readonly value="$">
                                         </div>
-                                        <div class="col-sm-9">
-                                            <input type="number" class="form-control-plaintext" id="price" name="price" required placeholder="60">
+                                        <div class="col-sm-6">
+                                            <input type="number" class="form-control" id="price" name="price" required placeholder="60">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="numOfStudent" class="col-sm-2 col-form-label">Number of Students</label>
-                                        <div class="col-sm-10">
+                                        <label for="numOfStudent" class="col-sm-3 offset-md-1 col-form-label">Number of Students</label>
+                                        <div class="col-sm-7">
                                             <input type="number" class="form-control" id="numOfStudent" name="numOfStudent" required placeholder="e.g., 10" min="1" max="10">
                                         </div>
                                     </div>
+                                    <div class="col-md-3 offset-md-8">
                                     <button type="submit" class="btn btn-primary" onclick="createLesson()" style="float:right;">Create</button>
+                                    </div>
                                 </form>
+                                <br>
                             </div>
-                        </div>
+                        <!-- </div> -->
                     </div>
                     <div id="checkLessonContainer" class="checklesson-container">
                     </div>
