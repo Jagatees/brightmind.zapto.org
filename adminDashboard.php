@@ -25,9 +25,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="css/bubble.css" rel="stylesheet">
     <style>
-    p {
-        color:whitesmoke;
-    }
+
     /* Approving lessons */
     .main-container {
     display: flex;
@@ -50,6 +48,7 @@ $allUserJSON = json_encode($user, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICOD
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     padding: 20px;
     box-sizing: border-box; /* Include padding in width calculations */
+    color: whitesmoke;
     }
 
     .approve, .deny {
