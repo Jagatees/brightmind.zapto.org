@@ -126,7 +126,7 @@ if (isset($_SESSION['uuid'])) {
 <body>
 <div id="main">
     <?php include "inc/header.inc.php"; // Include the header ?>
-    <div class="container-fluid">
+    <div class="container-fluid" style="min-height: 54vh;">
         <div class="row">
             <!-- Sidebar -->
             <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
