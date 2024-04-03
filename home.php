@@ -354,7 +354,7 @@ session_start();
     ?>
 
 <body>
-    
+    <div id="main">
         <?php
             include "inc/header.inc.php";
         ?>
@@ -544,6 +544,6 @@ session_start();
         <?php
             include "inc/footer.inc.php";
         ?>
-   
+    </div>
 </body>
 </html>
