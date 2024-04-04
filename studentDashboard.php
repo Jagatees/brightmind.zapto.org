@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] != "POST") {
-    header('Location: login.php');
-    exit;
-}
 
 if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] && $_SESSION['role'] == "student")) {
     header('Location: login.php');
