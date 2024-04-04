@@ -5,7 +5,8 @@
 <?php
 session_start();
 ?>
-
+<head>
+    <meta charset="UTF-8">
     <style>
         body {
             background: -webkit-linear-gradient(bottom, #dde2f2, #dde2f2);
@@ -347,11 +348,11 @@ session_start();
     a.book-now-btn:hover {
         background-color: #232F3E; /* Button background color on hover */
     }
-
     </style>  
     <?php
         include "inc/head.inc.php";
     ?>
+</head>
 
 <body>
     <div id="main">
