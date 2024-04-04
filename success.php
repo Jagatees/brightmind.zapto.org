@@ -34,7 +34,7 @@
     <div class="container">
         <h1>Lesson created.</h1>
         <?php
-        echo "<p>ou have successfully created the lesson!</p>";
+        echo "<p>You have successfully created the lesson!</p>";
         echo '<p><a href="index.php">Go Back to Main Page</a></p>';
         ?>
     </div>

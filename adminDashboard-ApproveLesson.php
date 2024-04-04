@@ -1,5 +1,9 @@
 <?php
 session_start();
+if ($_SERVER['REQUEST_METHOD'] != "POST") {
+    header('Location: home.php');
+    exit;
+}
 include "database/function.php";
 
 if (isset($_POST['uuid']) && isset($_POST['approvalStatus'])) {

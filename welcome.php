@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] != "POST") {
-    header('Location: home.php');
-    exit;
-}
-
 if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true)) {
     header('Location: login.php');
     exit; 
@@ -49,8 +44,8 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true)
         <h1>Welcome</h1>
         <?php
         session_start();
-        if (isset($_SESSION['user_name']) && (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true)) {
-            echo "<h3>Hello, " . $_SESSION['user_name'] . "! You are now logged in!</h3>";
+        if (isset($_SESSION['fname']) && (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true)) {
+            echo "<h3>Hello, " . $_SESSION['fname'] . "! You are now logged in!</h3>";
             // echo '<p><a href="home.php">Go Back to Main Page</a></p>';
             echo '<p>You will be redirected to our home page in <a id="counter">5</a> seconds...</p>';
             echo '<script>';
