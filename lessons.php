@@ -40,11 +40,11 @@ if (isset($_SESSION['role'])) {
                     <form method="POST" action="payment.php">
                         <div id="lessonCardsContainer" class="row">
                         </div>
-                        <input type="text" id="price" name="price" value="" hidden>
-                        <input type="text" id="selected_time_slot" name="selected_time_slot" value="" hidden>
-                        <input type="text" id="lessonID" name="lessonID" value="" hidden>
+                        <input type="text" id="price" name="price" value="" require hidden>
+                        <input type="text" id="selected_time_slot" name="selected_time_slot" value="" require hidden>
+                        <input type="text" id="lessonID" name="lessonID" value="" require hidden>
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'student'): ?>
-                            <button type="submit" class="btn btn-primary" style="float:right;">Book Lesson</button>
+                            <button type="submit" id="bookLessonBtn" class="btn btn-primary disabled" style="float:right;">Book Lesson</button>
                         <?php endif; ?>
                     </form>
                 </div>
@@ -108,14 +108,17 @@ if (isset($_SESSION['role'])) {
 
             function selectTimeSlot(element, lessonID, price) {
                 const btnList = document.querySelectorAll('.btn-light');
+                const submitBtn = document.getElementById('bookLessonBtn');
                 btnList.forEach(btn => {
                     btn.classList.remove('active');
                 });
 
+                submitBtn.classList.remove('disabled');
                 element.classList.add('active');
                 document.getElementById('lessonID').value = lessonID;
                 document.getElementById('selected_time_slot').value = element.innerHTML;
                 document.getElementById('price').value = price;
+                
             }
         </script>
 </body>
