@@ -62,7 +62,7 @@
       box-shadow: 0px 1px 18px #04d9ff;
     }
     .form {
-      align-items: left;
+      justify-content: flex-start;
       display: flex;
       flex-direction: column;
     }
@@ -111,9 +111,9 @@
               if (!empty($_SESSION['emailError'])) {
                 echo '<label for="emailError" style="padding-top:2px; color:red;">&nbsp;' . $_SESSION["emailError"] . '</label>';
                 unset($_SESSION['emailError']);
-                echo '<label for="password" style="padding-top:10px">&nbsp;Password</label>';
+                echo '<label for="pwd" style="padding-top:10px">&nbsp;Password</label>';
               } else {
-                echo '<label for="password" style="padding-top:34px">&nbsp;Password</label>';
+                echo '<label for="pwd" style="padding-top:34px">&nbsp;Password</label>';
               }
 
               echo '<input id="pwd" class="form-content" type="password" name="password" placeholder="Enter password" value="' . $_SESSION["password"] . '" required/>';
