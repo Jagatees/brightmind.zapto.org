@@ -9,6 +9,12 @@
     <?php include "inc/header.inc.php"; // Include the header ?>
     <?php
     include "database/function.php";
+
+    if ($_SERVER['REQUEST_METHOD'] != "POST") {
+        header('Location: home.php');
+        exit;
+    }
+    
     $price = 0;
     $module = $level = $date = $uuid = '';
     $lessons = getlessonsByID($_POST['lessonID']);

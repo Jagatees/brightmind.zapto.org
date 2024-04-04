@@ -270,7 +270,7 @@ function deleteLesson($lessonID) {
     $stmt->close();
     $conn->close();
 
-    deleteBookingByLessonID(lessonID);
+    deleteBookingByLessonID($lessonID);
 }
 
 function deleteBookingByLessonID($lessonID) {
