@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <title>OurTeachers</title>
     <style>
         .card {  
             transition: background-color 0.3s ease; 
