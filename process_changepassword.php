@@ -37,9 +37,9 @@ session_start();
 // Final output based on success
 if ($success) {
     savePasswordToDB($_SESSION['uuid'], $pwd);
-    echo'<script>alert("Password changed successfully")</script>';
-    header('Location: home.php');
-    exit;
+    $_SESSION['success'] = true;
+    header('Location: changepassword.php');
+    exit();
 } else {
     $_SESSION['pwError'] = $pwError;
     $_SESSION['cpwError'] = $cpwError;

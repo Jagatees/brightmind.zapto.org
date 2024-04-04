@@ -58,7 +58,7 @@ if (!empty($_SESSION['otp'])) {
 if ($loginsuccess) {
     unset($_SESSION['otp']);
     unset($_SESSION['otpCreated']);
-    header('Location: home.php'); 
+    header('Location: changepassword.php'); 
     exit();
 } elseif ($success) {
     $_SESSION['email'] = $_POST['email'];

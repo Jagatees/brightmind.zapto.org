@@ -106,7 +106,7 @@ if (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true) {
           <form method="post" class="form" action="process_otplogin.php">
             <?php
               echo '<label for="email" style="padding-top:13px">&nbsp;Email</label>';
-              echo '<p style="display:none;"> GENERATED OTP:' . $_SESSION["otp"] . '</p>';
+              //echo '<p style="display:none;"> GENERATED OTP:' . $_SESSION["otp"] . '</p>';
               if (!empty($_SESSION['emailError'])) {
                 echo '<input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" placeholder="Enter email" value="' . $_SESSION["email"] . '">';
                 echo '<div class="form-border"></div>';

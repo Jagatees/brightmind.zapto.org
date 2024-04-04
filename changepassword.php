@@ -5,7 +5,8 @@
 if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
   header('Location: login.php');
   exit;
-}?>
+}
+?>
 <head>
   <?php
       include "inc/head.inc.php";
@@ -154,5 +155,22 @@ if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
     <?php include "inc/footer.inc.php"; ?>
   </div>
 </body>
+
+<script>
+  
+    function successful() {
+        alert("Password changed successfully");
+        window.location = "http://brightmind.zapto.org/home.php";
+    }
+
+    window.addEventListener("load", function() {
+      <?php
+      if($_SESSION['success']) {
+        unset($_SESSION['success']);
+        echo'successful();';
+      }
+      ?>
+    });
+</script>
 
 </html>
