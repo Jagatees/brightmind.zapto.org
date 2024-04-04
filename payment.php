@@ -20,8 +20,6 @@
         $uuid = $lesson['uuid'];
     }
     ?>
-    <br>
-    <br>
     <div class="container">
     <div class="row">
     <h2 class="text-center mb-4">Review Your Selected Product Before Payment</h2> 
@@ -52,21 +50,20 @@
                 </tbody>
             </table>
             
-        <form action="checkout.php" method="POST">
-            <input type="hidden" name="lessonID" value="<?php echo htmlspecialchars($_POST['lessonID']); ?>">
-            <input type="hidden" name="module" value="<?php echo htmlspecialchars($module); ?>">
-            <input type="hidden" name="uuid" value="<?php echo htmlspecialchars($uuid); ?>">
-            <input type="hidden" name="date" value="<?php echo htmlspecialchars($date); ?>">
-            <input type="hidden" name="level" value="<?php echo htmlspecialchars($level); ?>">
-            <input type="hidden" name="selected_time_slot" value="<?php echo htmlspecialchars($_POST['selected_time_slot']); ?>">
-            <input type="hidden" name="price" value="<?php echo htmlspecialchars($_POST['price']); ?>">
-            
-            <button type="submit" class="btn btn-primary" style="float: right;">Proceed to Payment</button>
-        </form>
+            <form action="checkout.php" method="POST">
+                <input type="hidden" name="lessonID" value="<?php echo htmlspecialchars($_POST['lessonID'] ?? ''); ?>">
+                <input type="hidden" name="module" value="<?php echo htmlspecialchars($module ?? ''); ?>">
+                <input type="hidden" name="uuid" value="<?php echo htmlspecialchars($uuid ?? ''); ?>">
+                <input type="hidden" name="date" value="<?php echo htmlspecialchars($date ?? ''); ?>">
+                <input type="hidden" name="level" value="<?php echo htmlspecialchars($level ?? ''); ?>">
+                <input type="hidden" name="selected_time_slot" value="<?php echo htmlspecialchars($_POST['selected_time_slot'] ?? ''); ?>">
+                <input type="hidden" name="price" value="<?php echo htmlspecialchars($_POST['price'] ?? ''); ?>">
+                
+                <button type="submit" class="btn btn-primary" style="float: right;">Proceed to Payment</button>
+            </form>
         </div>
         </div>
-        <br>
-        <br>
+    <?php include "inc/footer.inc.php"; ?>
 </body>
-    <?php include "inc/footer.inc.php"; ?>       
+           
 </html>
