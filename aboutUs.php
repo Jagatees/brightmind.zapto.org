@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    <head>
         <style>
             body {
             font-family: Arial, sans-serif;
         }
-        
-        
-        
         .about {
             background: -webkit-linear-gradient(bottom, #87CEEB, #dbe9f4);
             background-repeat: no-repeat;
             padding: 100px 0 20px 0;
             text-align: center;
         }
-        
         .about h1 {
             font-size: 2.5rem;
             margin-bottom: 20px;
         }
-        
         .about p {
             font-size: 1rem;
             color: #323030;
             max-width: 800px;
             margin: 0 auto;
         }
-        
         .about-info {
             margin: 2rem 2rem;
             display: flex;
@@ -34,26 +28,22 @@
             justify-content: center;
             text-align: left;
         }
-        
         .about-img {
             width: 20rem;
             height: 20rem;
         
-        }
-        
+        }     
         .about-img img {
             width: 100%;
             height: 100%;
             border-radius: 5px;
             object-fit: contain;
-        }
-        
+        }  
         .about-info p {
             font-size: 1.3rem;
             margin: 0 2rem;
             text-align: justify;
         }
-        
         button {
             border: none;
             outline: 0;
@@ -67,13 +57,10 @@
             width: 15rem;
             border-radius: 4px;
         }
-        
         button:hover {
             background-color: #1f9405;
         }
-        
         /* Team Section */
-        
         .team {
             padding: 30px 0;
             text-align: center;
@@ -175,18 +162,14 @@
             }
         }
         </style>
-
-<div id="main">
-
-    <head>
-        <title>About Us</title>
-
         <?php
         include "inc/head.inc.php";
         ?>
     </head>
 
+
     <body>
+    <div id="main">
         <?php
         include "inc/header.inc.php";
         ?>
