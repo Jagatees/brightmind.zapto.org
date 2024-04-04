@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php session_start(); ?>
+<?php 
+session_start();
+if (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true) {
+  header('Location: home.php');
+  exit;
+}
+?>
 <head>
   <?php
       include "inc/head.inc.php";
@@ -127,7 +133,9 @@
                 echo '<input id="submit-btn" type="submit" name="submit" value="LOGIN">';
               }
             ?>
-            <p id="signup">New? Sign up <a href="register.php" style="color:blue;text-decoration:underline;">here</a>!</p>
+            <p id="signup">New? Sign up <a href="register.php" style="color:blue;text-decoration:underline;">here</a>!<br>
+              Reset your password <a href="otplogin.php" style="color:blue;text-decoration:underline;">here</a>!
+            </p>
           </form>
         </div>
       </div>

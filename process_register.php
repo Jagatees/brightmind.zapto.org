@@ -1,5 +1,10 @@
 <?php
-$fname = $email = $lname = $errorMsg = $pwd = $uuid = "";
+if ($_SERVER['REQUEST_METHOD'] != "POST") {
+    header('Location: register.php');
+    exit;
+}
+$fname = $email = $lname = $pwd = $uuid = "";
+$errorMsg = $emailError = $fnameError = $lnameError = $pwError = $cpwError = "";
 $success = true;
 
 ini_set('display_errors', 1);
@@ -81,21 +86,19 @@ if ($success) {
     $_SESSION['user_name'] = $fname . ' ' . $lname;
     $_SESSION['role'] = 'student';
     $_SESSION['uuid'] = $uuid; 
-    $_SESSION['bio'] ='This is my bio'; // Retrieve role from DB and store in session
+    $_SESSION['bio'] ='This is my bio'; 
     
     header('Location: home.php');
     exit; //
 } else {
     $_SESSION['fnameError'] = $fnameError;
     $_SESSION['lnameError'] = $lnameError;
-    $_SESSION['roleError'] = $roleError;
     $_SESSION['emailError'] = $emailError;
     $_SESSION['pwError'] = $pwError;
     $_SESSION['cpwError'] = $cpwError;
     $_SESSION['fname'] = $_POST['fname'];
     $_SESSION['lname'] = $_POST['lname'];
     $_SESSION['email'] = $_POST['email'];
-    $_SESSION['role'] = $_POST['role'];
     $_SESSION['password'] = $_POST['password'];
     $_SESSION['cpassword'] = $_POST['pwd_confirm'];
     header('Location: register.php');

@@ -1,4 +1,8 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] != "POST") {
+    header('Location: login.php');
+    exit;
+}
 session_start(); // Ensure session start is at the top
 
 
@@ -8,11 +12,10 @@ function sanitize_input($data) {
 }
 
 // Initialize variables
-$email = $pwd = $errorMsg = "";
+$email = $pwd = $errorMsg = $emailError = $pwError = "";
 $success = true;
 
 
-$emailError = "";
 // Sanitize and validate the email
 if (empty($_POST["email"])) {
     $errorMsg .= "Email is required.<br>";
@@ -27,7 +30,7 @@ if (empty($_POST["email"])) {
     }
 }
 
-$pwError = "";
+
 if (empty($_POST["password"])) {
     $errorMsg .= "Password is required.<br>";
     $pwError = "Password is required.";
@@ -44,7 +47,6 @@ if ($success) {
     header('Location: home.php'); 
     exit();
 } else {
-    $_SESSION['email'] = $email; // Keep email input
     $_SESSION['emailError'] = $emailError;
     $_SESSION['pwError'] = $pwError;
     $_SESSION['email'] = $_POST['email'];

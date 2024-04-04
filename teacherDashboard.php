@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true)) {
+if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && $_SESSION['role'] == "teacher")) {
     header('Location: login.php');
     exit;
 }

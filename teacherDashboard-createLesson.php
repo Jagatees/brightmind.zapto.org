@@ -1,4 +1,8 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] != "POST") {
+    header('Location: home.php');
+    exit;
+}
 session_start();
 include "database/function.php";
 

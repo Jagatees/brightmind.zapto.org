@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'])) {
+if (!(isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] && $_SESSION['role'] == "student")) {
     header('Location: login.php');
     exit;
 }

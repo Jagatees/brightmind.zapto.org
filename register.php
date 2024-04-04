@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php session_start(); ?>
+<?php session_start(); 
+if (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true) {
+  header('Location: home.php');
+  exit;
+}?>
 <head>
   <?php
       include "inc/head.inc.php";
