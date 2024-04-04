@@ -109,8 +109,6 @@
     }
   </style>
 </head>
-
-
 <body>
   <div id="main">
     <?php include "inc/header.inc.php"; ?>
@@ -126,7 +124,7 @@
               echo '<input type="text" id="uuid" name="uuid">';
 
               echo '<label for="fname" style="padding-top:13px">&nbsp;First Name</label>';
-              echo '<input required maxlength="45" class="form-content" type="text" id="fname" name="fname" placeholder="Enter first name" value="' . $_SESSION["fname"] . '"/>';
+              echo '<input required maxlength="45" class="form-content" type="text" id="fname" name="fname" placeholder="Enter first name" value="' . $_SESSION["fname"] . '">';
               unset($_SESSION['fname']);
               echo '<div class="form-border"></div>';
 
@@ -138,7 +136,7 @@
                 echo '<label for="lname" style="padding-top:34px">&nbsp;Last Name</label>';
               }
               
-              echo '<input required maxlength="45" class="form-content" type="text" id="lname" name="lname" placeholder="Enter last name" value="' . $_SESSION["lname"] . '"/>';
+              echo '<input required maxlength="45" class="form-content" type="text" id="lname" name="lname" placeholder="Enter last name" value="' . $_SESSION["lname"] . '">';
               unset($_SESSION['lname']);
               echo '<div class="form-border"></div>';
 
@@ -150,7 +148,7 @@
                 echo '<label for="email" style="padding-top:34px">&nbsp;Email</label>';
               }
 
-              echo '<input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" placeholder="Enter email" value="' . $_SESSION["email"] . '" />';
+              echo '<input id="email" class="form-content" type="email" name="email" autocomplete="on" required maxlength="45" placeholder="Enter email" value="' . $_SESSION["email"] . '">';
               unset($_SESSION['email']);
               echo '<div class="form-border"></div>';
 
@@ -162,7 +160,7 @@
                 echo '<label for="pwd" style="padding-top:34px">&nbsp;Password</label>';
               }
 
-              echo '<input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter password" value="' . $_SESSION["password"] . '" />';
+              echo '<input id="pwd" class="form-content" type="password" name="password" required placeholder="Enter password" value="' . $_SESSION["password"] . '">';
               unset($_SESSION['password']);
               echo '<div class="form-border"></div>';
 
@@ -175,16 +173,16 @@
               }
               
 
-              echo '<input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password" value="' . $_SESSION["cpassword"] . '" />';
+              echo '<input required class="form-content" type="password" id="pwd_confirm" name="pwd_confirm" placeholder="Confirm password" value="' . $_SESSION["cpassword"] . '">';
               unset($_SESSION['cpassword']);
               echo '<div class="form-border"></div>';
 
               if ($_SESSION['cpwError'] != "") {
                 echo '<label for="error" style="padding-top:2px; color:red;">&nbsp;' . $_SESSION["cpwError"] . '</label>';
                 unset($_SESSION['cpwError']);
-                echo '<input id="submit-btn" type="submit" name="submit" value="SIGNUP" style="margin-top:26px;"/>';
+                echo '<input id="submit-btn" type="submit" name="submit" value="SIGNUP" style="margin-top:26px;">';
               } else {
-                echo '<input id="submit-btn" type="submit" name="submit" value="SIGNUP" />';
+                echo '<input id="submit-btn" type="submit" name="submit" value="SIGNUP">';
               }
             ?>
             <p id="login">Already have an account? Log in <a href=login.php style="color:blue; text-decoration:underline;">here</a>!</p>

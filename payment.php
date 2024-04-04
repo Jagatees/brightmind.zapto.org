@@ -1,35 +1,25 @@
-<?php
-include "database/function.php";
-
-$price = 0;
-$module = $level = $date = $uuid = '';
-
-$lessons = getlessonsByID($_POST['lessonID']);
-    
-foreach ($lessons as $lesson) {
-    $price = $lesson['price'];
-    $module = $lesson['module'];
-    $level = $lesson['level'];
-    $date = $lesson['date'];
-    $uuid = $lesson['uuid'];
-}
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
     <?php include "inc/head.inc.php";?>
-    <script src="https://www.paypal.com/sdk/js?client-id=AR4se4kZHzxccoSPrrXXHyaJW17rZuqTV97FHFEUVjUatJOSWApEUSwiWFRzk2OfMxtNmAndbH90Jtdt&currency=USD"></script>
-    
-   
 </head>
 <body>
     <?php include "inc/header.inc.php"; // Include the header ?>
+    <?php
+    include "database/function.php";
+    $price = 0;
+    $module = $level = $date = $uuid = '';
+    $lessons = getlessonsByID($_POST['lessonID']);
+    foreach ($lessons as $lesson) {
+        $price = $lesson['price'];
+        $module = $lesson['module'];
+        $level = $lesson['level'];
+        $date = $lesson['date'];
+        $uuid = $lesson['uuid'];
+    }
+    ?>
     <br>
     <br>
     <div class="container">
@@ -72,14 +62,11 @@ foreach ($lessons as $lesson) {
             <input type="hidden" name="price" value="<?php echo htmlspecialchars($_POST['price']); ?>">
             
             <button type="submit" class="btn btn-primary" style="float: right;">Proceed to Payment</button>
-            <br>
-            <br>
         </form>
-    </div>
-</div>
-
-    <?php include "inc/footer.inc.php"; ?>
-
+        </div>
+        </div>
+        <br>
+        <br>
 </body>
-       
+    <?php include "inc/footer.inc.php"; ?>       
 </html>
