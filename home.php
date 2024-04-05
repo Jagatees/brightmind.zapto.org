@@ -411,14 +411,14 @@ session_start();
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="math-page.html" class="subject-box math"> <img src="images/math.png" alt="mathlogo" height="40" width="60"> Math</a>
+                            <a href="#" class="subject-box math"> <img src="images/math.png" alt="mathlogo" height="40" width="60"> Math</a>
                         </div><div class="col-md-6">
-                            <a href="science-page.html" class="subject-box science"> <img src="images/science.png" alt="sciencelogo" height="70" width="70"> Science</a>
+                            <a href="#" class="subject-box science"> <img src="images/science.png" alt="sciencelogo" height="70" width="70"> Science</a>
                         </div>
                         <div class="col-md-6">
-                            <a href="english-page.html" class="subject-box english">  <img src="images/english.png" alt="englishlogo" height="70" width="70"> English</a>
+                            <a href="#" class="subject-box english">  <img src="images/english.png" alt="englishlogo" height="70" width="70"> English</a>
                         </div><div class="col-md-6">
-                            <a href="mother-tongue-page.html" class="subject-box mother-tongue">  <img src="images/MT.png" alt="mothertonguelogo" height="70" width="70">  Mother Tongue</a>
+                            <a href="#" class="subject-box mother-tongue">  <img src="images/MT.png" alt="mothertonguelogo" height="70" width="70">  Mother Tongue</a>
                         </div>
                     </div>
                 </div>
